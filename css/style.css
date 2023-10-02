@@ -145,6 +145,18 @@ h1 {
   color: var(--clr-grey-200);
 }
 
+h2 {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-grey-200);
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-grey-200);
+}
+
 p {
   font-size: 14px;
   font-weight: var(--fw-ligth);
