@@ -240,3 +240,57 @@ li {
   border-radius: 15px;
   width: 90vw;
 }
+
+
+
+/* -- Sign in -- */
+
+.sign-in-interface {
+  display: flex;
+  flex-direction: column;
+}
+
+#email {
+  background-color: var(--clr-grey-600);
+  margin-top: var(--padding-400);
+  height: 35px;
+  border-radius: 30px;
+  font-size: 12px;
+  color: var(--clr-grey-200);
+}
+
+#password {
+  background-color: var(--clr-grey-600);
+  margin-top: var(--padding-300);
+  margin-bottom: var(--padding-700);
+  height: 35px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+#submit-signin {
+  background-color: var(--clr-primary-600);
+  color: var(--clr-white);
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+input::placeholder {
+  padding-left: var(--padding-500);
+  font-size: 12px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input:focus {
+  padding-left: var(--padding-500);
+  font-size: 12px;
+  color: var(--clr-grey-200);
+}
+
+.sign-in-hint {
+font-size: 10px;
+}
