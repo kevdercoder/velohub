@@ -131,6 +131,6 @@ select {
   }
 }
 
-html {
+body {
   background-color: var(--clr-grey-800);
 }
