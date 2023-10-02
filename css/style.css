@@ -196,6 +196,10 @@ header {
   margin-right: 20px; /* Rechter Abstand zum Text (optional) */
 }
 
+
+
+
+
 main{
   /*margin: 0 10vw;*/
   /*width: 80vw;*/
@@ -203,25 +207,6 @@ main{
   flex: 1;
 }
 
-
-footer {
-  background-color:var(--clr-grey-800); /* Hintergrundfarbe des Footers */
-  color: #fff; /* Textfarbe im Footer */
-  padding: 20px; /* Innenabstand des Footers */
-  border-top: var(--clr-grey-300);
-  border-width: 0.2rem;
-  border-top-style: solid;
-}
-
-/* CSS für die Icon-Knöpfe */
-.icon-button {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 24px;
-  margin-right: 10px; /* Rechter Abstand zwischen den Knöpfen (optional) */
-}
 
 
 
@@ -238,7 +223,7 @@ footer {
   justify-content: center;
   align-items: center;
   height: auto; /* Vollständige Bildschirmhöhe (vertikales Zentrieren) */
-  margin: 0 1rem 0 1rem;
+  margin: 0 5vw 0 5vw;
   
 }
 
@@ -273,6 +258,7 @@ ul {
   display: flex;
   overflow-x: scroll; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
   white-space: nowrap; /* Verhindern, dass der Inhalt umbrochen wird */
+  margin-left: 5vw;
 }
 
 /* CSS für die Listenelemente */
@@ -284,4 +270,27 @@ li {
 
 
 /* Footer ------------------------------------------------------------------------------------- */
+
+footer {
+  background-color: var(--clr-grey-800); /* Hintergrundfarbe des Footers */
+  color: #fff; /* Textfarbe im Footer */
+  padding: 20px; /* Innenabstand des Footers */
+  text-align: center; /* Text zentrieren */
+  display: flex;
+  border-top-style: solid;
+  border-top: var(--clr-grey-300);
+}
+
+/* CSS für die Icon-Container */
+.icon-container {
+  display: inline-block;
+  margin: 0 20px; /* Abstand zwischen den Icons (horizontal) */
+}
+
+/* CSS für die Bild-Icons */
+.icon {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle; /* Vertikal zentrieren */
+}
 
