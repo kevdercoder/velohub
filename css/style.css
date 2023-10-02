@@ -1,6 +1,19 @@
 :root {
   /* Colors */
+  --clr-grey-100: #ffffff;
+  --clr-grey-200: #DCE1EB;
+  --clr-grey-300: #87898F;
+  --clr-grey-600: #252525;
+  --clr-grey-800: #181818;
 
+  --clr-primary-300: /* wird noch definiert */;
+  --clr-primary-600: #91CB68;
+  --clr-primary-900: /* wird noch definiert */;
+
+  --clr-accent-blue: #53A2F9;
+  --clr-accent-purple: #9E80DC;
+  --clr-accent-orange: #E8A752;
+  --clr-accent-red: #D44538;
 
   /* Font Styling */
   --ff-base: 'Inter', sans-serif;
