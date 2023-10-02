@@ -1,4 +1,7 @@
-//
+/*
+ * This script fetches the current weather data from the OpenWeatherMap API.
+ * It then displays the current temperature and weather image.
+*/
 
 const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
 const CITY = 'Bern';
@@ -41,3 +44,10 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
   .catch(error => {
     console.log(error);
   });
+
+
+
+/*
+ * This script fetches the current weather data from the OpenWeatherMap API.
+ * It then displays the current temperature and weather image.
+*/
