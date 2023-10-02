@@ -1,12 +1,117 @@
-html{
-    font-family: Arial, Helvetica, sans-serif; 
-    font-size: 10px;
-    box-sizing: border-box;
-    width: 100vw;
+:root {
+  /* Colors */
+
+
+  /* Font Styling */
+  --ff-base: 'Inter', sans-serif;
+
+  --fw-ligth: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
+
+  /* Padding */
+  --padding-100: 0.25em;
+  --padding-200: 0.5em;
+  --padding-300: 0.75em;
+  --padding-400: 1em;
+  --padding-500: 1.25em;
+  --padding-600: 1.5em;
+  --padding-700: 2em;
+  --padding-750: 3em;
+  --padding-800: 4em;
+  --padding-850: 6em;
+  --padding-900: 8em;
+  --padding-950: 10em;
+}
+
+
+/* -- Document Reset -- */
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* 1. Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* 3. Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* 4. Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* 5. Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* 6. A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* 7. Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* 8. Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 9. Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+      scroll-behavior: auto;
   }
-  body{
-    line-height: 1.5;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #F8F8FF;
-    height: 100%;
+
+  *,
+  *::before,
+  *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
   }
+}
