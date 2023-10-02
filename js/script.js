@@ -1,4 +1,6 @@
-const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
+dotenv.config();
+
+const API_KEY = fcc3f6d978376e674cc87cad43d09e19;
 const CITY = 'Zurich';
 const COUNTRY_CODE = 'CH';
 
