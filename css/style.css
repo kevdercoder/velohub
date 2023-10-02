@@ -137,6 +137,7 @@ select {
 body {
   background-color: var(--clr-grey-800);
   font-family: var(--ff-base);
+  margin: 0 var(--padding-500);
 }
 
 h1 {
@@ -157,6 +158,14 @@ h3 {
   color: var(--clr-grey-200);
 }
 
+h4 {
+  font-size: 14px;
+  font-weight: var(--fw-ligth);
+  color: var(--clr-grey-200);
+  text-align: center;
+  width: 70vw;
+}
+
 p {
   font-size: 11px;
   font-weight: var(--fw-ligth);
@@ -164,60 +173,27 @@ p {
 }
 
 .page-header {
-  margin: var(--padding-200) ;
+  margin: var(--padding-200) 0;
 }
 
 
 
-/* Start Style ------------------------------------------------------------------------------------- */
+/* -- Container Styles -- */
 
-html{
-  font-family: Arial, Helvetica, sans-serif; 
-  font-size: 10px;
-  box-sizing: border-box;
-  width: 100vw;
-}
-body{
-  line-height: 1.5;
-  font-family: 'Helvetica Neue', sans-serif;
-  background-color: var(--clr-grey-800);
-  height: 100%;
-}
-
-header {
-  background-color: #333; /* Hintergrundfarbe des Headers */
-  color: #fff; /* Textfarbe im Header */
-  padding: 20px; /* Innenabstand des Headers */
-}
-
-/* CSS für das Logo */
-.logo {
-  float: left; /* Logo linksbündig ausrichten */
-  margin-right: 20px; /* Rechter Abstand zum Text (optional) */
-}
-
-main{
-  margin: 0 10vw;
-  width: 80vw;
+.container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  flex: 1;
+}
+
+.container-padding-750 {
+  padding-top: var(--padding-750);
 }
 
 
 
-
-
-
-
-
-
-
-/* Sartseite ------------------------------------------------------------------------------------- */
-
-
-
-
-
+/* -- Index -- */
 
 .button {
   display: inline-block;
@@ -245,4 +221,15 @@ ul {
 /* CSS für die Listenelemente */
 li {
   margin: 10px 0;
+}
+
+
+
+/* -- Weather -- */
+
+#weather-icon {
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px;
+  width: 90vw;
 }

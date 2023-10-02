@@ -1,7 +1,7 @@
 //
 
 const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
-const CITY = 'Zurich';
+const CITY = 'Bern';
 const COUNTRY_CODE = 'CH';
 
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}`)
@@ -28,11 +28,11 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     // Set the weather icon based on the weather condition and daytime
     let iconUrl;
     if (weatherCondition === 'Clear') {
-      iconUrl = isDaytime ? 'img/sun.png' : 'img/moon.jpg';
+      iconUrl = isDaytime ? 'img/sun.png' : 'img/moon.svg';
     } else if (weatherCondition === 'Clouds') {
-      iconUrl = isDaytime ? 'img/clouds-day.png' : 'img/clouds-night.png';
+      iconUrl = isDaytime ? 'img/clouds-day.png' : 'img/clouds-night.svg';
     } else if (weatherCondition === 'Rain') {
-      iconUrl = isDaytime ? 'img/rain-day.png' : 'img/rain-night.png';
+      iconUrl = isDaytime ? 'img/rain-day.svg' : 'img/rain-night.svg';
     } else {
       iconUrl = 'img/default.png';
     }
