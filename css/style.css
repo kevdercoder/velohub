@@ -1,6 +1,8 @@
 :root {
   /* Colors */
-  --clr-grey-100: #ffffff;
+  --clr-white: #ffffff;
+  --clr-black: #000000;
+
   --clr-grey-200: #DCE1EB;
   --clr-grey-300: #87898F;
   --clr-grey-600: #252525;
