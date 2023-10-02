@@ -131,6 +131,29 @@ select {
   }
 }
 
+
+/* -- Global Styles -- */
+
 body {
   background-color: var(--clr-grey-800);
+  font-family: var(--ff-base);
 }
+
+h1 {
+  font-size: 24px;
+  font-weight: var(--fw-medium);
+  color: var(--clr-grey-200);
+}
+
+p {
+  font-size: 14px;
+  font-weight: var(--fw-ligth);
+  color: var(--clr-grey-200);
+}
+
+.page-header {
+  margin: var(--padding-200) ;
+}
+
+
+
