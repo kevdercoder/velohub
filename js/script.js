@@ -5,7 +5,8 @@ const COUNTRY_CODE = 'CH';
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}`)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    currentTemp = Math.round(data.main.temp - 273.15);
+    document.querySelector('#temp').innerHTML = currentTemp;
   })
   .catch(error => {
     console.log(error);
