@@ -13,7 +13,6 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 
     // Get the current weather condition and icon
     const weatherCondition = data.weather[0].main;
-    const weatherIcon = data.weather[0].icon;
 
     // Determine the daytime based on the current time and timezone offset
     const timezoneOffset = data.timezone;
