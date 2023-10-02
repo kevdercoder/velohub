@@ -238,12 +238,15 @@ footer {
   justify-content: center;
   align-items: center;
   height: auto; /* Vollständige Bildschirmhöhe (vertikales Zentrieren) */
+  margin: 0 1rem 0 1rem;
+  
 }
 
 /* Optional: Begrenzen Sie die maximale Breite des Bildes */
 .centered-image img {
   max-width: 100%; /* Das Bild wird nicht breiter als der Container */
   height: min-content; /* Die Höhe wird automatisch angepasst, um das Bild nicht zu strecken */
+  border-radius: 2rem;
 }
 
 
