@@ -169,3 +169,80 @@ p {
 
 
 
+/* Start Style ------------------------------------------------------------------------------------- */
+
+html{
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 10px;
+  box-sizing: border-box;
+  width: 100vw;
+}
+body{
+  line-height: 1.5;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--clr-grey-800);
+  height: 100%;
+}
+
+header {
+  background-color: #333; /* Hintergrundfarbe des Headers */
+  color: #fff; /* Textfarbe im Header */
+  padding: 20px; /* Innenabstand des Headers */
+}
+
+/* CSS für das Logo */
+.logo {
+  float: left; /* Logo linksbündig ausrichten */
+  margin-right: 20px; /* Rechter Abstand zum Text (optional) */
+}
+
+main{
+  margin: 0 10vw;
+  width: 80vw;
+  align-items: center;
+  flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+/* Sartseite ------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+.button {
+  display: inline-block;
+  height: 10rem;
+  padding: 10px 20px;
+  background-color: var(--clr-grey-800);
+  color: var(--clr-grey-800);
+  text-decoration: none;
+  border: 10rem;
+  border-radius: 1px;
+  cursor: pointer;
+  margin: 5px;
+  border-color: var(--clr-grey-300);
+  color: var(--clr-grey-300);
+}
+
+/* CSS für die ungeordnete Liste */
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  
+}
+
+/* CSS für die Listenelemente */
+li {
+  margin: 10px 0;
+}
