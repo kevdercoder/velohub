@@ -130,3 +130,7 @@ select {
       scroll-behavior: auto !important;
   }
 }
+
+html {
+  background-color: var(--clr-grey-800);
+}
