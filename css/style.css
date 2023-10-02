@@ -173,10 +173,13 @@ p {
 }
 
 .page-header {
-  margin: var(--padding-200) 0;
+  margin: var(--padding-200) 0 var(--padding-100) 0;
 }
 
-
+.heading-title {
+  margin-top: var(--padding-200);
+  text-align: center;
+}
 
 /* -- Container Styles -- */
 
@@ -208,6 +211,10 @@ p {
   margin: 5px;
   border-color: var(--clr-grey-300);
   color: var(--clr-grey-300);
+}
+
+#heading-img {
+  border-radius: 15px;
 }
 
 /* CSS für die ungeordnete Liste */
