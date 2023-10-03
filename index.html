@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.29.0/dist/umd/supabase.min.js"></script>
 </head>
-
 <body>
     <header>
-        <img class="logo" src="logo.png" alt="Logo">
-
+        <h1 class="page-header">Logo</h1>
     </header>
     <main>
         <section class="container-center">
@@ -26,9 +26,23 @@
             <h2>Stelle deine Tour zusammen</h2>
             <div>
                 <ul class="">
+                    <li><button class="button"><20km</button></li>
+                    <li><button class="button">20-50km</button></li>
+                    <li><button class="button">50-100km</button></li>
+                    <li><button class="button">+100km</button></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="">
                     <li><button class="button">Flach</button></li>
-                    <li><button class="button">Hüglig</button></li>
+                    <li><button class="button">Wellig</button></li>
                     <li><button class="button">Bergig</button></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="">
+                    <li><button class="button">Rundfahrt</button></li>
+                    <li><button class="button">Tagestour</button></li>
                 </ul>
             </div>
         </section>
@@ -39,6 +53,6 @@
     </footer>
 
 </body>
-
-
+<script type="module" src="/js/supabase-setup.js"></script>
+<script type="module" src="/js/script.js"></script>
 </html>

@@ -200,18 +200,16 @@ p {
 
 .button {
   display: inline-block;
-  height: 4rem;
-  padding: 10px 20px;
-  background-color: var(--clr-grey-800);
+  height: 30px;
+  width: 75px;
+  font-size: 12px;
+  overflow-y: scroll;
   color: var(--clr-grey-800);
   text-decoration: none;
-  border-radius: 2rem;
   cursor: pointer;
-  margin: 5px;
-  border-color: var(--clr-grey-300);
+  border-radius: 30px;
   color: var(--clr-grey-300);
-  border-width: 0.2rem;
-border-style: solid;
+  border: 1px solid var(--clr-grey-300);
 }
 
 #heading-img {

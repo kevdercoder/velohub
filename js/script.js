@@ -59,8 +59,7 @@ console.log("00 JavaScript verbunden")
 // 1. **Alle Filme abrufen**: Hole alle Spalten aller Filme aus der Tabelle `movies`.
 
 async function selectUser() {
-    const { data, error } = await supa.from("user")
-    SELECT * FROM "user" WHERE id = 1;
+    const { data, error } = await supa.from("user").select()
   
     return data;
   }
