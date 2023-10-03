@@ -10,7 +10,7 @@ const COUNTRY_CODE = 'CH';
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}`)
   .then(response => response.json())
   .then(data => {
-    currentTemp = Math.round(data.main.temp - 273.15);
+    let currentTemp = Math.round(data.main.temp - 273.15);
     document.querySelector('#temp').innerHTML = currentTemp;
 
 
@@ -45,8 +45,6 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     console.log(error);
   });
 
-
-
 /*
  * This script fetches the current weather data from the OpenWeatherMap API.
  * It then displays the current temperature and weather image.
@@ -59,7 +57,7 @@ console.log("00 JavaScript verbunden")
 // 1. **Alle Filme abrufen**: Hole alle Spalten aller Filme aus der Tabelle `movies`.
 
 async function selectUser() {
-    const { data, error } = await supa.from("user").select()
+    const { data, error } = await supa.from("User").select()
   
     return data;
   }
