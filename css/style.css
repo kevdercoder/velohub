@@ -147,7 +147,7 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: var(--fw-medium);
   color: var(--clr-grey-200);
 }
@@ -223,18 +223,38 @@ p {
 /* CSS für die ungeordnete Liste */
 ul {
   list-style: none;
-  padding: 0;
   display: flex;
-  overflow-x: scroll; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
+  overflow-x: hidden; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
   white-space: nowrap; /* Verhindern, dass der Inhalt umbrochen wird */
-  margin-left: 5vw;
 }
 
-/* CSS für die Listenelemente */
-li {
-  margin: 10px 0;
+.btn-list {
+  display: inline-block;
+  width: 40vw;
+  height: 35px;
+  font-size: 12px;
+  overflow-y: scroll;
+  color: var(--clr-grey-800);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 10px;
+  color: var(--clr-grey-300);
+  border: 1px solid var(--clr-grey-300);
 }
 
+.btn-submit {
+  display: inline-block;
+  width: 90vw;
+  height: 35px;
+  font-size: 14px;
+  overflow-y: scroll;
+  background-color: var(--clr-primary-600);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 10px;
+  color: var(--clr-white);
+  border: 1px solid var(--clr-grey-300);
+}
 
 
 /* -- Weather -- */

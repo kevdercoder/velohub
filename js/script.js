@@ -53,10 +53,12 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 import { supa } from "/js/supabase-setup.js";
 
 async function selectUser() {
-    const { data, error } = await supa.from("User").select()
+    const { data, error } = await supa.from("User").select("name")
+
+   
   
     return data;
   }
 
-console.log('User: ', selectUser());
+  console.log(selectUser());
 
