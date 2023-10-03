@@ -55,8 +55,6 @@ import { supa } from "/js/supabase-setup.js";
 async function selectUser() {
     const { data, error } = await supa.from("User").select("name")
 
-   
-  
     return data;
   }
 
@@ -64,14 +62,8 @@ async function selectUser() {
   async function signUp() {
     const email = document.getElementById('join-email').value;
     const password = document.getElementById('join-password').value;
-    const confirmPassword = document.getElementById('join-password-confirmation').value;
     const firstName = document.getElementById('join-firstname').value;
-    const name = document.getElementById('join-name').value;
-
-    if (password !== confirmPassword) {
-      console.error("Passwords do not match");
-      return;
-    }    
+    const name = document.getElementById('join-name').value; 
   
     const { user, error } = await supa.auth.signUp({ email, password });
   
@@ -91,4 +83,56 @@ async function selectUser() {
     }
   }
 
-  document.getElementById('submit-signin').addEventListener('click', signUp);
+  let submitJoinButton = document.getElementById('submit-join');
+if (submitJoinButton) {
+  submitJoinButton.addEventListener('click', signUp);
+}
+
+  // Function to login using email and password
+async function login() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await supa.auth.signIn({ email, password });
+
+  if (error) {
+      console.error("Error during login: ", error.message);
+  } else {
+      console.log("Logged in as ", email);
+  }
+}
+
+let submitLoginButton = document.getElementById('submit-login');
+if (submitLoginButton) {
+  submitLoginButton.addEventListener('click', login);
+}
+
+
+
+  function getCurrentUser() {
+    const user = supa.auth.user();
+  
+    if (user) {
+      console.log("Current user:", user);
+  
+      // Retrieve the user's information from the "user_profile" table
+      supa
+        .from("user")
+        .select("*")
+        .then(({ data, error }) => {
+          if (error) {
+            console.error("Error during user profile retrieval: ", error.message);
+          } else {
+            console.log("User profile retrieved successfully:", data[0]);
+  
+            // Display the user's information on the profile page
+            document.getElementById("profile-name").textContent = data[0].name;
+            document.getElementById("profile-firstname").textContent = data[0].first_name;
+          }
+        });
+    } else {
+      console.log("No user is currently logged in");
+    }
+  }
+
+  getCurrentUser()

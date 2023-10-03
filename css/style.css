@@ -266,12 +266,13 @@ ul {
 
 /* -- Sign in -- */
 
-.sign-in-interface {
+.login-interface {
   display: flex;
   flex-direction: column;
+  padding-top: var(--padding-850);
 }
 
-#join-firstname, #join-name, #join-lastname, #join-email, #join-password, #join-password-confirmation {
+#join-firstname, #join-name, #join-lastname, #join-email, #join-password, #join-password-confirmation, #login-email, #login-password {
   background-color: var(--clr-grey-600);
   margin-top: var(--padding-400);
   height: 35px;
@@ -298,7 +299,7 @@ ul {
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-#submit-signin {
+#submit-login, #submit-join {
   background-color: var(--clr-primary-600);
   color: var(--clr-white);
   height: 35px;
@@ -310,8 +311,13 @@ input:focus::placeholder {
   color: transparent;
 }
 
-.sign-in-hint {
+#forgot-password {
+display: flex;
+justify-content: center;
 font-size: 10px;
+color: var(--clr-grey-200);
+text-decoration: underline;
+padding-top: var(--padding-200);
 }
 
 
