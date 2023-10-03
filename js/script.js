@@ -60,5 +60,20 @@ async function selectUser() {
     return data;
   }
 
-  console.log(selectUser());
 
+  async function signUp() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    console.log(email);
+
+    const { error } = await supa.auth.signUp({ email, password });
+
+    if (error) {
+        console.error("Error during sign up: ", error.message);
+    } else {
+       window.location.href = "/index.html";;
+    }
+}
+
+  document.getElementById('submit-signin').addEventListener('click', signUp);
