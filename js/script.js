@@ -62,18 +62,33 @@ async function selectUser() {
 
 
   async function signUp() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('join-email').value;
+    const password = document.getElementById('join-password').value;
+    const confirmPassword = document.getElementById('join-password-confirmation').value;
+    const firstName = document.getElementById('join-firstname').value;
+    const name = document.getElementById('join-name').value;
 
-    console.log(email);
-
-    const { error } = await supa.auth.signUp({ email, password });
-
+    if (password !== confirmPassword) {
+      console.error("Passwords do not match");
+      return;
+    }    
+  
+    const { user, error } = await supa.auth.signUp({ email, password });
+  
     if (error) {
-        console.error("Error during sign up: ", error.message);
+      console.error("Error during sign up: ", error.message);
     } else {
-       window.location.href = "/index.html";;
+      // Add the user's name and first name to the "user_profile" table
+      const { error } = await supa
+        .from("user")
+        .insert({ first_name: firstName, name: name, email: email, });
+  
+      if (error) {
+        console.error("Error during user profile creation: ", error.message);
+      } else {
+        console.log("User signed up successfully:", user);
+      }
     }
-}
+  }
 
   document.getElementById('submit-signin').addEventListener('click', signUp);

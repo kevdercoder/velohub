@@ -271,7 +271,7 @@ ul {
   flex-direction: column;
 }
 
-#email {
+#join-firstname, #join-name, #join-lastname, #join-email, #join-password, #join-password-confirmation {
   background-color: var(--clr-grey-600);
   margin-top: var(--padding-400);
   height: 35px;
