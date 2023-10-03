@@ -204,6 +204,7 @@ h4 {
   border-radius: 30px;
   color: var(--clr-grey-300);
   border: 1px solid var(--clr-grey-300);
+  margin-right: var(--padding-200);
 }
 
 #heading-img {
@@ -220,6 +221,7 @@ ul {
   display: flex;
   overflow-x: hidden; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
   white-space: nowrap; /* Verhindern, dass der Inhalt umbrochen wird */
+  padding: var(--padding-100);
 }
 
 .btn-list {
@@ -334,6 +336,7 @@ font-size: 10px;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  margin-top: -6px;
 }
 
 .mobile-nav-icon {
