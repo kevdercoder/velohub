@@ -264,6 +264,10 @@ li {
   border-radius: 30px;
   font-size: 12px;
   color: var(--clr-grey-200);
+  padding-left: var(--padding-500);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 #password {
@@ -273,6 +277,11 @@ li {
   height: 35px;
   border-radius: 30px;
   font-size: 12px;
+  color: var(--clr-grey-200);
+  padding-left: var(--padding-500);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 #submit-signin {
@@ -283,19 +292,8 @@ li {
   font-size: 14px;
 }
 
-input::placeholder {
-  padding-left: var(--padding-500);
-  font-size: 12px;
-}
-
 input:focus::placeholder {
   color: transparent;
-}
-
-input:focus {
-  padding-left: var(--padding-500);
-  font-size: 12px;
-  color: var(--clr-grey-200);
 }
 
 .sign-in-hint {
