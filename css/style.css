@@ -317,3 +317,20 @@ input:focus::placeholder {
 .sign-in-hint {
 font-size: 10px;
 }
+
+
+/* -- Mobile Navigation -- */
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  background-color: var(--clr-grey-800);
+  color: var(--clr-grey-300);
+  border-top: 1px solid var(--clr-grey-600);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
