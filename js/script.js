@@ -51,3 +51,18 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
  * This script fetches the current weather data from the OpenWeatherMap API.
  * It then displays the current temperature and weather image.
 */
+
+import { supa } from "/js/supabase-setup.js";
+
+console.log("00 JavaScript verbunden")
+
+// 1. **Alle Filme abrufen**: Hole alle Spalten aller Filme aus der Tabelle `movies`.
+
+async function selectUser() {
+    const { data, error } = await supa.from("user").select();
+  
+    return data;
+  }
+
+console.log('Alle Filme in der DB: ', selectUser());
+
