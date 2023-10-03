@@ -137,6 +137,7 @@ select {
 body {
   background-color: var(--clr-grey-800);
   font-family: var(--ff-base);
+  margin: 0 var(--padding-500);
 }
 
 h1 {
@@ -157,83 +158,45 @@ h3 {
   color: var(--clr-grey-200);
 }
 
-p {
+h4 {
   font-size: 14px;
+  font-weight: var(--fw-ligth);
+  color: var(--clr-grey-200);
+  text-align: center;
+  width: 70vw;
+}
+
+p {
+  font-size: 11px;
   font-weight: var(--fw-ligth);
   color: var(--clr-grey-200);
 }
 
 .page-header {
-  margin: var(--padding-200) ;
+  margin: var(--padding-200) 0 var(--padding-100) 0;
 }
 
-
-
-/* Start Style ------------------------------------------------------------------------------------- */
-
-html{
-  font-family: Arial, Helvetica, sans-serif; 
-  font-size: 10px;
-  box-sizing: border-box;
-  width: 100vw;
-}
-body{
-  line-height: 1.5;
-  font-family: 'Helvetica Neue', sans-serif;
-  background-color: var(--clr-grey-800);
-  height: 100%;
+.heading-title {
+  margin-top: var(--padding-200);
+  text-align: center;
 }
 
-header {
-  background-color: var(--clr-grey-800); /* Hintergrundfarbe des Headers */
-  color: #fff; /* Textfarbe im Header */
-  padding: 20px; /* Innenabstand des Headers */
-}
+/* -- Container Styles -- */
 
-/* CSS für das Logo */
-.logo {
-  float: left; /* Logo linksbündig ausrichten */
-  margin-right: 20px; /* Rechter Abstand zum Text (optional) */
-}
-
-
-
-
-
-main{
-  /*margin: 0 10vw;*/
-  /*width: 80vw;*/
-  align-items: center;
-  flex: 1;
-}
-
-
-
-
-
-
-
-
-/* Sartseite ------------------------------------------------------------------------------------- */
-
-
-
-.centered-image {
+.container-center {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto; /* Vollständige Bildschirmhöhe (vertikales Zentrieren) */
-  margin: 0 5vw 0 5vw;
-  
 }
 
-/* Optional: Begrenzen Sie die maximale Breite des Bildes */
-.centered-image img {
-  max-width: 100%; /* Das Bild wird nicht breiter als der Container */
-  height: min-content; /* Die Höhe wird automatisch angepasst, um das Bild nicht zu strecken */
-  border-radius: 2rem;
+.container-padding-750 {
+  padding-top: var(--padding-750);
 }
 
+
+
+/* -- Index -- */
 
 .button {
   display: inline-block;
@@ -249,6 +212,14 @@ main{
   color: var(--clr-grey-300);
   border-width: 0.2rem;
 border-style: solid;
+}
+
+#heading-img {
+  border-radius: 15px;
+}
+
+#heading-img {
+  border-radius: 15px;
 }
 
 /* CSS für die ungeordnete Liste */
@@ -268,29 +239,65 @@ li {
 
 
 
+/* -- Weather -- */
 
-/* Footer ------------------------------------------------------------------------------------- */
+#weather-icon {
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px;
+  width: 90vw;
+}
 
-footer {
-  background-color: var(--clr-grey-800); /* Hintergrundfarbe des Footers */
-  color: #fff; /* Textfarbe im Footer */
-  padding: 20px; /* Innenabstand des Footers */
-  text-align: center; /* Text zentrieren */
+
+
+/* -- Sign in -- */
+
+.sign-in-interface {
   display: flex;
-  border-top-style: solid;
-  border-top: var(--clr-grey-300);
+  flex-direction: column;
 }
 
-/* CSS für die Icon-Container */
-.icon-container {
-  display: inline-block;
-  margin: 0 20px; /* Abstand zwischen den Icons (horizontal) */
+#email {
+  background-color: var(--clr-grey-600);
+  margin-top: var(--padding-400);
+  height: 35px;
+  border-radius: 30px;
+  font-size: 12px;
+  color: var(--clr-grey-200);
 }
 
-/* CSS für die Bild-Icons */
-.icon {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle; /* Vertikal zentrieren */
+#password {
+  background-color: var(--clr-grey-600);
+  margin-top: var(--padding-300);
+  margin-bottom: var(--padding-700);
+  height: 35px;
+  border-radius: 30px;
+  font-size: 12px;
 }
 
+#submit-signin {
+  background-color: var(--clr-primary-600);
+  color: var(--clr-white);
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+input::placeholder {
+  padding-left: var(--padding-500);
+  font-size: 12px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input:focus {
+  padding-left: var(--padding-500);
+  font-size: 12px;
+  color: var(--clr-grey-200);
+}
+
+.sign-in-hint {
+font-size: 10px;
+}
