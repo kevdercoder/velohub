@@ -107,4 +107,13 @@ if (submitLoginButton) {
   submitLoginButton.addEventListener('click', login);
 }
 
+const { user } = supa.auth.user();
+
+if (user) {
+  console.log("Logged in as:", user.email);
+  console.log("User ID:", user.id);
+  console.log("User profile:", user.user_metadata);
+} else {
+  console.log("No user is currently logged in.");
+}
 
