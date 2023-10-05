@@ -1,7 +1,7 @@
 /*
  * This script fetches the current weather data from the OpenWeatherMap API.
  * It then displays the current temperature and weather image.
-*/
+ */
 
 const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
 const CITY = 'Bern';
@@ -48,38 +48,54 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 /*
  * This script fetches the current weather data from the OpenWeatherMap API.
  * It then displays the current temperature and weather image.
-*/
+ */
 
-import { supa } from "/js/supabase-setup.js";
+import {
+  supa
+} from "/js/supabase-setup.js";
 
 // Function to sign up a new user
 async function signUp() {
   const email = document.getElementById('join-email').value;
   const password = document.getElementById('join-password').value;
   const firstName = document.getElementById('join-firstname').value;
-  const name = document.getElementById('join-name').value; 
+  const name = document.getElementById('join-name').value;
 
-  const { user, error } = await supa.auth.signUp({ email, password });
+  const {
+    user,
+    error
+  } = await supa.auth.signUp({
+    email,
+    password
+  });
 
   if (error) {
     console.error("Error during sign up: ", error.message);
   } else {
     console.log("User signed up successfully:", user);
 
-   console.log(user.id)
+    console.log(user.id)
 
-      // Insert the UUID of the user into the "user" table
-      const { data, error } = await supa
-        .from("user")
-        .insert({ user_id: user.id, first_name: firstName, name: name, email: email });
+    // Insert the UUID of the user into the "user" table
+    const {
+      data,
+      error
+    } = await supa
+      .from("user")
+      .insert({
+        user_id: user.id,
+        first_name: firstName,
+        name: name,
+        email: email
+      });
 
-      if (error) {
-        console.error("Error during user creation: ", error.message);
-      } else {
-        console.log("User created successfully:", data[0]);
-      }
+    if (error) {
+      console.error("Error during user creation: ", error.message);
+    } else {
+      console.log("User created successfully:", data[0]);
     }
   }
+}
 
 
 // Function to login using email and password
@@ -87,7 +103,12 @@ async function login() {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
 
-  const { error } = await supa.auth.signIn({ email, password });
+  const {
+    error
+  } = await supa.auth.signIn({
+    email,
+    password
+  });
 
   if (error) {
     console.error("Error during login: ", error.message);
@@ -107,7 +128,9 @@ if (submitLoginButton) {
   submitLoginButton.addEventListener('click', login);
 }
 
-const { user } = supa.auth.user();
+const {
+  user
+} = supa.auth.user();
 
 if (user) {
   console.log("Logged in as:", user.email);
@@ -117,3 +140,55 @@ if (user) {
   console.log("No user is currently logged in.");
 }
 
+let btnSubmit = document.querySelector('.btn-submit');
+if (btnSubmit) {
+  btnSubmit.addEventListener('click', async () => {
+    // Pass data via URL parameter
+    window.location.href = 'overview-maps.html?loadData=true';
+  });
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const loadData = urlParams.get('loadData');
+
+  if (loadData === 'true') {
+    await showMaps();
+  }
+});
+
+async function showMaps() {
+  const ul = document.querySelector('#test');
+  const {
+    data: maps,
+    error
+  } = await supa.from("maps").select();
+  maps.forEach(maps => {
+    const section = document.createElement('section');
+    section.innerHTML = `
+  <div>
+    <img src="${maps.map_img}" alt="image-alt">
+    </div>
+    <div>
+      <h2>${maps.map_name}</h2>
+      <ul>
+        <li>
+          <img src="/img/icon-distance.svg" alt="image-alt">
+          <p>${maps.distance}</p>
+        </li>
+        <li>
+          <img src="/img/icon-up.svg" alt="image-alt">
+          <p>${maps.altitude_up}</p>
+        </li>
+        <li>
+          <img src="/img/icon-down.svg" alt="image-alt">
+          <p>${maps.altitude_down}</p>
+        </li>
+      </ul>
+  </div>
+  <div>${maps.filter}</div>
+`;
+
+    document.body.appendChild(section);
+  })
+}

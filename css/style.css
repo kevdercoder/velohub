@@ -293,11 +293,9 @@ ul {
 }
 
 .btn-submit {
-  display: inline-block;
-  width: 90vw;
+  width: 87.5vw;
   height: 35px;
   font-size: 14px;
-  overflow-y: scroll;
   background-color: var(--clr-primary-600);
   text-decoration: none;
   cursor: pointer;
