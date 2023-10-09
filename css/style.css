@@ -149,6 +149,7 @@ h1 {
 
 h2 {
   font-size: 18px;
+  line-height: 24px;
   font-weight: var(--fw-medium);
   color: var(--clr-grey-200);
 }
@@ -194,6 +195,10 @@ h4 {
 
 .container-padding-750 {
   padding-bottom: var(--padding-750);
+}
+
+.container-padding-800 {
+  padding-bottom: var(--padding-800);
 }
 
 .container-padding-850 {
@@ -302,6 +307,7 @@ ul {
   border-radius: 10px;
   color: var(--clr-white);
   margin-top: var(--padding-300);
+  margin-bottom: 5.5em;
 }
 
 
@@ -404,4 +410,60 @@ padding-top: var(--padding-200);
 
 .mobile-nav-description {
   font-size: 9px;
+}
+
+
+/* -- Overview Maps -- */
+
+.container-maps {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.maps-margin {
+  margin-left: 15px;
+}
+
+.maps-map-small {
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  border-radius: 15px;
+}
+
+.maps-distance {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+.maps-distance > img {
+  height: 7px;
+  margin: 3px 5px 0 0;
+}
+
+.maps-distance > p {
+  color: var(--clr-grey-200);
+  font-size: 10px;
+
+}
+
+.maps-filters {
+  background-color: var(--clr-accent-blue);
+  font-size: 9px;
+  color: var(--clr-white);
+  border-radius: 10px;
+  width: 47px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--padding-200);
+}
+
+.maps-seperator {
+  height: 0.75px;
+  background-color: var(--clr-grey-600);
 }

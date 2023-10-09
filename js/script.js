@@ -46,8 +46,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
   });
 
 /*
- * This script fetches the current weather data from the OpenWeatherMap API.
- * It then displays the current temperature and weather image.
+ * Script Description
  */
 
 import {
@@ -140,6 +139,7 @@ if (user) {
   console.log("No user is currently logged in.");
 }
 
+
 let btnSubmit = document.querySelector('.btn-submit');
 if (btnSubmit) {
   btnSubmit.addEventListener('click', async () => {
@@ -158,37 +158,56 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function showMaps() {
-  const ul = document.querySelector('#test');
-  const {
-    data: maps,
-    error
-  } = await supa.from("maps").select();
+  const { data: maps, error } = await supa.from("maps").select();
   maps.forEach(maps => {
-    const section = document.createElement('section');
-    section.innerHTML = `
-  <div>
-    <img src="${maps.map_img}" alt="image-alt">
-    </div>
-    <div>
-      <h2>${maps.map_name}</h2>
-      <ul>
-        <li>
-          <img src="/img/icon-distance.svg" alt="image-alt">
-          <p>${maps.distance}</p>
-        </li>
-        <li>
-          <img src="/img/icon-up.svg" alt="image-alt">
-          <p>${maps.altitude_up}</p>
-        </li>
-        <li>
-          <img src="/img/icon-down.svg" alt="image-alt">
-          <p>${maps.altitude_down}</p>
-        </li>
-      </ul>
-  </div>
-  <div>${maps.filter}</div>
-`;
+    let sectionMaps = document.createElement('section');
+    sectionMaps.className = 'container-maps';
+    sectionMaps.id = `map-${maps.id}`;
+    sectionMaps.innerHTML = `
+      <div>
+        <img class="maps-map-small" src="${maps.map_img}" alt="image-alt">
+      </div>
+      <div class="maps-margin">
+        <h2>${maps.map_name}</h2>
+        <ul>
+          <li class="maps-distance">
+            <img src="/img/icon-distance.svg" alt="image-alt">
+            <p>${maps.distance}</p>
+          </li>
+          <li class="maps-distance">
+            <img src="/img/icon-up.svg" alt="image-alt">
+            <p>${maps.altitude_up}</p>
+          </li>
+          <li class="maps-distance">
+            <img src="/img/icon-down.svg" alt="image-alt">
+            <p>${maps.altitude_down}</p>
+          </li>
+        </ul>
+        <div class="maps-filters">${maps.filter}</div>
+      </div>
+    `;
+  
+    document.body.appendChild(sectionMaps);
 
-    document.body.appendChild(section);
-  })
+    const hr = document.createElement('hr');
+    hr.className = 'maps-seperator';
+    document.body.appendChild(hr);
+  });
 }
+
+let chooseMap = document.querySelector('.container-maps')
+console.log(chooseMap)
+chooseMap.addEventListener('click', () => {
+  window.location.href = `single-map.html?id=${maps.id}?loadData=true`;
+  console.log(maps);
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const loadData = urlParams.get('loadData');
+
+  if (loadData === 'true') {
+    console.log(maps)
+  }
+});
+ 
