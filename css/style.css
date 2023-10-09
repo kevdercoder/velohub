@@ -236,18 +236,6 @@ h4 {
   display: none;
 }
 
-.btn-filter-distance:focus {
-  background-color: var(--clr-grey-200);
-  color: var(--clr-grey-800);
-  border: 0;
-}
-
-.btn-filter-altitude:focus {
-  background-color: var(--clr-grey-200);
-  color: var(--clr-grey-800);
-  border: 0;
-}
-
 .container-center > img {
   margin: 0 -1.25em;
 }
@@ -291,7 +279,7 @@ ul {
   margin-right: 0;
 }
 
-.btn-list:focus {
+.btn-filter-distance-active  {
   background-color: var(--clr-grey-200);
   color: var(--clr-grey-800);
   border: 0;
@@ -466,4 +454,114 @@ padding-top: var(--padding-200);
 .maps-seperator {
   height: 0.75px;
   background-color: var(--clr-grey-600);
+}
+
+
+/* -- Overview Maps [Skeleton Loading] -- */
+
+.skeleton-loading {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.skeleton-hidden {
+  display: hidden;
+}
+
+.skeleton-map {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  background: linear-gradient(	  
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;	 
+}
+@keyframes shine {	
+  to {
+    background-position: 100% 0, /* move highlight to right */ 0 0;
+  }
+}
+
+.skeleton-name {
+  width: 150px;
+  height: 20px;
+  border-radius: 30px;
+  background: linear-gradient(	  
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 80%
+  ),
+  var(--clr-grey-600);
+background-repeat: repeat-y;
+background-size: 50px 500px;
+background-position: 0 0;
+animation: shine 1s infinite;	 
+}
+@keyframes shine {	
+to {
+  background-position: 100% 0, /* move highlight to right */ 0 0;
+}
+}
+
+
+.skeleton-data {
+  width: 50px;
+  margin-right: 3px;
+  height: 15px;
+  border-radius: 30px;
+  background: linear-gradient(	  
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 80%
+  ),
+  var(--clr-grey-600);
+background-repeat: repeat-y;
+background-size: 50px 500px;
+background-position: 0 0;
+animation: shine 1s infinite;	 
+}
+@keyframes shine {	
+to {
+  background-position: 100% 0, /* move highlight to right */ 0 0;
+}
+}
+
+.skeleton-filters {
+  font-size: 9px;
+  color: var(--clr-white);
+  border-radius: 10px;
+  width: 47px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--padding-200);
+  background: linear-gradient(	  
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 80%
+  ),
+  var(--clr-grey-600);
+background-repeat: repeat-y;
+background-size: 50px 500px;
+background-position: 0 0;
+animation: shine 1s infinite;	 
+}
+@keyframes shine {	
+to {
+  background-position: 100% 0, /* move highlight to right */ 0 0;
+}
 }

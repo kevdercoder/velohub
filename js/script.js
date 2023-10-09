@@ -139,75 +139,91 @@ if (user) {
   console.log("No user is currently logged in.");
 }
 
+// Save the filter choice in local storage 
+const btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
+const btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
+const btnList = document.querySelectorAll('.btn-list');
+
+btnFilterDistance.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    
+    btnFilterDistance.forEach((otherBtn) => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove('btn-filter-distance-active');
+      }
+    });
+
+    if (btn.classList.contains('btn-filter-distance-active')) {
+      btn.classList.remove('btn-filter-distance-active');
+    } else {
+      btn.classList.add('btn-filter-distance-active');
+    }
+
+    localStorage.setItem('btnFilterDistance', btn.id);
+    console.log(localStorage.getItem('btnFilterDistance'))
+  });
+});
+
+btnFilterAltitude.forEach((btn) => {
+  btn.addEventListener('click', () => {
+
+
+    btnFilterAltitude.forEach((otherBtn) => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove('btn-filter-distance-active');
+      }
+    });
+
+    if (btn.classList.contains('btn-filter-distance-active')) {
+      btn.classList.remove('btn-filter-distance-active');
+    } else {
+      btn.classList.add('btn-filter-distance-active');
+    }
+
+    localStorage.setItem('btnFilterAltitude', btn.id);
+    console.log(localStorage.getItem('btnFilterAltitude'))
+  });
+});
+
+//activate button as default
+if (document.contains(document.getElementById('single-route'))) {
+  document.getElementById('single-route').classList.add('btn-filter-distance-active')
+}
+
+
+btnList.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    btnList.forEach((otherBtn) => {
+
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove('btn-filter-distance-active');
+      }
+    });
+
+    if (!btn.classList.contains('btn-filter-distance-active')) {
+      btn.classList.add('btn-filter-distance-active');
+    }
+
+    localStorage.setItem('btnList', btn.id);
+    
+  });
+});
+
+
 
 let btnSubmit = document.querySelector('.btn-submit');
 if (btnSubmit) {
   btnSubmit.addEventListener('click', async () => {
-    // Pass data via URL parameter
-    window.location.href = 'overview-maps.html?loadData=true';
+    // Redirect to the overview-maps.html page
+    window.location.href = 'overview-maps.html';
   });
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const loadData = urlParams.get('loadData');
-
-  if (loadData === 'true') {
-    await showMaps();
+  if (window.location.pathname === '/overview-maps.html') {
+    // Dynamically load the map-overview.js file
+    const { showMaps } = await import('./overview-maps.js');
+     
+    showMaps();
   }
 });
-
-async function showMaps() {
-  const { data: maps, error } = await supa.from("maps").select();
-  maps.forEach(maps => {
-    let sectionMaps = document.createElement('section');
-    sectionMaps.className = 'container-maps';
-    sectionMaps.id = `map-${maps.id}`;
-    sectionMaps.innerHTML = `
-      <div>
-        <img class="maps-map-small" src="${maps.map_img}" alt="image-alt">
-      </div>
-      <div class="maps-margin">
-        <h2>${maps.map_name}</h2>
-        <ul>
-          <li class="maps-distance">
-            <img src="/img/icon-distance.svg" alt="image-alt">
-            <p>${maps.distance}</p>
-          </li>
-          <li class="maps-distance">
-            <img src="/img/icon-up.svg" alt="image-alt">
-            <p>${maps.altitude_up}</p>
-          </li>
-          <li class="maps-distance">
-            <img src="/img/icon-down.svg" alt="image-alt">
-            <p>${maps.altitude_down}</p>
-          </li>
-        </ul>
-        <div class="maps-filters">${maps.filter}</div>
-      </div>
-    `;
-  
-    document.body.appendChild(sectionMaps);
-
-    const hr = document.createElement('hr');
-    hr.className = 'maps-seperator';
-    document.body.appendChild(hr);
-  });
-}
-
-let chooseMap = document.querySelector('.container-maps')
-console.log(chooseMap)
-chooseMap.addEventListener('click', () => {
-  window.location.href = `single-map.html?id=${maps.id}?loadData=true`;
-  console.log(maps);
-});
-
-window.addEventListener('DOMContentLoaded', async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const loadData = urlParams.get('loadData');
-
-  if (loadData === 'true') {
-    console.log(maps)
-  }
-});
- 
