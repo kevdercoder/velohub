@@ -209,8 +209,6 @@ btnList.forEach((btn) => {
   });
 });
 
-
-
 let btnSubmit = document.querySelector('.btn-submit');
 if (btnSubmit) {
   btnSubmit.addEventListener('click', async () => {

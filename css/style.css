@@ -8,9 +8,13 @@
   --clr-grey-600: #252525;
   --clr-grey-800: #181818;
 
-  --clr-primary-300: /* wird noch definiert */;
+  --clr-primary-300:
+    /* wird noch definiert */
+  ;
   --clr-primary-600: #91CB68;
-  --clr-primary-900: /* wird noch definiert */;
+  --clr-primary-900:
+    /* wird noch definiert */
+  ;
 
   --clr-accent-blue: #53A2F9;
   --clr-accent-purple: #9E80DC;
@@ -118,16 +122,16 @@ select {
 /* 9. Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-      scroll-behavior: auto;
+    scroll-behavior: auto;
   }
 
   *,
   *::before,
   *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -236,16 +240,17 @@ h4 {
   display: none;
 }
 
-.container-center > img {
+.container-center>img {
   margin: 0 -1.25em;
 }
 
 #heading-img {
- 
+
   min-width: 100vw;
   z-index: -1;
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(70%, rgba(0,0,0,0.7)), color-stop(100%, rgba(0,0,0,0)));
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%); /* Add fallback value */
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 1)), color-stop(70%, rgba(0, 0, 0, 0.7)), color-stop(100%, rgba(0, 0, 0, 0)));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 70%, rgba(0, 0, 0, 0) 100%);
+  /* Add fallback value */
 }
 
 
@@ -254,8 +259,10 @@ h4 {
 ul {
   list-style: none;
   display: flex;
-  overflow-x: hidden; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
-  white-space: nowrap; /* Verhindern, dass der Inhalt umbrochen wird */
+  overflow-x: hidden;
+  /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
+  white-space: nowrap;
+  /* Verhindern, dass der Inhalt umbrochen wird */
   padding-top: var(--padding-300);
 }
 
@@ -279,7 +286,7 @@ ul {
   margin-right: 0;
 }
 
-.btn-filter-distance-active  {
+.btn-filter-distance-active {
   background-color: var(--clr-grey-200);
   color: var(--clr-grey-800);
   border: 0;
@@ -317,7 +324,14 @@ ul {
   flex-direction: column;
 }
 
-#join-firstname, #join-name, #join-lastname, #join-email, #join-password, #join-password-confirmation, #login-email, #login-password {
+#join-firstname,
+#join-name,
+#join-lastname,
+#join-email,
+#join-password,
+#join-password-confirmation,
+#login-email,
+#login-password {
   background-color: var(--clr-grey-600);
   margin-top: var(--padding-400);
   height: 35px;
@@ -325,9 +339,12 @@ ul {
   font-size: 12px;
   color: var(--clr-grey-200);
   padding-left: var(--padding-500);
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 #password {
@@ -339,12 +356,16 @@ ul {
   font-size: 12px;
   color: var(--clr-grey-200);
   padding-left: var(--padding-500);
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
-#submit-login, #submit-join {
+#submit-login,
+#submit-join {
   background-color: var(--clr-primary-600);
   color: var(--clr-white);
   height: 35px;
@@ -358,12 +379,12 @@ input:focus::placeholder {
 }
 
 #forgot-password {
-display: flex;
-justify-content: center;
-font-size: 10px;
-color: var(--clr-grey-300);
-text-decoration: underline;
-padding-top: var(--padding-200);
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--clr-grey-300);
+  text-decoration: underline;
+  padding-top: var(--padding-200);
 }
 
 
@@ -427,12 +448,12 @@ padding-top: var(--padding-200);
   margin-right: 10px;
 }
 
-.maps-distance > img {
+.maps-distance>img {
   height: 7px;
   margin: 3px 5px 0 0;
 }
 
-.maps-distance > p {
+.maps-distance>p {
   color: var(--clr-grey-200);
   font-size: 10px;
 
@@ -459,7 +480,7 @@ padding-top: var(--padding-200);
 
 /* -- Overview Maps [Skeleton Loading] -- */
 
-.skeleton-loading {
+.skeleton-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
@@ -474,21 +495,22 @@ padding-top: var(--padding-200);
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  background: linear-gradient(	  
-      to right,
+  background: linear-gradient(to right,
       rgba(255, 255, 255, 0),
       rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%
-    ),
+      rgba(255, 255, 255, 0) 80%),
     var(--clr-grey-600);
   background-repeat: repeat-y;
   background-size: 50px 500px;
   background-position: 0 0;
-  animation: shine 1s infinite;	 
+  animation: shine 1s infinite;
 }
-@keyframes shine {	
+
+@keyframes shine {
   to {
-    background-position: 100% 0, /* move highlight to right */ 0 0;
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
   }
 }
 
@@ -496,22 +518,23 @@ padding-top: var(--padding-200);
   width: 150px;
   height: 20px;
   border-radius: 30px;
-  background: linear-gradient(	  
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0) 80%
-  ),
-  var(--clr-grey-600);
-background-repeat: repeat-y;
-background-size: 50px 500px;
-background-position: 0 0;
-animation: shine 1s infinite;	 
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
 }
-@keyframes shine {	
-to {
-  background-position: 100% 0, /* move highlight to right */ 0 0;
-}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
+  }
 }
 
 
@@ -520,22 +543,23 @@ to {
   margin-right: 3px;
   height: 15px;
   border-radius: 30px;
-  background: linear-gradient(	  
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0) 80%
-  ),
-  var(--clr-grey-600);
-background-repeat: repeat-y;
-background-size: 50px 500px;
-background-position: 0 0;
-animation: shine 1s infinite;	 
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
 }
-@keyframes shine {	
-to {
-  background-position: 100% 0, /* move highlight to right */ 0 0;
-}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
+  }
 }
 
 .skeleton-filters {
@@ -548,20 +572,21 @@ to {
   justify-content: center;
   align-items: center;
   margin-top: var(--padding-200);
-  background: linear-gradient(	  
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0) 80%
-  ),
-  var(--clr-grey-600);
-background-repeat: repeat-y;
-background-size: 50px 500px;
-background-position: 0 0;
-animation: shine 1s infinite;	 
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
 }
-@keyframes shine {	
-to {
-  background-position: 100% 0, /* move highlight to right */ 0 0;
-}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
+  }
 }
