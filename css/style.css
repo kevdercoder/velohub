@@ -142,6 +142,7 @@ body {
 
 h1 {
   font-size: 24px;
+  line-height: 30px;
   font-weight: var(--fw-medium);
   color: var(--clr-grey-200);
 }
@@ -160,8 +161,10 @@ h3 {
 
 h4 {
   font-size: 14px;
+  line-height: 18px;
+  padding-top: var(--padding-200);
   font-weight: var(--fw-ligth);
-  color: var(--clr-grey-200);
+  color: var(--clr-grey-300);
   text-align: center;
   width: 70vw;
 }
@@ -171,7 +174,8 @@ h4 {
 }
 
 .heading-title {
-  margin-top: var(--padding-200);
+
+  margin-top: -2em;
   text-align: center;
 }
 
@@ -184,20 +188,35 @@ h4 {
   align-items: center;
 }
 
+.container-padding-700 {
+  padding-bottom: var(--padding-700);
+}
+
 .container-padding-750 {
-  padding-top: var(--padding-750);
+  padding-bottom: var(--padding-750);
+}
+
+.container-padding-850 {
+  padding-bottom: var(--padding-850);
 }
 
 
 
 /* -- Index -- */
 
+.container-btn-filter {
+  display: flex;
+  overflow: auto;
+  ;
+}
+
 .btn-filter {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 30px;
   width: 75px;
   font-size: 12px;
-  overflow-y: scroll;
   color: var(--clr-grey-800);
   text-decoration: none;
   cursor: pointer;
@@ -205,15 +224,38 @@ h4 {
   color: var(--clr-grey-300);
   border: 1px solid var(--clr-grey-300);
   margin-right: var(--padding-200);
+  scrollbar-color: transparent;
+}
+
+.container-btn-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.btn-filter-distance:focus {
+  background-color: var(--clr-grey-200);
+  color: var(--clr-grey-800);
+  border: 0;
+}
+
+.btn-filter-altitude:focus {
+  background-color: var(--clr-grey-200);
+  color: var(--clr-grey-800);
+  border: 0;
+}
+
+.container-center > img {
+  margin: 0 -1.25em;
 }
 
 #heading-img {
-  border-radius: 15px;
+ 
+  min-width: 100vw;
+  z-index: -1;
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(70%, rgba(0,0,0,0.7)), color-stop(100%, rgba(0,0,0,0)));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%); /* Add fallback value */
 }
 
-#heading-img {
-  border-radius: 15px;
-}
+
 
 /* CSS für die ungeordnete Liste */
 ul {
@@ -221,35 +263,45 @@ ul {
   display: flex;
   overflow-x: hidden; /* Zeige eine horizontale Scrollbar an, wenn der Inhalt über die Container-Breite hinausgeht */
   white-space: nowrap; /* Verhindern, dass der Inhalt umbrochen wird */
-  padding: var(--padding-100);
+  padding-top: var(--padding-300);
+}
+
+.container-btn-list {
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-list {
   display: inline-block;
-  width: 40vw;
+  width: 42vw;
   height: 35px;
   font-size: 12px;
-  overflow-y: scroll;
   color: var(--clr-grey-800);
   text-decoration: none;
   cursor: pointer;
   border-radius: 10px;
   color: var(--clr-grey-300);
   border: 1px solid var(--clr-grey-300);
+  margin-top: var(--padding-300);
+  margin-right: 0;
+}
+
+.btn-list:focus {
+  background-color: var(--clr-grey-200);
+  color: var(--clr-grey-800);
+  border: 0;
 }
 
 .btn-submit {
-  display: inline-block;
-  width: 90vw;
+  width: 87.5vw;
   height: 35px;
   font-size: 14px;
-  overflow-y: scroll;
   background-color: var(--clr-primary-600);
   text-decoration: none;
   cursor: pointer;
   border-radius: 10px;
   color: var(--clr-white);
-  border: 1px solid var(--clr-grey-300);
+  margin-top: var(--padding-300);
 }
 
 
@@ -269,7 +321,6 @@ ul {
 .login-interface {
   display: flex;
   flex-direction: column;
-  padding-top: var(--padding-850);
 }
 
 #join-firstname, #join-name, #join-lastname, #join-email, #join-password, #join-password-confirmation, #login-email, #login-password {
@@ -305,6 +356,7 @@ ul {
   height: 35px;
   border-radius: 10px;
   font-size: 14px;
+  margin-top: var(--padding-600);
 }
 
 input:focus::placeholder {
@@ -315,7 +367,7 @@ input:focus::placeholder {
 display: flex;
 justify-content: center;
 font-size: 10px;
-color: var(--clr-grey-200);
+color: var(--clr-grey-300);
 text-decoration: underline;
 padding-top: var(--padding-200);
 }
