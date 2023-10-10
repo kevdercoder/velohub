@@ -45,6 +45,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     console.log(error);
   });
 
+import { displayProfile } from "./profile.js";
 /*
  * Script Description
  */
@@ -140,6 +141,41 @@ if (user) {
   console.log("No user is currently logged in.");
 }
 
+// Function to update user status
+function updateUserStatus(user) {
+  const userStatusElement = document.getElementById('userStatus');
+
+  if (user) {
+      console.log(`Authenticated as: ${user.email}`) ;
+  } else {
+    console.log(`Not Authenticated`);
+  }
+}
+
+// Check and display the initial user status
+const initialUser = supa.auth.user();
+updateUserStatus(initialUser);
+
+if (document.getElementById('submit-login')) {
+  document.getElementById('submit-login').addEventListener('click', login);
+}
+// Event listeners for the buttons
+
+
+
+// Listener for authentication state changes
+supa.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_IN") {
+      console.log("User signed in: ", session.user);
+      updateUserStatus(session.user);
+  } else if (event === "SIGNED_OUT") {
+      console.log("User signed out");
+      updateUserStatus(null);
+  }
+});
+
+
+
 // Save the filter choice in local storage 
 const btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
 const btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
@@ -221,7 +257,7 @@ if (btnSubmit) {
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/overview-maps.html') {
     // Dynamically load the map-overview.js file
-    const { showMaps } = await import('./overview-maps.js');
+    const { showMaps } = await import('./maps.js');
      
     showMaps();
   }
@@ -231,8 +267,25 @@ window.addEventListener('DOMContentLoaded', async () => {
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
     // Dynamically load the map-overview.js file
-    const { displayMap } = await import('./single-map.js');
+    const { displayMap } = await import('./maps.js');
      
     displayMap();
+  }
+});
+
+let navProfile = document.getElementById('mobile-nav-profile');
+if (navProfile) {
+  navProfile.addEventListener('click', async () => {
+    // Redirect to the overview-maps.html page
+    window.location.href = 'profile.html';
+  });
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/profile.html') {
+    // Dynamically load the map-overview.js file
+    const { displayProfile } = await import('./profile.js');
+     
+    displayProfile();
   }
 });
