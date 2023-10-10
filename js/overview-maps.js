@@ -49,20 +49,20 @@ async function showMaps() {
   console.log(localStorage.getItem('btnFilterAltitude'));
   console.log(localStorage.getItem('btnList'));
 
-  const sectionMapsList = document.querySelectorAll('.container-maps');
 
+const sectionMapsList = document.querySelectorAll('.container-maps');
 
 sectionMapsList.forEach((sectionMaps) => {
   sectionMaps.addEventListener('click', () => {
+
+    localStorage.setItem('mapId', sectionMaps.id)
     // Handle the click event here
     console.log(`Clicked on ${sectionMaps.id}`);
     window.location.href = `single-map.html?${sectionMaps.id}`;
   });
 
-  console.log(sectionMaps.id)
-
-
 });
-}
+  }
+
 
   export { showMaps };

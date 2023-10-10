@@ -225,3 +225,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     showMaps();
   }
 });
+
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/single-map.html') {
+    // Dynamically load the map-overview.js file
+    const { displayMap } = await import('./single-map.js');
+     
+    displayMap();
+  }
+});
