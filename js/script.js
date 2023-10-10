@@ -113,6 +113,7 @@ async function login() {
     console.error("Error during login: ", error.message);
   } else {
     console.log("Logged in as ", email);
+    window.location.href = 'index.html';
   }
 }
 

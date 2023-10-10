@@ -83,7 +83,8 @@ dd {
 
 /* 3. Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
-ol[role='list'] {
+ol[role='list'],
+ul {
   list-style: none;
 }
 
@@ -191,6 +192,11 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.container-flex {
+  display: flex;
+  flex-direction: row;
 }
 
 .container-padding-700 {
@@ -595,11 +601,6 @@ input:focus::placeholder {
   object-fit: cover;
 }
 
-.container-flex {
-  display: flex;
-  flex-direction: row;
-}
-
 #single-map-name {
   width: 80%;
   padding-top: var(--padding-200);
@@ -612,6 +613,7 @@ input:focus::placeholder {
   border-radius: 30px;
   background-color: var(--clr-grey-200);
   color: var(--clr-grey-800);
+  margin-top: var(--padding-500);
 }
 
 #btn-gpx {
