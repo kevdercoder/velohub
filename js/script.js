@@ -45,42 +45,57 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     console.log(error);
   });
 
-import { displayProfile } from "./profile.js";
-/*
- * Script Description
+/**
+ * This section handles the login and sign up functionality.
+ * Aditionally it manages the current user status.
  */
 
 import {
   supa
 } from "/js/supabase-setup.js";
 
-// Function to sign up a new user
+// Attach event listeners to the login button
+let submitLoginButton = document.getElementById('submit-login');
+if (submitLoginButton) {
+  submitLoginButton.addEventListener('click', login);
+}
+
+// Function to login using email and password
+async function login() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const { error } = await supa.auth.signIn({ email, password });
+
+  if (error) {
+      console.error("Error during login: ", error.message);
+  } else {
+      console.log("Logged in as ", email);
+  }
+}
+
+// Attach event listeners to the sign up buttons
+let submitJoinButton = document.getElementById('submit-join');
+if (submitJoinButton) {
+  submitJoinButton.addEventListener('click', signUp);
+}
+
+// Function to sign up using email and password
 async function signUp() {
   const email = document.getElementById('join-email').value;
   const password = document.getElementById('join-password').value;
   const firstName = document.getElementById('join-firstname').value;
   const name = document.getElementById('join-name').value;
 
-  const {
-    user,
-    error
-  } = await supa.auth.signUp({
-    email,
-    password
-  });
+  const { user, error } = await supa.auth.signUp({ email, password });
 
   if (error) {
     console.error("Error during sign up: ", error.message);
   } else {
     console.log("User signed up successfully:", user);
 
-    console.log(user.id)
-
-    // Insert the UUID of the user into the "user" table
-    const {
-      data,
-      error
-    } = await supa
+    //Insert the UUID of the user into the "user" table
+    const { data, error } = await supa
       .from("user")
       .insert({
         user_id: user.id,
@@ -90,55 +105,11 @@ async function signUp() {
       });
 
     if (error) {
-      console.error("Error during user creation: ", error.message);
+      console.log("Error inserting data:", error.message);
     } else {
-      console.log("User created successfully:", data[0]);
+      console.log("Data inserted successfully:", data);
     }
   }
-}
-
-
-// Function to login using email and password
-async function login() {
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-
-  const {
-    error
-  } = await supa.auth.signIn({
-    email,
-    password
-  });
-
-  if (error) {
-    console.error("Error during login: ", error.message);
-  } else {
-    console.log("Logged in as ", email);
-    window.location.href = 'index.html';
-  }
-}
-
-// Attach event listeners to the login and sign up buttons
-let submitJoinButton = document.getElementById('submit-join');
-if (submitJoinButton) {
-  submitJoinButton.addEventListener('click', signUp);
-}
-
-let submitLoginButton = document.getElementById('submit-login');
-if (submitLoginButton) {
-  submitLoginButton.addEventListener('click', login);
-}
-
-const {
-  user
-} = supa.auth.user();
-
-if (user) {
-  console.log("Logged in as:", user.email);
-  console.log("User ID:", user.id);
-  console.log("User profile:", user.user_metadata);
-} else {
-  console.log("No user is currently logged in.");
 }
 
 // Function to update user status
@@ -146,21 +117,15 @@ function updateUserStatus(user) {
   const userStatusElement = document.getElementById('userStatus');
 
   if (user) {
-      console.log(`Authenticated as: ${user.email}`) ;
+      console.log(`Authenticated as: ${user.email}`);
   } else {
-    console.log(`Not Authenticated`);
+      console.log("Not authenticated.");
   }
 }
 
 // Check and display the initial user status
 const initialUser = supa.auth.user();
 updateUserStatus(initialUser);
-
-if (document.getElementById('submit-login')) {
-  document.getElementById('submit-login').addEventListener('click', login);
-}
-// Event listeners for the buttons
-
 
 
 // Listener for authentication state changes
@@ -173,6 +138,22 @@ supa.auth.onAuthStateChange((event, session) => {
       updateUserStatus(null);
   }
 });
+
+// Logout logic
+/*async function logout() {
+  const { error } = await supa.auth.signOut();
+  if (error) {
+      console.error("Error during logout:", error);
+  } else {
+      updateUserStatus(null);
+      console.log("User logged out successfully.");
+  }
+}
+
+let logoutButton = document.getElementById('btn-logout')
+if (logoutButton) {
+  submitJoinButton.addEventListener('click', logout);
+}*/
 
 
 
@@ -273,18 +254,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+
 let navProfile = document.getElementById('mobile-nav-profile');
 if (navProfile) {
   navProfile.addEventListener('click', async () => {
-    // Redirect to the overview-maps.html page
-    window.location.href = 'profile.html';
+    if(supa.auth.user().aud === 'authenticated') {
+      window.location.href = 'profile.html';
+    } else {
+      window.location.href = 'sign-in.html';
+    }
   });
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/profile.html') {
     // Dynamically load the map-overview.js file
-    const { displayProfile } = await import('./profile.js');
+    const { displayProfile } = await import('./user.js');
      
     displayProfile();
   }
