@@ -477,7 +477,6 @@ input:focus::placeholder {
   background-color: var(--clr-grey-600);
 }
 
-
 /* -- Overview Maps [Skeleton Loading] -- */
 
 .skeleton-container {
