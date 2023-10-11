@@ -140,20 +140,21 @@ supa.auth.onAuthStateChange((event, session) => {
 });
 
 // Logout logic
-/*async function logout() {
+async function logout() {
   const { error } = await supa.auth.signOut();
   if (error) {
       console.error("Error during logout:", error);
   } else {
       updateUserStatus(null);
+      window.location.href = 'index.html';
       console.log("User logged out successfully.");
   }
 }
 
 let logoutButton = document.getElementById('btn-logout')
 if (logoutButton) {
-  submitJoinButton.addEventListener('click', logout);
-}*/
+  logoutButton.addEventListener('click', logout);
+}
 
 
 
@@ -258,10 +259,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 let navProfile = document.getElementById('mobile-nav-profile');
 if (navProfile) {
   navProfile.addEventListener('click', async () => {
-    if(supa.auth.user().aud === 'authenticated') {
-      window.location.href = 'profile.html';
-    } else {
+    if(supa.auth.user() === null) {
       window.location.href = 'sign-in.html';
+    } else {
+      window.location.href = 'profile.html';
+     
     }
   });
 }

@@ -112,6 +112,63 @@ sectionMapsList.forEach((sectionMaps) => {
       `;
 
       document.body.appendChild(singleMapContainer);
+      let btnTrackFinished = document.getElementById('btn-track-finished');
+
+
+      async function checkRiddenMap() {
+      if (supa.auth.user() === null) {
+        btnTrackFinished.style.display = 'none';
+      } else {
+        const { user, error } = await supa.auth.user();
+        if (error) {
+          console.log("Error getting user information:", error.message);
+        } else {
+          const { data: existingData, error: existingError } = await supa
+            .from("user_ridden_maps")
+            .select("*")
+            .eq("maps_id", maps.id)
+            .eq("user_id", supa.auth.user().id);
+      
+          if (existingError) {
+            console.log("Error getting existing data:", existingError.message);
+          } else if (existingData.length > 0) {
+            btnTrackFinished.id = 'finished-map';
+            btnTrackFinished.removeEventListener('click', addRiddenMap);
+          } else {
+            console.log("User has not finished the track yet.");
+          }
+        }
+      }
+    }
+
+    checkRiddenMap();
+
+      if (document.contains(document.getElementById('btn-track-finished'))) {
+        document.getElementById('btn-track-finished').addEventListener('click', addRiddenMap)
+      }
+
+      async function addRiddenMap() {
+        const { user, error } = await supa.auth.user();
+        if (error) {
+        } else {
+          const { data, error } = await supa
+            .from("user_ridden_maps")
+            .insert({
+              maps_id: maps.id,
+              maps_name: maps.map_name,
+              user_id: supa.auth.user().id
+            });
+
+            btnTrackFinished.id = 'finished-map'
+            btnTrackFinished.removeEventListener('click', addRiddenMap);
+      
+          if (error) {
+            console.log("Error inserting data:", error.message);
+          } else {
+            console.log("Data inserted successfully:", data);
+          }
+        }
+      }
   }
     });
 
@@ -123,3 +180,5 @@ sectionMapsList.forEach((sectionMaps) => {
 }
 
   export { displayMap };
+
+

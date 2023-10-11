@@ -616,6 +616,16 @@ input:focus::placeholder {
   margin-top: var(--padding-500);
 }
 
+#finished-map {
+  font-size: 9px;
+  width: 70px;
+  height: 20px;
+  border-radius: 30px;
+  background-color: var(--clr-accent-orange);
+  color: var(--clr-grey-800);
+  margin-top: var(--padding-500);
+}
+
 #btn-gpx {
   background-color: var(--clr-primary-600);
   width: 100%;

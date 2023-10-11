@@ -14,4 +14,17 @@ import {
   export { displayProfile };
 
 
+  async function displayRiddenMaps() {
+    const { data, error } = await supa
+        .from("user_ridden_maps")
+        .select("*")
+        .eq("maps_id", maps.id)
+        .eq("user_id", supa.auth.user().id);
+
+        if (data.length > 0) {
+          
+        }
+    } 
   
+
+  export { displayRiddenMaps };
