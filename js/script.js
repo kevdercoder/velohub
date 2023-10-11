@@ -71,6 +71,7 @@ async function login() {
       console.error("Error during login: ", error.message);
   } else {
       console.log("Logged in as ", email);
+      window.location.href = 'profile.html';
   }
 }
 
@@ -92,6 +93,7 @@ async function signUp() {
   if (error) {
     console.error("Error during sign up: ", error.message);
   } else {
+    window.location.href = 'confirm-email.html';
     console.log("User signed up successfully:", user);
 
     //Insert the UUID of the user into the "user" table

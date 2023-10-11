@@ -45,9 +45,25 @@ async function showMaps() {
   skeletonLoading.style.display = 'none';
 
 
-  console.log(localStorage.getItem('btnFilterDistance'));
-  console.log(localStorage.getItem('btnFilterAltitude'));
-  console.log(localStorage.getItem('btnList'));
+  let distance = localStorage.getItem('btnFilterDistance');
+  let altitude = localStorage.getItem('btnFilterAltitude');
+  let listType = localStorage.getItem('btnList');
+
+
+  async function filterMaps() {
+    const { data, error } = await supa
+        .from("maps")
+        .select("*")
+        .eq("distance", maps.distance)
+
+        if (maps.distance < 20) {
+          console.log('20')
+        } else if (maps.distance < 50) {
+          console.log('50')
+        }
+      
+    } 
+  
 
 
 const sectionMapsList = document.querySelectorAll('.container-maps');
