@@ -2,6 +2,13 @@ import {
   supa
 } from "/js/supabase-setup.js";
 
+//Global variables
+let distance = localStorage.getItem('btnFilterDistance');
+let altitude = localStorage.getItem('btnFilterAltitude');
+let listType = localStorage.getItem('btnList');
+
+
+/* Programm to display the maps in the list view */
 async function showMaps() {
     const { data: maps, error } = await supa.from("maps").select();
     maps.forEach(maps => {
@@ -9,25 +16,21 @@ async function showMaps() {
       sectionMaps.className = 'container-maps';
       sectionMaps.id = maps.id;
 
-
-      let distance = localStorage.getItem('btnFilterDistance');
-      let altitude = localStorage.getItem('btnFilterAltitude');
-      let listType = localStorage.getItem('btnList');
-
-console.log(distance);
-
-
-      if (distance == 20 && maps.distance <= 20) {
-        console.log(maps.distance);
-      } else if (distance == 50) {
-        console.log('fünfzig')
-      } else if (distance == 100) {
-        console.log('hundert')
-      } else if (distance == 200) { 
-        console.log('hundertplus')
+      //Check which filters are active
+      if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
+        displayOverview()
+      } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
+        displayOverview()
+      } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
+        displayOverview()
+      } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) { 
+        displayOverview()
+      } else if (distance == null && altitude == maps.altitude) { 
+        displayOverview()
       }
       
-    
+      //Display the maps in the list view
+      async function displayOverview() {
       sectionMaps.innerHTML = `
         <div class="maps-img-container">
           <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
@@ -57,22 +60,23 @@ console.log(distance);
       const hr = document.createElement('hr');
       hr.className = 'maps-seperator';
       document.body.appendChild(hr);
+    }
     })
 
 
-    // Hide skeleton-loading after maps are loaded
+  // Hide skeleton-loading after maps are loaded
   let skeletonLoading = document.querySelector('.skeleton-loading');
   skeletonLoading.style.display = 'none';
 
 
-
+  // Save the id of the clicked map in local storage and redirect to single-map.html
 const sectionMapsList = document.querySelectorAll('.container-maps');
 
 sectionMapsList.forEach((sectionMaps) => {
   sectionMaps.addEventListener('click', () => {
 
     localStorage.setItem('mapId', sectionMaps.id)
-    // Handle the click event here
+  
     console.log(`Clicked on ${sectionMaps.id}`);
     window.location.href = `single-map.html?${sectionMaps.id}`;
   });

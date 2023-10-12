@@ -278,3 +278,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     displayProfile();
   }
 });
+
+
+// Check if the user is on the index page and reset local storage
+if (window.location.pathname === '/index.html') {
+  localStorage.clear(); 
+}
