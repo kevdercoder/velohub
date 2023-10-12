@@ -436,11 +436,17 @@ input:focus::placeholder {
   margin-left: 15px;
 }
 
-.maps-map-small {
+.maps-img-container {
   width: 100px;
-  min-width: 100px;
   height: 100px;
+  min-width: 100px;
+
+}
+
+.maps-map-small {
   border-radius: 15px;
+  background-size: cover;
+ 
 }
 
 .maps-distance {

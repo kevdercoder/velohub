@@ -8,25 +8,44 @@ async function showMaps() {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
       sectionMaps.id = maps.id;
+
+
+      let distance = localStorage.getItem('btnFilterDistance');
+      let altitude = localStorage.getItem('btnFilterAltitude');
+      let listType = localStorage.getItem('btnList');
+
+console.log(distance);
+
+
+      if (distance == 20 && maps.distance <= 20) {
+        console.log(maps.distance);
+      } else if (distance == 50) {
+        console.log('fünfzig')
+      } else if (distance == 100) {
+        console.log('hundert')
+      } else if (distance == 200) { 
+        console.log('hundertplus')
+      }
       
+    
       sectionMaps.innerHTML = `
-        <div>
-          <img class="maps-map-small" src="${maps.map_img}" alt="image-alt">
+        <div class="maps-img-container">
+          <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
         </div>
         <div class="maps-margin">
           <h2>${maps.map_name}</h2>
           <ul>
             <li class="maps-distance">
               <img src="/img/icon-distance.svg" alt="image-alt">
-              <p>${maps.distance}</p>
+              <p>${maps.distance}km</p>
             </li>
             <li class="maps-distance">
               <img src="/img/icon-up.svg" alt="image-alt">
-              <p>${maps.altitude_up}</p>
+              <p>${maps.altitude_up}m</p>
             </li>
             <li class="maps-distance">
               <img src="/img/icon-down.svg" alt="image-alt">
-              <p>${maps.altitude_down}</p>
+              <p>${maps.altitude_down}m</p>
             </li>
           </ul>
           <div class="maps-filters">${maps.altitude}</div>
@@ -38,32 +57,13 @@ async function showMaps() {
       const hr = document.createElement('hr');
       hr.className = 'maps-seperator';
       document.body.appendChild(hr);
-    });
+    })
+
 
     // Hide skeleton-loading after maps are loaded
   let skeletonLoading = document.querySelector('.skeleton-loading');
   skeletonLoading.style.display = 'none';
 
-
-  let distance = localStorage.getItem('btnFilterDistance');
-  let altitude = localStorage.getItem('btnFilterAltitude');
-  let listType = localStorage.getItem('btnList');
-
-
-  async function filterMaps() {
-    const { data, error } = await supa
-        .from("maps")
-        .select("*")
-        .eq("distance", maps.distance)
-
-        if (maps.distance < 20) {
-          console.log('20')
-        } else if (maps.distance < 50) {
-          console.log('50')
-        }
-      
-    } 
-  
 
 
 const sectionMapsList = document.querySelectorAll('.container-maps');
@@ -94,22 +94,22 @@ sectionMapsList.forEach((sectionMaps) => {
       if (localStorage.getItem('mapId') == maps.id) {
       
       singleMapContainer.innerHTML = `
-          <img class="single-map-big" src="${maps.map_img}" alt="image-alt">
+          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
         <div class="container-flex">
           <div>
           <h2 id="single-map-name">${maps.map_name}</h2>
           <ul>
             <li class="maps-distance">
               <img src="/img/icon-distance.svg" alt="image-alt">
-              <p>${maps.distance}</p>
+              <p>${maps.distance}km</p>
             </li>
             <li class="maps-distance">
               <img src="/img/icon-up.svg" alt="image-alt">
-              <p>${maps.altitude_up}</p>
+              <p>${maps.altitude_up}m</p>
             </li>
             <li class="maps-distance">
               <img src="/img/icon-down.svg" alt="image-alt">
-              <p>${maps.altitude_down}</p>
+              <p>${maps.altitude_down}m</p>
             </li>
           </ul>
           <div class="maps-filters">${maps.altitude}</div>
