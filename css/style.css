@@ -659,6 +659,7 @@ input:focus::placeholder {
   font-weight: var(--fw-ligth);
   color: var(--clr-grey-200);
   width: 100%;
+  margin-bottom: var(--padding-850);
 }
 
 

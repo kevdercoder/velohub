@@ -16,7 +16,7 @@ async function showMaps() {
       sectionMaps.className = 'container-maps';
       sectionMaps.id = maps.id;
 
-      //Check which filters are active
+      //Filter for the maps which should be displayed
       if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
         displayOverview()
       } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
@@ -26,6 +26,8 @@ async function showMaps() {
       } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) { 
         displayOverview()
       } else if (distance == null && altitude == maps.altitude) { 
+        displayOverview()
+      } else if (distance == null && altitude == null) { 
         displayOverview()
       }
       
@@ -56,10 +58,12 @@ async function showMaps() {
       `;
 
       document.body.appendChild(sectionMaps);
-  
       const hr = document.createElement('hr');
       hr.className = 'maps-seperator';
-      document.body.appendChild(hr);
+   
+      document.querySelector('main').appendChild(sectionMaps);
+      document.querySelector('main').appendChild(hr)
+      
     }
     })
 
@@ -67,6 +71,11 @@ async function showMaps() {
   // Hide skeleton-loading after maps are loaded
   let skeletonLoading = document.querySelector('.skeleton-loading');
   skeletonLoading.style.display = 'none';
+
+  // Add padding to the bottom of the page
+  let div = document.createElement('div');
+  div.className = 'container-padding-800'
+  document.body.appendChild(div);
 
 
   // Save the id of the clicked map in local storage and redirect to single-map.html
@@ -121,7 +130,7 @@ sectionMapsList.forEach((sectionMaps) => {
           <button id="btn-track-finished">Beendet</button>
         </div>
         <section>
-        <a href="/geojson/gpx/20-50km+flach_R01.gpx" download>
+        <a href="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}" download>
           <button id="btn-gpx">Download .gpx</button>
           </a>
           <button id="btn-add-community">Community-Tour planen</button>
