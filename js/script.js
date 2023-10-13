@@ -45,9 +45,38 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     console.log(error);
   });
 
-/**
+
+  /*
+   * This script checks for the current URL and adds an id 
+   * to the current link in the navigation menu
+   */
+
+// Get the current page URL
+const currentUrl = window.location.href;
+
+console.log(currentUrl);
+
+// Get all the links in the navigation menu
+const links = document.querySelectorAll('.mobile-nav a');
+
+// Loop through the links and add the active class to the current link
+links.forEach(link => {
+  if (link.href === currentUrl) {
+    link.id = 'mobile-nav-active-link';
+
+    // Find the SVG element within the link
+    const svgIcon = link.querySelector('.mobile-nav-icon');
+
+    if (svgIcon) {
+      svgIcon.id = 'mobile-nav-active-icon';
+    }
+  }
+});
+
+
+/* 
  * This section handles the login and sign up functionality.
- * Aditionally it manages the current user status.
+ * Aditionally it manages the current user status. 
  */
 
 import {

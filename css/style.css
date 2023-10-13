@@ -105,6 +105,11 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 7. Make images easier to work with */
 img,
 picture {
@@ -415,11 +420,21 @@ input:focus::placeholder {
 
 .mobile-nav-icon {
   fill: var(--clr-grey-300);
-  height: 25px;
+  height: 24px;
+  margin-bottom: -1px;
+  margin-left: 1px;
 }
 
 .mobile-nav-description {
   font-size: 9px;
+}
+
+#mobile-nav-active-link {
+  color: var(--clr-grey-200);
+}
+
+#mobile-nav-active-icon {
+  fill: var(--clr-grey-200);
 }
 
 
@@ -608,7 +623,7 @@ input:focus::placeholder {
 }
 
 #single-map-name {
-  width: 80%;
+  width: 100%;
   padding-top: var(--padding-200);
 }
 
