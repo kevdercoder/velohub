@@ -209,5 +209,3 @@ sectionMapsList.forEach((sectionMaps) => {
 }
 
   export { displayMap };
-
-

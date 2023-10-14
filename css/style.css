@@ -313,7 +313,6 @@ ul {
 
 
 /* -- Weather -- */
-
 #weather-icon {
   display: block;
   margin: 0 auto;
@@ -321,6 +320,25 @@ ul {
   width: 90vw;
 }
 
+
+/* -- Login -- */
+#btn-sign-in{
+  background-color: var(--clr-primary-600);
+  color: var(--clr-white);
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: var(--padding-600);
+}
+
+#btn-sign-up {
+  background-color: var(--clr-grey-600);
+  color: var(--clr-primary-600);
+  height: 35px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: var(--padding-600);
+}
 
 
 /* -- Sign in -- */
@@ -419,7 +437,7 @@ input:focus::placeholder {
 }
 
 .mobile-nav-icon {
-  fill: var(--clr-grey-300);
+  filter: invert(66%) sepia(56%) saturate(38%) hue-rotate(188deg) brightness(74%) contrast(82%);
   height: 24px;
   margin-bottom: -1px;
   margin-left: 1px;
@@ -434,7 +452,7 @@ input:focus::placeholder {
 }
 
 #mobile-nav-active-icon {
-  fill: var(--clr-grey-200);
+  filter: invert(95%) sepia(6%) saturate(777%) hue-rotate(185deg) brightness(97%) contrast(90%); 
 }
 
 

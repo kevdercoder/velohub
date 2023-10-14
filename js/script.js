@@ -122,8 +122,7 @@ async function signUp() {
   if (error) {
     console.error("Error during sign up: ", error.message);
   } else {
-    window.location.href = 'confirm-email.html';
-    console.log("User signed up successfully:", user);
+    //console.log("User signed up successfully:", user);
 
     //Insert the UUID of the user into the "user" table
     const { data, error } = await supa
@@ -139,6 +138,7 @@ async function signUp() {
       console.log("Error inserting data:", error.message);
     } else {
       console.log("Data inserted successfully:", data);
+      window.location.href = 'confirm-email.html';
     }
   }
 }
@@ -309,7 +309,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// Check if the user is on the index page and reset local storage
+// Check if the user is on the index page and reset local storage of filter elements
 if (window.location.pathname === '/index.html') {
-  localStorage.clear(); 
+  localStorage.removeItem('distance');
+  localStorage.removeItem('altitude');
+  localStorage.removeItem('listtype');
 }
