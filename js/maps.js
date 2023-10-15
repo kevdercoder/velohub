@@ -143,6 +143,7 @@ async function displayMap() {
 
       singleMapContainer.innerHTML = `
           <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
+          <button id="shuffle-again">Nochmals mischen</button>
         <div class="container-flex">
           <div>
           <h2 id="single-map-name">${maps.map_name}</h2>
@@ -174,7 +175,7 @@ async function displayMap() {
           <p class="single-map-description">${maps.description}</p>
         </section>
       `;
-
+      
       document.body.appendChild(singleMapContainer);
       let btnTrackFinished = document.getElementById('btn-track-finished');
 
@@ -265,23 +266,41 @@ async function shuffleMaps() {
     data: maps,
     error
   } = await supa.from("maps").select();
-  maps.forEach(maps => {
-    
-    console.log(maps);
 
+    // Fisher-Yates shuffle algorithm
+    for (let i = maps.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [maps[i], maps[j]] = [maps[j], maps[i]];
+    }
+
+  let selectedMapId = null;
+
+  maps.forEach(maps => {
     //Filter for the maps which should be displayed
     if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
-      
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
-      
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
-    
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
-     
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     } else if (distance == null && altitude == maps.altitude) {
-   
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     } else if (distance == null && altitude == null) {
-    
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
     }
 
   })
