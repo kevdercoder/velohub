@@ -11,8 +11,10 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
   .then(response => response.json())
   .then(data => {
     let currentTemp = Math.round(data.main.temp - 273.15);
-    document.querySelector('#temp').innerHTML = currentTemp;
 
+    if (document.querySelector('#temp')) {
+    document.querySelector('#temp').innerHTML = currentTemp;
+    }
 
     // Get the current weather condition and icon
     const weatherCondition = data.weather[0].main;
@@ -38,13 +40,14 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     } else {
       iconUrl = 'img/default.png';
     }
-    document.querySelector('#weather-icon').src = iconUrl;
 
+    if (document.querySelector('#weather-icon')) {
+    document.querySelector('#weather-icon').src = iconUrl;
+    }
   })
   .catch(error => {
     console.log(error);
   });
-
 
   /*
    * This script checks for the current URL and adds an id 
@@ -74,6 +77,7 @@ links.forEach(link => {
 });
 
 
+import { shuffleMaps } from "./maps.js";
 /* 
  * This section handles the login and sign up functionality.
  * Aditionally it manages the current user status. 
@@ -189,7 +193,7 @@ if (logoutButton) {
 
 
 
-// Save the filter choice in local storage 
+// Save filter choice in local storage 
 const btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
 const btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
 const btnList = document.querySelectorAll('.btn-list');
@@ -205,11 +209,12 @@ btnFilterDistance.forEach((btn) => {
 
     if (btn.classList.contains('btn-filter-distance-active')) {
       btn.classList.remove('btn-filter-distance-active');
+      localStorage.removeItem('btnFilterDistance');
     } else {
       btn.classList.add('btn-filter-distance-active');
+      localStorage.setItem('btnFilterDistance', btn.id);
     }
-
-    localStorage.setItem('btnFilterDistance', btn.id);
+    
     console.log(localStorage.getItem('btnFilterDistance'))
   });
 });
@@ -226,18 +231,19 @@ btnFilterAltitude.forEach((btn) => {
 
     if (btn.classList.contains('btn-filter-distance-active')) {
       btn.classList.remove('btn-filter-distance-active');
+      localStorage.removeItem('btnFilterAltitude');
     } else {
       btn.classList.add('btn-filter-distance-active');
+      localStorage.setItem('btnFilterAltitude', btn.id);
     }
 
-    localStorage.setItem('btnFilterAltitude', btn.id);
     console.log(localStorage.getItem('btnFilterAltitude'))
   });
 });
 
 //activate button as default
 if (document.contains(document.getElementById('single-route'))) {
-  document.getElementById('single-route').classList.add('btn-filter-distance-active')
+  document.getElementById('list-overview').classList.add('btn-filter-distance-active')
 }
 
 
@@ -259,12 +265,23 @@ btnList.forEach((btn) => {
   });
 });
 
+
+if (document.querySelector('.btn-submit')) {
 let btnSubmit = document.querySelector('.btn-submit');
-if (btnSubmit) {
-  btnSubmit.addEventListener('click', async () => {
+let singleRoute = document.querySelector('#single-route');
+
+
+btnSubmit.addEventListener('click', async () => {
+
+  if (singleRoute.classList.contains('btn-filter-distance-active')) {
+      // Redirect to the single-map.html page
+      window.location.href = '/single-map.html';
+   
+} else {
     // Redirect to the overview-maps.html page
     window.location.href = 'overview-maps.html';
-  });
+}
+});
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -275,6 +292,18 @@ window.addEventListener('DOMContentLoaded', async () => {
     showMaps();
   }
 });
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/single-map.html') {
+    // Dynamically load the map-overview.js file
+    const { shuffleMaps } = await import('./maps.js');
+     
+    shuffleMaps();
+  }
+});
+
+
+
 
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -311,7 +340,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // Check if the user is on the index page and reset local storage of filter elements
 if (window.location.pathname === '/index.html') {
-  localStorage.removeItem('distance');
-  localStorage.removeItem('altitude');
-  localStorage.removeItem('listtype');
+  localStorage.removeItem('btnFilterDistance');
+  localStorage.removeItem('btnFilterAltitude');
+  localStorage.removeItem('btnList');
 }

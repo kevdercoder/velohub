@@ -185,9 +185,14 @@ h4 {
 }
 
 .heading-title {
-
   margin-top: -2em;
   text-align: center;
+}
+
+.btn-back {
+  color: var(--clr-grey-200);
+  font-size: 14px;
+  padding: var(--padding-500) 0;
 }
 
 /* -- Container Styles -- */
@@ -482,6 +487,12 @@ input:focus::placeholder {
   border-radius: 15px;
 }
 
+.maps-checkmark {
+  position: absolute;
+  height: 15px;
+  margin: -20px 0 0 80px;
+}
+
 .maps-distance {
   display: flex;
   flex-direction: row;
@@ -632,6 +643,22 @@ input:focus::placeholder {
 
 
 /* -- Display Single Map -- */
+
+#back-overview {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#back-overview a {
+  display: flex;
+  align-items: center;
+}
+
+#icon-chevron {
+  height: 20px;
+  margin-right: 5px;
+}
 
 .single-map-big {
   border-radius: 15px;
