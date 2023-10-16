@@ -304,9 +304,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-
-
-
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
     // Dynamically load the map-overview.js file
@@ -321,7 +318,7 @@ let navProfile = document.getElementById('mobile-nav-profile');
 if (navProfile) {
   navProfile.addEventListener('click', async () => {
     if(supa.auth.user() === null) {
-      window.location.href = 'sign-in.html';
+      window.location.href = 'user-login.html';
     } else {
       window.location.href = 'profile.html';
      

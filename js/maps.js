@@ -176,6 +176,25 @@ async function displayMap() {
       `;
       
       document.body.appendChild(singleMapContainer);
+
+      const referrer = document.referrer;
+  if (referrer.includes('overview-maps.html')) {
+    document.querySelector('.btn-back').innerHTML = 'Übersicht';
+    document.querySelector('#icon-chevron').style.display = 'block';
+  } else {
+
+    document.querySelector('.btn-back').innerHTML = 'Home';
+    document.querySelector('#back-home').href = 'index.html';
+    document.querySelector('#icon-chevron').style.display = 'block';
+
+      const shuffleAgainButton = document.getElementById('shuffle-again');
+      shuffleAgainButton.style.display = 'block';
+
+        shuffleAgainButton.addEventListener('click', () => {
+          window.location.reload();
+        })
+      }
+
       let btnTrackFinished = document.getElementById('btn-track-finished');
 
       async function checkRiddenMap() {
@@ -305,17 +324,9 @@ async function shuffleMaps() {
       localStorage.setItem('mapId', selectedMapId);
       return
     }
-
   })
 }
 }
 
 export { shuffleMaps };
-
-        // Add the event listener for the "Shuffle Again" button here
-        const shuffleAgainButton = document.getElementById('shuffle-again');
-        if (shuffleAgainButton) {
-          shuffleAgainButton.addEventListener('click', () => {
-            shuffleMaps();
-          });
-        }
+        

@@ -334,7 +334,9 @@ ul {
   height: 35px;
   border-radius: 10px;
   font-size: 14px;
-  margin-top: var(--padding-600);
+  position: fixed;
+  bottom: 65px;
+  width: 87.5%;
 }
 
 #btn-sign-up {
@@ -343,7 +345,9 @@ ul {
   height: 35px;
   border-radius: 10px;
   font-size: 14px;
-  margin-top: var(--padding-600);
+  position: fixed;
+  bottom: 20px;
+  width: 87.5%;
 }
 
 
@@ -657,6 +661,7 @@ input:focus::placeholder {
 }
 
 #icon-chevron {
+  display: none;
   height: 20px;
   margin-right: 5px;
 }
@@ -735,6 +740,7 @@ input:focus::placeholder {
 }
 
 #shuffle-again {
+  display: none;
   font-size: 14px;
   font-weight: var(--fw-medium);
   background-color: var(--clr-grey-800);
@@ -784,7 +790,9 @@ input:focus::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  position: fixed;
+  bottom: 70px;
+  width: 87.5%;
   height: 35px;
   font-size: 14px;
   border-radius: 10px;
