@@ -174,15 +174,9 @@ async function displayMap() {
           <p class="single-map-description">${maps.description}</p>
         </section>
       `;
-
-      checkRiddenMap();
       
       document.body.appendChild(singleMapContainer);
       let btnTrackFinished = document.getElementById('btn-track-finished');
-
-      document.querySelector('#shuffle-again').addEventListener('click', () => {
-        shuffleMaps();
-      });
 
       async function checkRiddenMap() {
         if (supa.auth.user() === null) {
@@ -219,6 +213,7 @@ async function displayMap() {
         }
       }
 
+      checkRiddenMap();
 
       if (document.contains(document.getElementById('btn-track-finished'))) {
         document.getElementById('btn-track-finished').addEventListener('click', addRiddenMap)
@@ -315,7 +310,12 @@ async function shuffleMaps() {
 }
 }
 
-
-
-
 export { shuffleMaps };
+
+        // Add the event listener for the "Shuffle Again" button here
+        const shuffleAgainButton = document.getElementById('shuffle-again');
+        if (shuffleAgainButton) {
+          shuffleAgainButton.addEventListener('click', () => {
+            shuffleMaps();
+          });
+        }

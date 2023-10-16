@@ -275,7 +275,7 @@ h4 {
 /* CSS für die ungeordnete Liste */
 ul {
   display: flex;
-  padding-top: var(--padding-100);
+  padding-top: var(--padding-200);
 }
 
 .container-btn-list {
@@ -684,6 +684,7 @@ input:focus::placeholder {
   background-color: var(--clr-grey-200);
   color: var(--clr-grey-800);
   margin-top: var(--padding-500);
+  margin-left: 10px;
 }
 
 #add-track-finished {
@@ -700,6 +701,7 @@ input:focus::placeholder {
   height: 20px;
   color: var(--clr-grey-200);
   margin-top: var(--padding-500);
+  margin-left: 10px;
 }
 
 #btn-gpx {
