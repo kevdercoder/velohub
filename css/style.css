@@ -528,13 +528,173 @@ input:focus::placeholder {
   margin-top: var(--padding-200);
 }
 
+.Hügelig {
+  background-color: var(--clr-accent-orange);
+}
+
+.Bergig {
+  background-color: var(--clr-accent-red);
+}
+
 .maps-seperator {
   height: 0.75px;
   background-color: var(--clr-grey-600);
 }
 
-/* -- Overview Maps [Skeleton Loading] -- */
 
+/* -- Display Single Map -- */
+#back-overview {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#back-overview a {
+  display: flex;
+  align-items: center;
+}
+
+#icon-chevron {
+  display: none;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.single-map-big {
+  border-radius: 15px;
+  height: 220px;
+  width: 100vw;
+  object-fit: cover;
+}
+
+#single-map-name {
+  width: 100%;
+  padding-top: var(--padding-200);
+}
+
+#btn-track-finished {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  width: 70px;
+  height: 20px;
+  border-radius: 30px;
+  background-color: var(--clr-grey-200);
+  color: var(--clr-grey-800);
+  margin-top: var(--padding-500);
+  margin-left: 10px;
+}
+
+#add-track-finished {
+  width: 9px;
+  margin-right: 3px;
+}
+
+#finished-map {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 10px;
+  width: 70px;
+  height: 20px;
+  color: var(--clr-grey-200);
+  margin-top: var(--padding-500);
+  margin-left: 10px;
+}
+
+#btn-gpx {
+  background-color: var(--clr-primary-600);
+  width: 100%;
+  height: 35px;
+  color: var(--clr-white);
+  font-size: 14px;
+  border-radius: 10px;
+  margin-top: var(--padding-600);
+  margin-bottom: 9px;
+}
+
+#btn-add-community {
+  background-color: var(--clr-grey-600);
+  width: 100%;
+  height: 35px;
+  color: var(--clr-primary-600);
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.single-map-description {
+  font-size: 11px;
+  line-height: 16px;
+  margin-top: var(--padding-600);
+  font-weight: var(--fw-ligth);
+  color: var(--clr-grey-200);
+  width: 100%;
+  margin-bottom: var(--padding-850);
+}
+
+#shuffle-again {
+  display: none;
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  background-color: var(--clr-grey-800);
+  color: var(--clr-grey-200);
+  border-radius: 10px;
+  width: 80%;
+  height: 35px;
+  position: absolute;
+  margin: -3.25em 0 0 0.75em;
+}
+
+
+/* -- Profile -- */
+.container-userinfos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#user-name {
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+}
+
+#user-img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+}
+
+.btn-user-routes {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: var(--padding-400);
+  width: 100%;
+  height: 45px;
+  font-size: 14px;
+  border-radius: 15px;
+  color: var(--clr-grey-200);
+  background-color: var(--clr-grey-600);
+  margin-bottom: var(--padding-200);
+}
+
+#btn-logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 70px;
+  width: 87.5%;
+  height: 35px;
+  font-size: 14px;
+  border-radius: 10px;
+  color: var(--clr-primary-600);
+  background-color: var(--clr-grey-600);
+}
+
+
+/* -- Overview Maps [Skeleton Loading] -- */
 .skeleton-container {
   display: flex;
   flex-direction: row;
@@ -644,158 +804,4 @@ input:focus::placeholder {
       /* move highlight to right */
       0 0;
   }
-}
-
-
-/* -- Display Single Map -- */
-
-#back-overview {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
-
-#back-overview a {
-  display: flex;
-  align-items: center;
-}
-
-#icon-chevron {
-  display: none;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.single-map-big {
-  border-radius: 15px;
-  height: 220px;
-  width: 100vw;
-  object-fit: cover;
-}
-
-#single-map-name {
-  width: 100%;
-  padding-top: var(--padding-200);
-}
-
-#btn-track-finished {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  width: 70px;
-  height: 20px;
-  border-radius: 30px;
-  background-color: var(--clr-grey-200);
-  color: var(--clr-grey-800);
-  margin-top: var(--padding-500);
-  margin-left: 10px;
-}
-
-#add-track-finished {
-  width: 9px;
-  margin-right: 3px;
-}
-
-#finished-map {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  font-size: 10px;
-  width: 70px;
-  height: 20px;
-  color: var(--clr-grey-200);
-  margin-top: var(--padding-500);
-  margin-left: 10px;
-}
-
-#btn-gpx {
-  background-color: var(--clr-primary-600);
-  width: 100%;
-  height: 35px;
-  color: var(--clr-white);
-  font-size: 14px;
-  border-radius: 10px;
-  margin-top: var(--padding-600);
-  margin-bottom: 9px;
-}
-
-#btn-add-community {
-  background-color: var(--clr-grey-600);
-  width: 100%;
-  height: 35px;
-  color: var(--clr-primary-600);
-  font-size: 14px;
-  border-radius: 10px;
-}
-
-.single-map-description {
-  font-size: 11px;
-  line-height: 16px;
-  margin-top: var(--padding-600);
-  font-weight: var(--fw-ligth);
-  color: var(--clr-grey-200);
-  width: 100%;
-  margin-bottom: var(--padding-850);
-}
-
-#shuffle-again {
-  display: none;
-  font-size: 14px;
-  font-weight: var(--fw-medium);
-  background-color: var(--clr-grey-800);
-  color: var(--clr-grey-200);
-  border-radius: 10px;
-  width: 80%;
-  height: 35px;
-  position: absolute;
-  margin: -3.25em 0 0 0.75em;
-}
-
-
-/* -- Profile -- */
-
-.container-userinfos {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#user-name {
-  font-size: 16px;
-  font-weight: var(--fw-regular);
-}
-
-#user-img {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-}
-
-.btn-user-routes {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-left: var(--padding-400);
-  width: 100%;
-  height: 45px;
-  font-size: 14px;
-  border-radius: 15px;
-  color: var(--clr-grey-200);
-  background-color: var(--clr-grey-600);
-  margin-bottom: var(--padding-200);
-}
-
-#btn-logout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 70px;
-  width: 87.5%;
-  height: 35px;
-  font-size: 14px;
-  border-radius: 10px;
-  color: var(--clr-primary-600);
-  background-color: var(--clr-grey-600);
 }

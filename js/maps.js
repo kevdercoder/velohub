@@ -37,7 +37,7 @@ async function showMaps() {
       sectionMaps.innerHTML = `
         <div class="maps-img-container">
           <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
-          <img id="${maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark.svg" alt="checkmark">
+          <img id="${maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
         </div>
         <div class="maps-margin">
           <h2>${maps.map_name}</h2>
@@ -55,7 +55,7 @@ async function showMaps() {
               <p>${maps.altitude_down}m</p>
             </li>
           </ul>
-          <div class="maps-filters">${maps.altitude}</div>
+          <div class="maps-filters ${maps.altitude}">${maps.altitude}</div>
         </div>
       `;
 
@@ -159,7 +159,7 @@ async function displayMap() {
               <p>${maps.altitude_down}m</p>
             </li>
           </ul>
-          <div class="maps-filters">${maps.altitude}</div>
+          <div class="maps-filters ${maps.altitude}">${maps.altitude}</div>
           </div>
           <button id="btn-track-finished">
           <img id="add-track-finished" src="img/icon-add.svg">Beendet</button>
