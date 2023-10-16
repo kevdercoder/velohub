@@ -163,7 +163,8 @@ async function displayMap() {
           </ul>
           <div class="maps-filters">${maps.altitude}</div>
           </div>
-          <button id="btn-track-finished">Beendet</button>
+          <button id="btn-track-finished">
+          <img id="add-track-finished" src="img/icon-add.svg">Beendet</button>
         </div>
         <section>
         <a href="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}" download>
@@ -205,6 +206,9 @@ async function displayMap() {
             } else if (existingData.length > 0) {
               btnTrackFinished.id = 'finished-map';
               btnTrackFinished.removeEventListener('click', addRiddenMap);
+
+              document.getElementById('add-track-finished').src = 'img/icon-checkmark.svg';
+
             } else {
               console.log("User has not finished the track yet.");
             }
