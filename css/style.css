@@ -275,7 +275,7 @@ h4 {
 /* CSS für die ungeordnete Liste */
 ul {
   display: flex;
-  padding-top: var(--padding-200);
+  padding-top: var(--padding-100);
 }
 
 .container-btn-list {

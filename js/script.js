@@ -296,6 +296,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
     // Dynamically load the map-overview.js file
+
     const { shuffleMaps } = await import('./maps.js');
      
     shuffleMaps();

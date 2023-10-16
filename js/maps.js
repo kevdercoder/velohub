@@ -115,17 +115,15 @@ async function showMaps() {
     sectionMaps.addEventListener('click', () => {
 
       localStorage.setItem('mapId', sectionMaps.id)
-
-      console.log(`Clicked on ${sectionMaps.id}`);
       window.location.href = `single-map.html?${sectionMaps.id}`;
+      console.log(`Clicked on ${sectionMaps.id}`);
+      
     });
 
   });
 }
 
-export {
-  showMaps
-};
+export { showMaps };
 
 
 
@@ -176,10 +174,15 @@ async function displayMap() {
           <p class="single-map-description">${maps.description}</p>
         </section>
       `;
+
+      checkRiddenMap();
       
       document.body.appendChild(singleMapContainer);
       let btnTrackFinished = document.getElementById('btn-track-finished');
 
+      document.querySelector('#shuffle-again').addEventListener('click', () => {
+        shuffleMaps();
+      });
 
       async function checkRiddenMap() {
         if (supa.auth.user() === null) {
@@ -216,8 +219,6 @@ async function displayMap() {
         }
       }
 
-      checkRiddenMap();
-
 
       if (document.contains(document.getElementById('btn-track-finished'))) {
         document.getElementById('btn-track-finished').addEventListener('click', addRiddenMap)
@@ -243,6 +244,8 @@ async function displayMap() {
           btnTrackFinished.id = 'finished-map'
           btnTrackFinished.removeEventListener('click', addRiddenMap);
 
+          document.getElementById('add-track-finished').src = 'img/icon-checkmark.svg';
+
           if (error) {
             console.log("Error inserting data:", error.message);
           } else {
@@ -266,16 +269,17 @@ export { displayMap };
 /* Programm to display the maps in the single-view */
 
 async function shuffleMaps() {
-  const {
-    data: maps,
-    error
-  } = await supa.from("maps").select();
+  const { data: maps, error } = await supa.from("maps").select();
 
+  const referrer = document.referrer;
+  if (referrer.includes('overview-maps.html')) {
+
+  } else {
     // Fisher-Yates shuffle algorithm
     for (let i = maps.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [maps[i], maps[j]] = [maps[j], maps[i]];
-    }
+  }
 
   let selectedMapId = null;
 
@@ -309,5 +313,9 @@ async function shuffleMaps() {
 
   })
 }
+}
+
+
+
 
 export { shuffleMaps };
