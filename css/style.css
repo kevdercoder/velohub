@@ -568,12 +568,19 @@ input:focus::placeholder {
 }
 
 #single-map-name {
-  width: 100%;
   padding-top: var(--padding-200);
+  word-break: break-word;
+}
+
+.break-point {
+  width: 70px;
+  height: 20px;
+  display: flex;
+  justify-content: end;
 }
 
 #btn-track-finished {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   font-size: 10px;
@@ -583,7 +590,6 @@ input:focus::placeholder {
   background-color: var(--clr-grey-200);
   color: var(--clr-grey-800);
   margin-top: var(--padding-500);
-  margin-left: 10px;
 }
 
 #add-track-finished {
@@ -667,7 +673,7 @@ input:focus::placeholder {
 
 .btn-user-routes {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   padding-left: var(--padding-400);
   width: 100%;
@@ -677,6 +683,11 @@ input:focus::placeholder {
   color: var(--clr-grey-200);
   background-color: var(--clr-grey-600);
   margin-bottom: var(--padding-200);
+}
+
+.btn-chevron {
+  height: 16px;
+  margin-right: 16px;
 }
 
 #btn-logout {
@@ -694,7 +705,7 @@ input:focus::placeholder {
 }
 
 
-/* -- Overview Maps [Skeleton Loading] -- */
+/* -- Skeleton Loading [Overview Maps] -- */
 .skeleton-container {
   display: flex;
   flex-direction: row;
@@ -805,3 +816,179 @@ input:focus::placeholder {
       0 0;
   }
 }
+
+/* -- Skeleton Loading [Single Page] -- */
+.skeleton-single-map-back {
+  margin-top: -38px;
+  position: absolute;
+  border-radius: 15px;
+  height: 20px;
+  width: 70px;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+
+  @keyframes shine {
+    to {
+      background-position: 100% 0,
+        /* move highlight to right */
+        0 0;
+    }
+}
+}
+
+.skeleton-single-map-big {
+  margin-top: var(--padding-500);
+  border-radius: 15px;
+  height: 220px;
+  width: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+
+  @keyframes shine {
+    to {
+      background-position: 100% 0,
+        /* move highlight to right */
+        0 0;
+    }
+}
+}
+
+.skeleton-single-map-container {
+margin-top: var(--padding-300);
+display: flex;
+justify-content: space-between;
+}
+
+.skeleton-single-map-name {
+  width: 150px;
+  height: 20px;
+  border-radius: 30px;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
+  }
+}
+
+.skeleton-single-map-finished {
+  width: 70px;
+  height: 20px;
+  border-radius: 30px;
+  background: linear-gradient(to right,
+  rgba(255, 255, 255, 0),
+  rgba(255, 255, 255, 0.1) 50%,
+  rgba(255, 255, 255, 0) 80%),
+var(--clr-grey-600);
+background-repeat: repeat-y;
+background-size: 50px 500px;
+background-position: 0 0;
+animation: shine 1s infinite;
+}
+
+@keyframes shine {
+to {
+background-position: 100% 0,
+  /* move highlight to right */
+  0 0;
+}
+}
+
+
+.skeleton-single-map-data {
+  width: 50px;
+  height: 15px;
+  border-radius: 30px;
+  margin-right: 3px;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0,
+      /* move highlight to right */
+      0 0;
+  }
+}
+
+.skeleton-single-map-download {
+  margin-top: var(--padding-500);
+  border-radius: 10px;
+  height: 35px;
+  width: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+
+  @keyframes shine {
+    to {
+      background-position: 100% 0,
+        /* move highlight to right */
+        0 0;
+    }
+}
+}
+
+.skeleton-single-map-community {
+  margin-top: var(--padding-200);
+  border-radius: 10px;
+  height: 35px;
+  width: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 80%),
+    var(--clr-grey-600);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;
+
+  @keyframes shine {
+    to {
+      background-position: 100% 0,
+        /* move highlight to right */
+        0 0;
+    }
+}
+}
+

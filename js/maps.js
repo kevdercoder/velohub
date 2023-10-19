@@ -80,7 +80,7 @@ async function showMaps() {
             data: existingData,
             error: existingError
           } = await supa
-            .from("user_ridden_maps")
+            .from("done")
             .select("*")
             .eq("maps_id", maps.id)
             .eq("user_id", supa.auth.user().id);
@@ -163,6 +163,7 @@ async function displayMap() {
           </div>
           <button id="btn-track-finished">
           <img id="add-track-finished" src="img/icon-add.svg">Beendet</button>
+          <div class="break-point"></div>
         </div>
         <section>
         <a href="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}" download>
@@ -196,6 +197,7 @@ async function displayMap() {
       }
 
       let btnTrackFinished = document.getElementById('btn-track-finished');
+      let breakPoint = document.querySelector('.break-point');
 
       async function checkRiddenMap() {
         if (supa.auth.user() === null) {
@@ -212,7 +214,7 @@ async function displayMap() {
               data: existingData,
               error: existingError
             } = await supa
-              .from("user_ridden_maps")
+              .from("done")
               .select("*")
               .eq("maps_id", maps.id)
               .eq("user_id", supa.auth.user().id);
@@ -220,12 +222,16 @@ async function displayMap() {
             if (existingError) {
               console.log("Error getting existing data:", existingError.message);
             } else if (existingData.length > 0) {
+              breakPoint.style.display = 'none';
+              btnTrackFinished.style.display = 'flex';
               btnTrackFinished.id = 'finished-map';
               btnTrackFinished.removeEventListener('click', addRiddenMap);
 
               document.getElementById('add-track-finished').src = 'img/icon-checkmark.svg';
 
             } else {
+              breakPoint.style.display = 'none';
+              btnTrackFinished.style.display = 'flex';
               console.log("User has not finished the track yet.");
             }
           }
@@ -248,10 +254,9 @@ async function displayMap() {
             data,
             error
           } = await supa
-            .from("user_ridden_maps")
+            .from("done")
             .insert({
               maps_id: maps.id,
-              maps_name: maps.map_name,
               user_id: supa.auth.user().id
             });
 
@@ -272,7 +277,7 @@ async function displayMap() {
 
   // Hide skeleton-loading after maps are loaded
   let skeletonLoading = document.querySelector('.skeleton-loading');
-  /*skeletonLoading.style.display = 'none';*/
+  skeletonLoading.style.display = 'none';
 
   console.log(localStorage.getItem('mapId'));
 }

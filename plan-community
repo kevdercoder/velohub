@@ -22,6 +22,23 @@
         </div>
     </header>
     <main>
+
+
+        <h1>Community Tour Planner</h1>
+        <label for="tour-time">Select a time within the next 24 hours:</label>
+        <input type="datetime-local" id="tour-time" min="" max="">
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const now = new Date();
+                const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+    
+                const dateInput = document.getElementById('tour-time');
+                dateInput.min = now.toISOString().slice(0, 16); // Set min attribute to current date and time
+                dateInput.max = maxTime.toISOString().slice(0, 16); // Set max attribute to 24 hours from now
+            });
+        </script>
+
+
         <section class="skeleton-loading">
             <div class="skeleton-single-map-back"></div>
             <div class="skeleton-single-map-big"></div>
