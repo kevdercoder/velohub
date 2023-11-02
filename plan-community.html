@@ -23,20 +23,32 @@
     </header>
     <main>
 
-
-        <h1>Community Tour Planner</h1>
-        <label for="tour-time">Select a time within the next 24 hours:</label>
-        <input type="datetime-local" id="tour-time" min="" max="">
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const now = new Date();
-                const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-    
-                const dateInput = document.getElementById('tour-time');
-                dateInput.min = now.toISOString().slice(0, 16); // Set min attribute to current date and time
-                dateInput.max = maxTime.toISOString().slice(0, 16); // Set max attribute to 24 hours from now
-            });
-        </script>
+        <h1>Simple Calendar</h1>
+        <div class="calendar-header">
+          <button id="prev-month">Previous Month</button>
+          <span id="current-month-year"></span>
+          <button id="next-month">Next Month</button>
+        </div>
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+              <th>Sun</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body">
+          </tbody>
+        </table>
+        <div class="time-slots">
+          <h2>Available Time Slots</h2>
+          <select id="time-slot"></select>
+        </div>
+        <button id="plan-ride-button">Submit</button>
 
     <!--
         <section class="skeleton-loading">
@@ -85,5 +97,5 @@
 </body>
 <script type="module" src="/js/supabase-setup.js"></script>
 <script type="module" src="/js/script.js"></script>
-
+<script type="module" src="/js/plan-community.js"></script>
 </html>

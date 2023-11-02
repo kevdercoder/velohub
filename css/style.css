@@ -992,3 +992,71 @@ background-position: 100% 0,
 }
 }
 
+/* Plan Community */
+
+.calendar-header {
+  margin-top: 10px;
+}
+
+.calendar-header button {
+  font-size: 14px;
+  color: #222;
+  background-color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+
+#current-month-year {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.calendar {
+  border-collapse: collapse;
+  margin: auto;
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.calendar th,
+.calendar td {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #555;
+}
+
+.calendar th {
+  color: #ddd;
+  background-color: #444;
+}
+
+.calendar td {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--clr-primary-600); /* Selected date color */
+}
+
+.time-slots {
+  margin-top: 20px;
+  text-align: center;
+}
+
+label {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}

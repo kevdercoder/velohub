@@ -313,6 +313,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/community.html') {
+    // Dynamically load the map-overview.js file
+    const { community } = await import('./community.js');
+     
+    community();
+  }
+});
+
 
 let navProfile = document.getElementById('mobile-nav-profile');
 if (navProfile) {
@@ -342,3 +351,4 @@ if (window.location.pathname === '/index.html') {
   localStorage.removeItem('btnFilterAltitude');
   localStorage.removeItem('btnList');
 }
+
