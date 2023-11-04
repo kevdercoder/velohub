@@ -65,37 +65,40 @@ async function community() {
 
     async function showMapDetails(tour) {
       const { data: tour_x, error } = await supa.from("tour_x").select('*');
-
-  if (error) {
-    console.error("Error fetching tour_x data:", error);
-    return;
-  }
-
-  for (const tour of tour_x) {
-    const { data: maps, error: userError } = await supa.from('maps').select('*').eq('id', tour.maps_id);
-
-    console.log(maps[0].id)
-
-    if (userError) {
-      console.error("Error fetching user data:", userError);
-      return;
+    
+      if (error) {
+        console.error("Error fetching tour_x data:", error);
+        return;
+      }
+    
+      for (const tour of tour_x) {
+        const { data: maps, error: userError } = await supa.from('maps').select('*').eq('id', tour.maps_id);
+    
+        if (userError) {
+          console.error("Error fetching user data:", userError);
+          return;
+        }
+    
+        function displayCommunityMap() {
+          sectionMaps.innerHTML = `
+            <div class="">
+              <div>
+                <img class="user-picture" src="/img/profile-picture01.png" alt="image-alt">
+              </div>
+              <div class="maps-margin">
+                <h2> ${maps[0].id}</h2>
+              </div>
+            </div>
+          `;
+        }
+    
+        // Assuming you want to redirect to community_maps.html
+        window.location.href = 'community-maps.html'; // Redirect to the desired HTML file
+    
+        // Call displayCommunityMap after the redirect
+        displayCommunityMap();
+      }
     }
-
-    function displayCommunityMap() {
-      sectionMaps.innerHTML = `
-      <div class="">
-      <div>
-      <img class="user-picture" src="/img/profile-picture01.png" alt="image-alt">
-      </div>
-        <div class="maps-margin">
-          <h2> ${maps[0].id}</h2>
-        </div>
-        </div>
-      `;
-    }
-      
-    }
-  }
 
 
 
