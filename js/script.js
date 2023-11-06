@@ -1,58 +1,5 @@
-/*
- * This script fetches the current weather data from the OpenWeatherMap API.
- * It then displays the current temperature and weather image.
- */
+import { supa } from "/js/supabase-setup.js";
 
-const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
-const CITY = 'Bern';
-const COUNTRY_CODE = 'CH';
-
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}`)
-  .then(response => response.json())
-  .then(data => {
-    let currentTemp = Math.round(data.main.temp - 273.15);
-
-    if (document.querySelector('#temp')) {
-    document.querySelector('#temp').innerHTML = currentTemp;
-    }
-
-    // Get the current weather condition and icon
-    const weatherCondition = data.weather[0].main;
-
-    // Determine the daytime based on the current time and timezone offset
-    const timezoneOffset = data.timezone;
-    const currentTime = new Date();
-    const localTime = currentTime.getTime() + (currentTime.getTimezoneOffset() * 60000) + (timezoneOffset * 1000);
-    const localDate = new Date(localTime);
-    const hours = localDate.getHours();
-    const isDaytime = hours >= 6 && hours < 18;
-
-    console.log(weatherCondition);
-
-    // Set the weather icon based on the weather condition and daytime
-    let iconUrl;
-    if (weatherCondition === 'Clear') {
-      iconUrl = isDaytime ? 'img/sun.png' : 'img/moon.svg';
-    } else if (weatherCondition === 'Clouds') {
-      iconUrl = isDaytime ? 'img/clouds-day.png' : 'img/clouds-night.svg';
-    } else if (weatherCondition === 'Rain') {
-      iconUrl = isDaytime ? 'img/rain-day.svg' : 'img/rain-night.svg';
-    } else {
-      iconUrl = 'img/default.png';
-    }
-
-    if (document.querySelector('#weather-icon')) {
-    document.querySelector('#weather-icon').src = iconUrl;
-    }
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
-  /*
-   * This script checks for the current URL and adds an id 
-   * to the current link in the navigation menu
-   */
 
 // Get the current page URL
 const currentUrl = window.location.href;
@@ -83,70 +30,6 @@ import { shuffleMaps } from "./maps.js";
  * Aditionally it manages the current user status. 
  */
 
-import {
-  supa
-} from "/js/supabase-setup.js";
-
-// Attach event listeners to the login button
-let submitLoginButton = document.getElementById('submit-login');
-if (submitLoginButton) {
-  submitLoginButton.addEventListener('click', login);
-}
-
-// Function to login using email and password
-async function login() {
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-
-  const { error } = await supa.auth.signIn({ email, password });
-
-  if (error) {
-      console.error("Error during login: ", error.message);
-  } else {
-      console.log("Logged in as ", email);
-      window.location.href = 'profile.html';
-  }
-}
-
-// Attach event listeners to the sign up buttons
-let submitJoinButton = document.getElementById('submit-join');
-if (submitJoinButton) {
-  submitJoinButton.addEventListener('click', signUp);
-}
-
-// Function to sign up using email and password
-async function signUp() {
-  const email = document.getElementById('join-email').value;
-  const password = document.getElementById('join-password').value;
-  const firstName = document.getElementById('join-firstname').value;
-  const name = document.getElementById('join-name').value;
-
-  const { user, error } = await supa.auth.signUp({ email, password });
-
-  if (error) {
-    console.error("Error during sign up: ", error.message);
-  } else {
-    //console.log("User signed up successfully:", user);
-
-    //Insert the UUID of the user into the "user" table
-    const { data, error } = await supa
-      .from("user")
-      .insert({
-        user_id: user.id,
-        first_name: firstName,
-        name: name,
-        email: email
-      });
-
-    if (error) {
-      console.log("Error inserting data:", error.message);
-    } else {
-      console.log("Data inserted successfully:", data);
-      window.location.href = 'confirm-email.html';
-    }
-  }
-}
-
 // Function to update user status
 function updateUserStatus(user) {
   const userStatusElement = document.getElementById('userStatus');
@@ -173,23 +56,6 @@ supa.auth.onAuthStateChange((event, session) => {
       updateUserStatus(null);
   }
 });
-
-// Logout logic
-async function logout() {
-  const { error } = await supa.auth.signOut();
-  if (error) {
-      console.error("Error during logout:", error);
-  } else {
-      updateUserStatus(null);
-      window.location.href = 'index.html';
-      console.log("User logged out successfully.");
-  }
-}
-
-let logoutButton = document.getElementById('btn-logout')
-if (logoutButton) {
-  logoutButton.addEventListener('click', logout);
-}
 
 
 
@@ -343,6 +209,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     displayProfile();
   }
 });
+
+
+
 
 
 // Check if the user is on the index page and reset local storage of filter elements

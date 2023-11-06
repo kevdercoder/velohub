@@ -16,18 +16,18 @@ async function community() {
       return;
     }
 
-    let sectionMaps = document.createElement('section');
+    let sectionMaps = document.createElement('section')
 
     function displayOverview(userName) {
       sectionMaps.innerHTML = `
-      <div class="">
-      <div>
-      <img class="user-picture" src="/img/profile-picture01.png" alt="image-alt">
-      </div>
-        <div class="maps-margin">
-          <h2> ${userFirstName} ${userName}'s Tour</h2>
-          <h3> ${formattedDate} ${formattedTime}</h3>
-        </div>
+        <div class="">
+          <div>
+            <img class="user-picture" src="/img/profile-picture01.png" alt="image-alt">
+          </div>
+          <div class="maps-margin">
+            <h2> ${userFirstName} ${userName}'s Tour</h2>
+            <h3> ${formattedDate} ${formattedTime}</h3>
+          </div>
         </div>
       `;
     }
@@ -54,61 +54,61 @@ async function community() {
     const h3Element = document.createElement('h3');
     h3Element.textContent = formattedDateTimeString;
 
-    displayOverview(userName);
-
-    // Add an event listener to the sectionMaps element
-    sectionMaps.addEventListener('click', () => {
-      // Assuming you have a function to show map details, replace `showMapDetails` with your actual function
-      showMapDetails(tour); // Pass the relevant tour data to showMapDetails
-    });
-
-
-    async function showMapDetails(tour) {
-      const { data: tour_x, error } = await supa.from("tour_x").select('*');
-    
-      if (error) {
-        console.error("Error fetching tour_x data:", error);
-        return;
-      }
-    
-      for (const tour of tour_x) {
-        const { data: maps, error: userError } = await supa.from('maps').select('*').eq('id', tour.maps_id);
-    
-        if (userError) {
-          console.error("Error fetching user data:", userError);
-          return;
-        }
-    
-        function displayCommunityMap() {
-          sectionMaps.innerHTML = `
-            <div class="">
-              <div>
-                <img class="user-picture" src="/img/profile-picture01.png" alt="image-alt">
-              </div>
-              <div class="maps-margin">
-                <h2> ${maps[0].id}</h2>
-              </div>
-            </div>
-          `;
-        }
-    
-        // Assuming you want to redirect to community_maps.html
-        window.location.href = 'community-maps.html'; // Redirect to the desired HTML file
-    
-        // Call displayCommunityMap after the redirect
-        displayCommunityMap();
-      }
-    }
-
-
-
     document.body.appendChild(sectionMaps);
     const hr = document.createElement('hr');
     hr.className = 'maps-seperator';
-
+    
     document.querySelector('main').appendChild(sectionMaps);
     document.querySelector('main').appendChild(hr);
+
+    displayOverview(userName);
+
+    // Add a click event listener for redirection
+    sectionMaps.addEventListener('click', () => {
+      const mapId = tour.maps_id; // Assuming tour has a property named maps_id
+      localStorage.setItem('clickedMapId', mapId);
+      window.location.href = 'community-maps.html'; // Redirect to community-maps.html
+    });
   }
 }
 
 export { community };
+
+
+
+
+
+async function showMapDetails() {
+  const clickedMapId = localStorage.getItem('clickedMapId');
+  
+  // Check if a map ID was clicked
+  if (!clickedMapId) {
+    console.error("No map ID found in local storage");
+    return;
+  }
+
+  const { data: maps, error: userError } = await supa.from('maps').select('*').eq('id', clickedMapId);
+
+  if (userError) {
+    console.error("Error fetching user data:", userError);
+    return;
+  }
+
+  function displayCommunityMap() {
+    document.body.innerHTML = `
+      <div class="">
+        <div class="maps-margin">
+          <h2> ${clickedMapId}</h2>
+        </div>
+      </div>
+    `;
+
+    console.log(maps[0].id);
+  }
+
+  // Call displayCommunityMap after fetching the map data
+  displayCommunityMap();
+}
+
+export { showMapDetails };
+

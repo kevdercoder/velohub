@@ -25,11 +25,40 @@
                 <input type="name" id="join-name" name="name" placeholder="Name" required/>
                 <input type="email" id="join-email" name="email" placeholder="E-Mail Adresse" required/>
                 <input type="password" id="join-password" name="password" placeholder="Passwort" minlength="8" required />
+                <h3>Wähle ein Benutzerbild aus</h3>
+                <div id="profile-picture-options">
+                  <label>
+                    <input type="radio" name="profile-picture" value="1" style="display:none;" required>
+                    <img src="/img/01_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                  <label>
+                    <input type="radio" name="profile-picture" value="2" style="display:none;" required>
+                    <img src="/img/02_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                  <label>
+                    <input type="radio" name="profile-picture" value="3" style="display:none;" required>
+                    <img src="/img/03_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                  <label>
+                    <input type="radio" name="profile-picture" value="4" style="display:none;" required>
+                    <img src="/img/04_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                  <label>
+                    <input type="radio" name="profile-picture" value="5" style="display:none;" required>
+                    <img src="/img/05_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                  <label>
+                    <input type="radio" name="profile-picture" value="6" style="display:none;" required>
+                    <img src="/img/06_profile-picture.JPG" alt="Profile Picture">
+                  </label>
+                </div>
                 <input type="submit" id="submit-join" value="Registrieren" />
-            </div>
+              </div>
+            
         </section>
     </main>
 </body>
 <script type="module" src="/js/supabase-setup.js"></script>
 <script type="module" src="/js/script.js"></script>
+<script type="module" src="/js/sign-up.js"></script>
 </html>

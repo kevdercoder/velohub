@@ -327,7 +327,7 @@ ul {
 }
 
 
-/* -- Login -- */
+/* -- Sign in -- */
 #btn-sign-in{
   background-color: var(--clr-primary-600);
   color: var(--clr-white);
@@ -350,8 +350,21 @@ ul {
   width: 87.5%;
 }
 
+#profile-picture-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  margin-top: var(--padding-500);
+  gap: 10px; 
+}
 
-/* -- Sign in -- */
+#profile-picture-options label img {
+  border-radius: 50%;
+}
+
+label.selected-img img {
+  border: 2px solid var(--clr-primary-600);
+}
 
 .login-interface {
   display: flex;
@@ -363,7 +376,6 @@ ul {
 #join-lastname,
 #join-email,
 #join-password,
-#join-password-confirmation,
 #login-email,
 #login-password {
   background-color: var(--clr-grey-600);
@@ -396,6 +408,10 @@ ul {
   /* Firefox, other Gecko */
   box-sizing: border-box;
   /* Opera/IE 8+ */
+}
+
+#join-password {
+  margin-bottom: var(--padding-750);
 }
 
 #submit-login,

@@ -2,6 +2,40 @@ import {
     supa
   } from "/js/supabase-setup.js";
 
+
+  // Logout logic
+async function logout() {
+  const { error } = await supa.auth.signOut();
+  if (error) {
+      console.error("Error during logout:", error);
+  } else {
+      updateUserStatus(null);
+      window.location.href = 'index.html';
+      console.log("User logged out successfully.");
+  }
+}
+
+let logoutButton = document.getElementById('btn-logout')
+if (logoutButton) {
+  logoutButton.addEventListener('click', logout);
+}
+
+// Function to update user status
+function updateUserStatus(user) {
+  const userStatusElement = document.getElementById('userStatus');
+
+  if (user) {
+      console.log(`Authenticated as: ${user.email}`);
+  } else {
+      console.log("Not authenticated.");
+  }
+}
+
+// Check and display the initial user status
+const initialUser = supa.auth.user();
+updateUserStatus(initialUser);
+
+
   async function displayProfile() {
     const { data: user, error } = await supa.from("user").select();
     user.forEach(user => {
