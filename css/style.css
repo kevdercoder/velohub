@@ -1008,71 +1008,34 @@ background-position: 100% 0,
 }
 }
 
+/* Community */
+.user-picture {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+}
+
+.container-community {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  margin-top: var(--padding-300);
+  margin-bottom: var(--padding-300);
+}
+
+.container-details {
+  padding-left: var(--padding-400);
+}
+
+
 /* Plan Community */
 
-.calendar-header {
-  margin-top: 10px;
-}
-
-.calendar-header button {
-  font-size: 14px;
-  color: #222;
-  background-color: #fff;
-  border: none;
-  padding: 5px 10px;
-  margin: 0 5px;
-  border-radius: 5px;
-}
-
-#current-month-year {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0 10px;
-}
-
-.calendar {
-  border-collapse: collapse;
-  margin: auto;
-  background-color: #333;
-  border-radius: 10px;
-}
-
-.calendar th,
-.calendar td {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #555;
-}
-
-.calendar th {
-  color: #ddd;
-  background-color: #444;
-}
-
-.calendar td {
-  cursor: pointer;
-}
-
-.selected {
-  background-color: var(--clr-primary-600); /* Selected date color */
-}
-
-.time-slots {
-  margin-top: 20px;
-  text-align: center;
-}
-
-label {
-  font-size: 20px;
+.date-option {
+  display: inline-block;
   margin-right: 10px;
 }
 
-select {
-  padding: 10px;
-  font-size: 16px;
-  background-color: #444;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-}
+
+
+
+

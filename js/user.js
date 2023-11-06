@@ -22,7 +22,6 @@ if (logoutButton) {
 
 // Function to update user status
 function updateUserStatus(user) {
-  const userStatusElement = document.getElementById('userStatus');
 
   if (user) {
       console.log(`Authenticated as: ${user.email}`);
@@ -41,6 +40,7 @@ updateUserStatus(initialUser);
     user.forEach(user => {
        if(user.user_id === supa.auth.user().id){
         document.getElementById('user-name').innerHTML = user.first_name + " " + user.name;
+        document.getElementById('user-img').src = user.user_img;
        }
     })
 }

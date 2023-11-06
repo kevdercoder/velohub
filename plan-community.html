@@ -23,52 +23,13 @@
     </header>
     <main>
 
-        <h1>Simple Calendar</h1>
-        <div class="calendar-header">
-          <button id="prev-month">Previous Month</button>
-          <span id="current-month-year"></span>
-          <button id="next-month">Next Month</button>
-        </div>
-        <table class="calendar">
-          <thead>
-            <tr>
-              <th>Mon</th>
-              <th>Tue</th>
-              <th>Wed</th>
-              <th>Thu</th>
-              <th>Fri</th>
-              <th>Sat</th>
-              <th>Sun</th>
-            </tr>
-          </thead>
-          <tbody id="calendar-body">
-          </tbody>
-        </table>
-        <div class="time-slots">
-          <h2>Available Time Slots</h2>
-          <select id="time-slot"></select>
-        </div>
-        <button id="plan-ride-button">Submit</button>
+        <div class="date-selectors">
+            <select id="date-dropdown"></select>
+            
+          </div>
+          <select id="time-dropdown"></select>
+          <button id="plan-ride-button">Submit</button>
 
-    <!--
-        <section class="skeleton-loading">
-            <div class="skeleton-single-map-back"></div>
-            <div class="skeleton-single-map-big"></div>
-                <div class="skeleton-single-map-container">
-                    <div class="skeleton-single-map-name"></div>
-                    <div class="skeleton-single-map-finished"></div>
-                </div>
-                <div>
-                    <ul>
-                        <div class="skeleton-single-map-data"></div>
-                        <div class="skeleton-single-map-data"></div>
-                        <div class="skeleton-single-map-data"></div>
-                    </ul>
-                    <div class="skeleton-filters"></div>
-                </div>
-                    <div class="skeleton-single-map-download"></div>
-                    <div class="skeleton-single-map-community"></div>
-            </section> -->
     </main>
     <nav class="mobile-nav">
         <a href="/index.html">
@@ -97,5 +58,5 @@
 </body>
 <script type="module" src="/js/supabase-setup.js"></script>
 <script type="module" src="/js/script.js"></script>
-<script type="module" src="/js/plan-community.js"></script>
+<script type="module" src="/js/community-ride.js"></script>
 </html>
