@@ -1,7 +1,54 @@
 import { supa } from "/js/supabase.js";
 
+
+let mapID = localStorage.getItem('mapId')
+
+async function displayMap() {
+  const {
+    data: maps,
+    error
+  } = await supa.from("maps").select();
+  maps.forEach(maps => {
+    let mapInformation = document.getElementsByClassName('map-information')[0]
+    mapInformation.id = maps.id;
+
+    if (mapID == maps.id) {
+
+      mapInformation.innerHTML = `
+          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
+          <button id="shuffle-again">Nochmals mischen</button>
+        <div class="container-flex">
+          <div>
+          <h2 id="single-map-name">${maps.map_name}</h2>
+          <ul>
+            <li class="maps-distance">
+              <img src="/img/icon-distance.svg" alt="image-alt">
+              <p>${maps.distance}km</p>
+            </li>
+            <li class="maps-distance">
+              <img src="/img/icon-up.svg" alt="image-alt">
+              <p>${maps.altitude_up}m</p>
+            </li>
+            <li class="maps-distance">
+              <img src="/img/icon-down.svg" alt="image-alt">
+              <p>${maps.altitude_down}m</p>
+            </li>
+          </ul>
+          <div class="maps-filters ${maps.altitude}">${maps.altitude}</div>
+          </div>
+        </div>
+      `;
+    
+
+    }
+  });
+}
+
+
+
+//time and date picker
 let selectedDate
-let selectedTime 
+let selectedTime
 
 function generateDateDropdown() {
   let dateDropdown = document.getElementById('date-dropdown');
@@ -98,7 +145,7 @@ function formatDate(date) {
   return date.toLocaleDateString(undefined, options);
 }
 
-document.getElementById('plan-ride-button').addEventListener('click', planRide);
+document.getElementById('btn-add-community').addEventListener('click', planRide);
 
 function planRide() {
   if (selectedDate && selectedTime) {
@@ -139,5 +186,9 @@ async function saveRideDetails(dateTime) {
   }
 }
 
+document.querySelector('.btn-back').innerHTML = 'Zurück';
+document.querySelector('#icon-chevron').style.display = 'block';
+
+displayMap();
 generateDateDropdown();
 generateTimeDropdown();

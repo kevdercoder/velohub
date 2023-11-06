@@ -62,3 +62,4 @@ updateUserStatus(initialUser);
   
 
   export { displayRiddenMaps };
+  

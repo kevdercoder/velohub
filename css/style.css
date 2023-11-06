@@ -326,6 +326,19 @@ ul {
   width: 90vw;
 }
 
+#container-clothes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: var(--padding-300);
+  border-radius: 15px;
+  gap: 10px;
+  margin-bottom: var(--padding-500);
+}
+
+.clothes {
+  background-color: var(--clr-grey-600);
+  border-radius: 10px;
+}
 
 /* -- Sign in -- */
 #btn-sign-in{
@@ -625,7 +638,7 @@ input:focus::placeholder {
   margin-left: 10px;
 }
 
-#btn-gpx {
+#btn-gpx, #btn-add-community {
   background-color: var(--clr-primary-600);
   width: 100%;
   height: 35px;
@@ -636,7 +649,7 @@ input:focus::placeholder {
   margin-bottom: 9px;
 }
 
-#btn-add-community {
+#btn-plan-community {
   background-color: var(--clr-grey-600);
   width: 100%;
   height: 35px;
@@ -1030,11 +1043,26 @@ background-position: 100% 0,
 
 /* Plan Community */
 
-.date-option {
-  display: inline-block;
-  margin-right: 10px;
+.date-selectors {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -0.75em;
 }
 
+#date-dropdown, #time-dropdown {
+  margin-top: var(--padding-700);
+  background-color: var(--clr-grey-200);
+  background-image: url(../img/icon-chevron-down.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-position-x: calc(100% - 4px);
+  background-size: 13px;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: var(--padding-300) var(--padding-600) var(--padding-300) var(--padding-300);
+  appearance: none;
+}
 
 
 

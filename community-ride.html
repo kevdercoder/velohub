@@ -15,21 +15,26 @@
 <body>
     <header>
         <div id="back-overview">
-            <a id="back-home" href="/overview-maps.html">
+            <a id="back-home" href="/single-map.html">
             <img id="icon-chevron" src="/img/icon-chevron.svg" alt="">
             <p class="btn-back"></p>
         </a>
         </div>
     </header>
     <main>
-
+        <section>
+        <div class="map-information"></div>
         <div class="date-selectors">
-            <select id="date-dropdown"></select>
-            
-          </div>
+            <select id="date-dropdown"></select>       
           <select id="time-dropdown"></select>
-          <button id="plan-ride-button">Submit</button>
+        </div>
 
+        <div>
+          <a href="/community.html">
+            <button id="btn-add-community">Community-Tour hinzufügen</button>
+              </a>
+            </section>
+        </div>
     </main>
     <nav class="mobile-nav">
         <a href="/index.html">
@@ -57,6 +62,6 @@
     </nav>
 </body>
 <script type="module" src="/js/supabase.js"></script>
-<script type="module" src="/js/script.js"></script>
 <script type="module" src="/js/community-ride.js"></script>
+<script type="module" src="/js/script.js"></script>
 </html>

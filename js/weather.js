@@ -5,9 +5,9 @@ import { supa } from "/js/supabase.js";
  * It then displays the current temperature and weather image.
  */
 
-const API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
-const CITY = 'Bern';
-const COUNTRY_CODE = 'CH';
+let API_KEY = 'fcc3f6d978376e674cc87cad43d09e19';
+let CITY = 'Bern';
+let COUNTRY_CODE = 'CH';
 
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}`)
   .then(response => response.json())
@@ -19,15 +19,15 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     }
 
     // Get the current weather condition and icon
-    const weatherCondition = data.weather[0].main;
+    let weatherCondition = data.weather[0].main;
 
     // Determine the daytime based on the current time and timezone offset
-    const timezoneOffset = data.timezone;
-    const currentTime = new Date();
-    const localTime = currentTime.getTime() + (currentTime.getTimezoneOffset() * 60000) + (timezoneOffset * 1000);
-    const localDate = new Date(localTime);
-    const hours = localDate.getHours();
-    const isDaytime = hours >= 6 && hours < 18;
+    let timezoneOffset = data.timezone;
+    let currentTime = new Date();
+    let localTime = currentTime.getTime() + (currentTime.getTimezoneOffset() * 60000) + (timezoneOffset * 1000);
+    let localDate = new Date(localTime);
+    let hours = localDate.getHours();
+    let isDaytime = hours >= 6 && hours < 18;
 
     console.log(weatherCondition);
 
@@ -50,13 +50,13 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 
 // Assuming you have already fetched the weather data and stored it in a variable called weatherData
 
-const temperaturesToCheck = [10, 15, 20, 25]; // Add more temperatures as needed
-const isRaining = weatherCondition === 'Rain'; // Assuming you have obtained the current weather conditions
+let temperaturesToCheck = [10, 15, 20, 25]; // Add more temperatures as needed
+let isRaining = weatherCondition === 'Rain'; // Assuming you have obtained the current weather conditions
 
 console.log(isRaining)
 
 let closestTemperature = temperaturesToCheck[0]; // Initialize with the first temperature
-for (const temperature of temperaturesToCheck) {
+for (let temperature of temperaturesToCheck) {
   if (Math.abs(currentTemp - temperature) < Math.abs(currentTemp - closestTemperature)) {
     closestTemperature = temperature;
   }
@@ -72,17 +72,28 @@ supa
       console.error('Error selecting row:', error);
     } else {
       if (data.length > 0) {
-        const selectedRow = data[0];
+        let selectedRow = data[0];
         console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
       } else {
         console.log(`No matching rows found for temperature ${closestTemperature}.`);
       }
     }
 
-    const selectedRow = data[0];
+    let selectedRow = data[0];
 
-    document.getElementById('jersey').src = `https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public${selectedRow.jersey}`;
-
+    for (let key in selectedRow) {
+      let value = selectedRow[key];
+      if (typeof value === 'string' && value !== true && value !== false && value !== null) {
+        let clothingImage = document.createElement('img');
+        let createContainer = document.createElement('div')
+        createContainer.className = "clothes"
+        clothingImage.src = `https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public${value}`;
+        clothingImage.alt = `${key} Image`;
+        createContainer.appendChild(clothingImage);
+        document.getElementById('container-clothes').appendChild(createContainer);
+    
+      }
+    }
   });
 
 

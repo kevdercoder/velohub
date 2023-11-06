@@ -169,8 +169,8 @@ async function displayMap() {
         <a href="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}" download>
           <button id="btn-gpx">Download .gpx</button>
           </a>
-          <a href="/plan-community.html">
-          <button id="btn-add-community">Community-Tour planen</button>
+          <a href="/community-ride.html">
+          <button id="btn-plan-community">Community-Tour planen</button>
           </a>
         </section>
         <section>
