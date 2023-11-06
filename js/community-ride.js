@@ -1,4 +1,4 @@
-import { supa } from "/js/supabase-setup.js";
+import { supa } from "/js/supabase.js";
 
 let selectedDate
 let selectedTime 

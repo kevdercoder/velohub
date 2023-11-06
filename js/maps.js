@@ -1,6 +1,6 @@
 import {
   supa
-} from "/js/supabase-setup.js";
+} from "/js/supabase.js";
 
 //Global variables
 let distance = localStorage.getItem('btnFilterDistance');

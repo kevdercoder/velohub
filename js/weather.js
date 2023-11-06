@@ -1,3 +1,5 @@
+import { supa } from "/js/supabase.js";
+
 /*
  * This script fetches the current weather data from the OpenWeatherMap API.
  * It then displays the current temperature and weather image.
@@ -44,7 +46,49 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     if (document.querySelector('#weather-icon')) {
     document.querySelector('#weather-icon').src = iconUrl;
     }
+
+
+// Assuming you have already fetched the weather data and stored it in a variable called weatherData
+
+const temperaturesToCheck = [10, 15, 20, 25]; // Add more temperatures as needed
+const isRaining = weatherCondition === 'Rain'; // Assuming you have obtained the current weather conditions
+
+console.log(isRaining)
+
+let closestTemperature = temperaturesToCheck[0]; // Initialize with the first temperature
+for (const temperature of temperaturesToCheck) {
+  if (Math.abs(currentTemp - temperature) < Math.abs(currentTemp - closestTemperature)) {
+    closestTemperature = temperature;
+  }
+}
+
+supa
+  .from('clothes')
+  .select('*')
+  .eq('temperature', closestTemperature)
+  .eq('rain', isRaining)
+  .then(({ data, error }) => {
+    if (error) {
+      console.error('Error selecting row:', error);
+    } else {
+      if (data.length > 0) {
+        const selectedRow = data[0];
+        console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
+      } else {
+        console.log(`No matching rows found for temperature ${closestTemperature}.`);
+      }
+    }
+
+    const selectedRow = data[0];
+
+    document.getElementById('jersey').src = `https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public${selectedRow.jersey}`;
+
+  });
+
+
+
   })
+
   .catch(error => {
     console.log(error);
   });

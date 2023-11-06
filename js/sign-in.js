@@ -1,4 +1,4 @@
-import { supa } from "/js/supabase-setup.js";
+import { supa } from "/js/supabase.js";
   
   // Attach event listeners to the login button
   let submitLoginButton = document.getElementById('submit-login');
