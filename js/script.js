@@ -211,6 +211,16 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+  
+  window.addEventListener('DOMContentLoaded', async () => {
+    if (window.location.pathname === '/profile-maps.html') {
+  
+    const { displayRiddenMaps } = await import('./user.js');
+   
+    displayRiddenMaps();
+    }
+  });
+
 
 
 

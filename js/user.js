@@ -1,6 +1,4 @@
-import {
-    supa
-  } from "/js/supabase.js";
+import { supa } from "/js/supabase.js";
 
 
   // Logout logic
@@ -49,16 +47,66 @@ updateUserStatus(initialUser);
 
 
   async function displayRiddenMaps() {
-    const { data, error } = await supa
-        .from("user_ridden_maps")
-        .select("*")
-        .eq("maps_id", maps.id)
-        .eq("user_id", supa.auth.user().id);
+    const {
+      data: riddenMaps,
+      error
+    } = await supa
+    .from("done")
+    .select(`
+                maps_id, 
+                maps (id)
+            `)
+    .eq('user_id', supa.auth.user().id);
+    
+    if (error) {
+      console.error("Error fetching data:", error);
+    } else {
+      console.log(riddenMaps);
+    }
 
-        if (data.length > 0) {
-          
-        }
-    } 
+    riddenMaps.forEach(riddenMaps => {
+      let sectionMaps = document.createElement('section');
+      sectionMaps.className = 'container-maps';
+      sectionMaps.id = riddenMaps.id;
+  
+      //Display the maps in the list view
+      async function displayOverview() {
+        sectionMaps.innerHTML = `
+          <div class="maps-img-container">
+            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${riddenMaps.id}" alt="image-alt">
+            <img id="${riddenMaps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+          </div>
+          <div class="maps-margin">
+            <h2></h2>
+            <ul>
+              <li class="maps-distance">
+                <img src="/img/icon-distance.svg" alt="image-alt">
+                <p></p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-up.svg" alt="image-alt">
+                <p></p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-down.svg" alt="image-alt">
+                <p></p>
+              </li>
+            </ul>
+            <div class="maps-filters"></div>
+          </div>
+        `;
+  
+        document.body.appendChild(sectionMaps);
+        const hr = document.createElement('hr');
+        hr.className = 'maps-seperator';
+
+
+      document.querySelector('main').appendChild(sectionMaps);
+      document.querySelector('main').appendChild(hr)
+}
+displayOverview();
+    })
+  }
   
 
   export { displayRiddenMaps };
