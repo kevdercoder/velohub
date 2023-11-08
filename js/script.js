@@ -151,7 +151,12 @@ if (document.querySelector('.btn-submit')) {
   });
 }
 
-// Event listeners to dynamically load different JavaScript files based on page location
+/* 
+ * This section handles different event listeners to dynamically load 
+ * different JavaScript files based on page location.
+ */
+
+// Event listener for maps feature
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/overview-maps.html') {
     const { showMaps } = await import('./maps.js');
@@ -173,6 +178,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Event listener for community page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/community.html') {
     const { community } = await import('./community.js');
@@ -180,6 +186,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Event listener for profile page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/profile.html') {
     const { displayProfile } = await import('./user.js');
@@ -208,8 +215,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-
-// Event listener for Profile page
 let navProfile = document.getElementById('mobile-nav-profile');
 if (navProfile) {
   navProfile.addEventListener('click', async () => {
