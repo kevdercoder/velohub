@@ -120,3 +120,131 @@ displayOverview();
 
   export { displayRiddenMaps };
   
+
+  
+  async function displayPastTour() {
+    const {
+      data: pastTour,
+      error
+    } = await supa
+    .from("past_tour")
+    .select(`
+                *,
+                maps_id, 
+                maps (*)
+            `)
+    .eq('user_id', supa.auth.user().id);
+
+    console.log(pastTour);
+
+    pastTour.forEach(pastTour => {
+      let sectionMaps = document.createElement('section');
+      sectionMaps.className = 'container-maps';
+      sectionMaps.id = pastTour.id;
+     
+  
+      //Display the maps in the list view
+      async function displayOverview() {
+        sectionMaps.innerHTML = `
+          <div class="maps-img-container">
+            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${pastTour.maps.map_img}" alt="image-alt">
+            <img id="${pastTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+          </div>
+          <div class="maps-margin">
+            <h2>${pastTour.maps.map_name}</h2>
+            <ul>
+              <li class="maps-distance">
+                <img src="/img/icon-distance.svg" alt="image-alt">
+                <p>${pastTour.start_time}km</p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-up.svg" alt="image-alt">
+                <p>${pastTour.maps.altitude_up}m</p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-down.svg" alt="image-alt">
+                <p>${pastTour.maps.altitude_down}m</p>
+              </li>
+            </ul>
+            <div class="maps-filters">${pastTour.maps.altitude}</div>
+          </div>
+        `;
+  
+        document.body.appendChild(sectionMaps);
+        const hr = document.createElement('hr');
+        hr.className = 'maps-seperator';
+
+
+      document.querySelector('main').appendChild(sectionMaps);
+      document.querySelector('main').appendChild(hr)
+}
+displayOverview();
+    })
+
+  }
+
+  export { displayPastTour };
+
+
+  async function displayPlannedTour() {
+    const {
+      data: pastTour,
+      error
+    } = await supa
+    .from("past_tour")
+    .select(`
+                *,
+                maps_id, 
+                maps (*)
+            `)
+    .eq('user_id', supa.auth.user().id);
+
+    console.log(pastTour);
+
+    pastTour.forEach(pastTour => {
+      let sectionMaps = document.createElement('section');
+      sectionMaps.className = 'container-maps';
+      sectionMaps.id = pastTour.id;
+     
+  
+      //Display the maps in the list view
+      async function displayOverview() {
+        sectionMaps.innerHTML = `
+          <div class="maps-img-container">
+            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${pastTour.maps.map_img}" alt="image-alt">
+            <img id="${pastTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+          </div>
+          <div class="maps-margin">
+            <h2>${pastTour.maps.map_name}</h2>
+            <ul>
+              <li class="maps-distance">
+                <img src="/img/icon-distance.svg" alt="image-alt">
+                <p>${pastTour.start_time}km</p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-up.svg" alt="image-alt">
+                <p>${pastTour.maps.altitude_up}m</p>
+              </li>
+              <li class="maps-distance">
+                <img src="/img/icon-down.svg" alt="image-alt">
+                <p>${pastTour.maps.altitude_down}m</p>
+              </li>
+            </ul>
+            <div class="maps-filters">${pastTour.maps.altitude}</div>
+          </div>
+        `;
+  
+        document.body.appendChild(sectionMaps);
+        const hr = document.createElement('hr');
+        hr.className = 'maps-seperator';
+
+
+      document.querySelector('main').appendChild(sectionMaps);
+      document.querySelector('main').appendChild(hr)
+}
+displayOverview();
+    })
+
+  }
+
+  export { displayPlannedTour };

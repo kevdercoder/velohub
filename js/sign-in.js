@@ -6,7 +6,6 @@ import { supa } from "/js/supabase.js";
     submitLoginButton.addEventListener('click', login);
   }
   
-  
   // Function to login using email and password
   async function login() {
     const email = document.getElementById('login-email').value;

@@ -1,55 +1,59 @@
+
+// Import 'supa' object from '/js/supabase.js' module
 import { supa } from "/js/supabase.js";
 
-
-let mapID = localStorage.getItem('mapId')
-
-async function displayMap() {
-  const {
-    data: maps,
-    error
-  } = await supa.from("maps").select();
-  maps.forEach(maps => {
-    let mapInformation = document.getElementsByClassName('map-information')[0]
-    mapInformation.id = maps.id;
-
-    if (mapID == maps.id) {
-
-      mapInformation.innerHTML = `
-          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.map_img}" alt="image-alt">
-          <button id="shuffle-again">Nochmals mischen</button>
-        <div class="container-flex">
-          <div>
-          <h2 id="single-map-name">${maps.map_name}</h2>
-          <ul>
-            <li class="maps-distance">
-              <img src="/img/icon-distance.svg" alt="image-alt">
-              <p>${maps.distance}km</p>
-            </li>
-            <li class="maps-distance">
-              <img src="/img/icon-up.svg" alt="image-alt">
-              <p>${maps.altitude_up}m</p>
-            </li>
-            <li class="maps-distance">
-              <img src="/img/icon-down.svg" alt="image-alt">
-              <p>${maps.altitude_down}m</p>
-            </li>
-          </ul>
-          <div class="maps-filters ${maps.altitude}">${maps.altitude}</div>
-          </div>
-        </div>
-      `;
-    
-
-    }
-  });
-}
-
-
-
-//time and date picker
+// Define variables
+let mapID = localStorage.getItem('mapId');
 let selectedDate
 let selectedTime
 
+// Function to display map information
+async function displayMap() {
+  try {
+    // Query 'maps' data from Supabase
+    const { data: maps, error } = await supa.from("maps").select();
+    if (error) {
+      throw error;
+    }
+
+    maps.forEach(map => {
+      let mapInformation = document.querySelector('.map-information');
+      mapInformation.id = map.id;
+
+      if (mapID == map.id) {
+        // Populate map information in HTML based on map ID
+        mapInformation.innerHTML = `
+          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${map.map_img}" alt="image-alt">
+          <button id="shuffle-again">Nochmals mischen</button>
+          <div class="container-flex">
+            <div>
+              <h2 id="single-map-name">${map.map_name}</h2>
+              <ul>
+                <li class="maps-distance">
+                  <img src="/img/icon-distance.svg" alt="image-alt">
+                  <p>${map.distance}km</p>
+                </li>
+                <li class="maps-distance">
+                  <img src="/img/icon-up.svg" alt="image-alt">
+                  <p>${map.altitude_up}m</p>
+                </li>
+                <li class="maps-distance">
+                  <img src="/img/icon-down.svg" alt="image-alt">
+                  <p>${map.altitude_down}m</p>
+                </li>
+              </ul>
+              <div class="maps-filters ${map.altitude}">${map.altitude}</div>
+            </div>
+          </div>
+        `;
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching map data:', error.message);
+  }
+}
+
+// Function to generate date dropdown
 function generateDateDropdown() {
   let dateDropdown = document.getElementById('date-dropdown');
 
@@ -87,6 +91,7 @@ function generateDateDropdown() {
   dateDropdown.dispatchEvent(new Event('change'));
 }
 
+// Function to generate time dropdown
 function generateTimeDropdown() {
   let timeDropdown = document.getElementById('time-dropdown');
   timeDropdown.innerHTML = '';
@@ -138,16 +143,12 @@ function generateTimeDropdown() {
   }
 }
 
-
-
-function formatDate(date) {
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString(undefined, options);
-}
-
+// Event listener for "Plan Ride" button click
 document.getElementById('btn-add-community').addEventListener('click', planRide);
 
+// Function to plan a ride
 function planRide() {
+  // Check if date and time are selected
   if (selectedDate && selectedTime) {
     let formattedDateTime = `${formatDate(selectedDate)} ${selectedTime}`;
 
@@ -161,10 +162,8 @@ function planRide() {
   }
 }
 
-
-
-async function saveRideDetails(dateTime) {
-
+// Function to save ride details to the database
+async function saveRideDetails(dateTime, mapId) {
   try {
     const { data, error } = await supa
       .from('tour_x')
@@ -172,7 +171,7 @@ async function saveRideDetails(dateTime) {
         {
           start_time: dateTime,
           user_id: supa.auth.user().id,
-          maps_id: localStorage.getItem('mapId')
+          maps_id: mapId
         }
       ]);
 
@@ -186,9 +185,17 @@ async function saveRideDetails(dateTime) {
   }
 }
 
+// Function to format date
+function formatDate(date) {
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString(undefined, options);
+}
+
+// Set button text and display style
 document.querySelector('.btn-back').innerHTML = 'Zurück';
 document.querySelector('#icon-chevron').style.display = 'block';
 
+// Initial function calls
 displayMap();
 generateDateDropdown();
 generateTimeDropdown();

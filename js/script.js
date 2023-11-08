@@ -1,12 +1,7 @@
 import { supa } from "/js/supabase.js";
 
-
-// Get the current page URL
+// Get the current page URL and links
 const currentUrl = window.location.href;
-
-console.log(currentUrl);
-
-// Get all the links in the navigation menu
 const links = document.querySelectorAll('.mobile-nav a');
 
 // Loop through the links and add the active class to the current link
@@ -23,21 +18,17 @@ links.forEach(link => {
   }
 });
 
-
-import { shuffleMaps } from "./maps.js";
 /* 
- * This section handles the login and sign up functionality.
- * Aditionally it manages the current user status. 
+ * This section manages the current user status. 
  */
 
 // Function to update user status
 function updateUserStatus(user) {
-  const userStatusElement = document.getElementById('userStatus');
 
   if (user) {
-      console.log(`Authenticated as: ${user.email}`);
+    console.log(`Authenticated as: ${user.email}`);
   } else {
-      console.log("Not authenticated.");
+    console.log("Not authenticated.");
   }
 }
 
@@ -45,15 +36,14 @@ function updateUserStatus(user) {
 const initialUser = supa.auth.user();
 updateUserStatus(initialUser);
 
-
 // Listener for authentication state changes
 supa.auth.onAuthStateChange((event, session) => {
   if (event === "SIGNED_IN") {
-      console.log("User signed in: ", session.user);
-      updateUserStatus(session.user);
+    console.log("User signed in: ", session.user);
+    updateUserStatus(session.user);
   } else if (event === "SIGNED_OUT") {
-      console.log("User signed out");
-      updateUserStatus(null);
+    console.log("User signed out");
+    updateUserStatus(null);
   }
 });
 
@@ -64,9 +54,11 @@ const btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
 const btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
 const btnList = document.querySelectorAll('.btn-list');
 
+// Event listener for distance filter buttons
 btnFilterDistance.forEach((btn) => {
   btn.addEventListener('click', () => {
-    
+
+    // Remove 'btn-filter-distance-active' class from other buttons
     btnFilterDistance.forEach((otherBtn) => {
       if (otherBtn !== btn) {
         otherBtn.classList.remove('btn-filter-distance-active');
@@ -74,20 +66,22 @@ btnFilterDistance.forEach((btn) => {
     });
 
     if (btn.classList.contains('btn-filter-distance-active')) {
+      // If button is active, deactivate and remove from local storage
       btn.classList.remove('btn-filter-distance-active');
       localStorage.removeItem('btnFilterDistance');
     } else {
+      // If button is not active, activate and save to local storage
       btn.classList.add('btn-filter-distance-active');
       localStorage.setItem('btnFilterDistance', btn.id);
     }
-    
+
     console.log(localStorage.getItem('btnFilterDistance'))
   });
 });
 
+// Similar event listener for altitude filter buttons
 btnFilterAltitude.forEach((btn) => {
   btn.addEventListener('click', () => {
-
 
     btnFilterAltitude.forEach((otherBtn) => {
       if (otherBtn !== btn) {
@@ -107,12 +101,12 @@ btnFilterAltitude.forEach((btn) => {
   });
 });
 
-//activate button as default
+// Activate a button as default if 'single-route' element is present
 if (document.contains(document.getElementById('single-route'))) {
   document.getElementById('list-overview').classList.add('btn-filter-distance-active')
 }
 
-
+// Event listener for list buttons
 btnList.forEach((btn) => {
   btn.addEventListener('click', () => {
     btnList.forEach((otherBtn) => {
@@ -127,100 +121,9 @@ btnList.forEach((btn) => {
     }
 
     localStorage.setItem('btnList', btn.id);
-    
+
   });
 });
-
-
-if (document.querySelector('.btn-submit')) {
-let btnSubmit = document.querySelector('.btn-submit');
-let singleRoute = document.querySelector('#single-route');
-
-
-btnSubmit.addEventListener('click', async () => {
-
-  if (singleRoute.classList.contains('btn-filter-distance-active')) {
-      // Redirect to the single-map.html page
-      window.location.href = '/single-map.html';
-   
-} else {
-    // Redirect to the overview-maps.html page
-    window.location.href = 'overview-maps.html';
-}
-});
-}
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/overview-maps.html') {
-    // Dynamically load the map-overview.js file
-    const { showMaps } = await import('./maps.js');
-     
-    showMaps();
-  }
-});
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/single-map.html') {
-    // Dynamically load the map-overview.js file
-
-    const { shuffleMaps } = await import('./maps.js');
-     
-    shuffleMaps();
-  }
-});
-
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/single-map.html') {
-    // Dynamically load the map-overview.js file
-    const { displayMap } = await import('./maps.js');
-     
-    displayMap();
-  }
-});
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/community.html') {
-    // Dynamically load the map-overview.js file
-    const { community } = await import('./community.js');
-     
-    community();
-  }
-});
-
-
-let navProfile = document.getElementById('mobile-nav-profile');
-if (navProfile) {
-  navProfile.addEventListener('click', async () => {
-    if(supa.auth.user() === null) {
-      window.location.href = 'user-login.html';
-    } else {
-      window.location.href = 'profile.html';
-     
-    }
-  });
-}
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/profile.html') {
-    // Dynamically load the map-overview.js file
-    const { displayProfile } = await import('./user.js');
-     
-    displayProfile();
-  }
-});
-
-
-  
-  window.addEventListener('DOMContentLoaded', async () => {
-    if (window.location.pathname === '/profile-maps.html') {
-  
-    const { displayRiddenMaps } = await import('./user.js');
-   
-    displayRiddenMaps();
-    }
-  });
-
 
 // Check if the user is on the index page and reset local storage of filter elements
 if (window.location.pathname === '/index.html') {
@@ -229,3 +132,91 @@ if (window.location.pathname === '/index.html') {
   localStorage.removeItem('btnList');
 }
 
+// Check if a submit button is present
+if (document.querySelector('.btn-submit')) {
+  let btnSubmit = document.querySelector('.btn-submit');
+  let singleRoute = document.querySelector('#single-route');
+
+  // Event listener for submit button click
+  btnSubmit.addEventListener('click', async () => {
+
+    if (singleRoute.classList.contains('btn-filter-distance-active')) {
+      // Redirect to the single-map.html page
+      window.location.href = '/single-map.html';
+
+    } else {
+      // Redirect to the overview-maps.html page
+      window.location.href = 'overview-maps.html';
+    }
+  });
+}
+
+// Event listeners to dynamically load different JavaScript files based on page location
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/overview-maps.html') {
+    const { showMaps } = await import('./maps.js');
+    showMaps();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/single-map.html') {
+    const { shuffleMaps } = await import('./maps.js');
+    shuffleMaps();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/single-map.html') {
+    const { displayMap } = await import('./maps.js');
+    displayMap();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/community.html') {
+    const { community } = await import('./community.js');
+    community();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/profile.html') {
+    const { displayProfile } = await import('./user.js');
+    displayProfile();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/maps-ridden.html') {
+    const { displayRiddenMaps } = await import('./user.js');
+    displayRiddenMaps();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/past-rides.html') {
+    const { displayPastTour } = await import('./user.js');
+    displayPastTour();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/planned-rides.html') {
+    const { displayPlannedTour } = await import('./user.js');
+    displayPlannedTour();
+  }
+});
+
+
+// Event listener for Profile page
+let navProfile = document.getElementById('mobile-nav-profile');
+if (navProfile) {
+  navProfile.addEventListener('click', async () => {
+    if (supa.auth.user() === null) {
+      window.location.href = 'user-login.html';
+    } else {
+      window.location.href = 'profile.html';
+    }
+  });
+}
