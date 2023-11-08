@@ -222,8 +222,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
 
-
-
 // Check if the user is on the index page and reset local storage of filter elements
 if (window.location.pathname === '/index.html') {
   localStorage.removeItem('btnFilterDistance');

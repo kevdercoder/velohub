@@ -54,7 +54,7 @@ updateUserStatus(initialUser);
     .from("done")
     .select(`
                 maps_id, 
-                maps (id)
+                maps (*)
             `)
     .eq('user_id', supa.auth.user().id);
     
@@ -62,37 +62,39 @@ updateUserStatus(initialUser);
       console.error("Error fetching data:", error);
     } else {
       console.log(riddenMaps);
+      console.log(riddenMaps[0].maps.map_img)
     }
 
     riddenMaps.forEach(riddenMaps => {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
       sectionMaps.id = riddenMaps.id;
+     
   
       //Display the maps in the list view
       async function displayOverview() {
         sectionMaps.innerHTML = `
           <div class="maps-img-container">
-            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${riddenMaps.id}" alt="image-alt">
-            <img id="${riddenMaps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${riddenMaps.maps.map_img}" alt="image-alt">
+            <img id="${riddenMaps.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
           </div>
           <div class="maps-margin">
-            <h2></h2>
+            <h2>${riddenMaps.maps.map_name}</h2>
             <ul>
               <li class="maps-distance">
                 <img src="/img/icon-distance.svg" alt="image-alt">
-                <p></p>
+                <p>${riddenMaps.maps.distance}km</p>
               </li>
               <li class="maps-distance">
                 <img src="/img/icon-up.svg" alt="image-alt">
-                <p></p>
+                <p>${riddenMaps.maps.altitude_up}m</p>
               </li>
               <li class="maps-distance">
                 <img src="/img/icon-down.svg" alt="image-alt">
-                <p></p>
+                <p>${riddenMaps.maps.altitude_down}m</p>
               </li>
             </ul>
-            <div class="maps-filters"></div>
+            <div class="maps-filters">${riddenMaps.maps.altitude}</div>
           </div>
         `;
   
@@ -108,6 +110,13 @@ displayOverview();
     })
   }
   
+  if (window.location.href === 'http://127.0.0.1:5500/profile-maps.html') {
+    document.querySelector('.btn-back').innerHTML = 'Zurück';
+    document.querySelector('#icon-chevron').style.display = 'block';
+  } else {
+
+  }
+
 
   export { displayRiddenMaps };
   
