@@ -2,6 +2,7 @@ import {
   supa
 } from "/js/supabase.js";
 
+
 async function community() {
   try {
     let {
@@ -13,25 +14,17 @@ async function community() {
       throw error;
     }
 
-    let tourId = tour_x[0].id;
-    console.log(tourId);
-    let now = new Date();
+      // Sort tours by start time
+  tour_x.sort((a, b) => {
+    let dateA = new Date(a.start_time);
+    let dateB = new Date(b.start_time);
+    return dateA - dateB;
+  });
+
     let mainElement = document.querySelector('main');
-
-    tour_x.sort((a, b) => {
-      let dateA = new Date(a.start_time);
-      let dateB = new Date(b.start_time);
-      return dateA - dateB;
-    });
-
     let fragment = document.createDocumentFragment();
 
     for (let tour of tour_x) {
-      let startingTime = new Date(tour.start_time);
-
-      if (startingTime < now) {
-        continue;
-      }
 
       let {
         data: user
@@ -103,25 +96,8 @@ async function community() {
   document.body.appendChild(div);
 }
 
-
-function formatDateTime(dateTimeString) {
-  let date = new Date(dateTimeString);
-  let options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  };
-  let formattedDate = date.toLocaleDateString('de-DE', options);
-  let hours = date.getHours().toString().padStart(2, '0');
-  let minutes = date.getMinutes().toString().padStart(2, '0');
-  let formattedTime = `${hours}:${minutes}`;
-  return {
-    formattedDate,
-    formattedTime
-  };
-}
-
 export { community };
+
 
 
 async function displayCommunityMap() {
@@ -129,17 +105,25 @@ async function displayCommunityMap() {
     data: tour_x,
     error
   } = await supa
-    .from("tour_x")
+    .from("tour_x",)
     .select(`
   *,
   maps_id, 
   maps (*)
 `)
 
+const { data: participant, errors } = await supa.from("tour_participant").select('*');
+
+console.log(participant);
+
   tour_x.forEach(tour => {
     let singleMapContainer = document.createElement('section');
     singleMapContainer.className = 'container-single-map';
     singleMapContainer.id = tour.id;
+
+    let formattedDateTime = formatDateTime(tour.start_time);
+    let participantCount = participant.filter(p => p.tour_id === tour.id).length;
+
 
     if (localStorage.getItem('communityId') == tour.id && window.location.href.includes('community-maps.html')) {
 
@@ -149,18 +133,18 @@ async function displayCommunityMap() {
         <div class="container-flex">
           <div>
           <h2 id="single-map-name">${tour.maps.map_name}</h2>
-          <ul>
+          <ul class="maps-margin-bottom">
             <li class="maps-distance">
               <img src="/img/icon-calendar.svg" alt="image-alt">
-              <p>${formattedDateTime.formattedDate}km</p>
+              <p>${formattedDateTime.formattedDate}</p>
             </li>
             <li class="maps-distance">
               <img src="/img/icon-clock.svg" alt="image-alt">
-              <p>${tour.maps.altitude_up}m</p>
+              <p>${formattedDateTime.formattedTime}</p>
             </li>
             <li class="maps-distance">
-              <img src="/img/icon-down.svg" alt="image-alt">
-              <p>${tour.maps.altitude_down}m</p>
+              <img src="/img/icon-participants.svg" alt="image-alt">
+              <p>${participantCount}</p>
             </li>
           </ul>
           <ul>
@@ -188,6 +172,9 @@ async function displayCommunityMap() {
           <button id="btn-gpx">Download .gpx</button>
           </a>
           <button id="btn-community-participate">Einschreiben</button>
+        </section>
+        <section>
+          <p class="single-map-description">${tour.maps.description}</p>
         </section>
       `;
 
@@ -239,7 +226,21 @@ async function displayCommunityMap() {
 }
 
 
-
-
-
 displayCommunityMap();
+
+function formatDateTime(dateTimeString) {
+  let date = new Date(dateTimeString);
+  let options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  let formattedDate = date.toLocaleDateString('de-DE', options);
+  let hours = date.getHours().toString().padStart(2, '0');
+  let minutes = date.getMinutes().toString().padStart(2, '0');
+  let formattedTime = `${hours}:${minutes}`;
+  return {
+    formattedDate,
+    formattedTime
+  };
+}
