@@ -1,4 +1,6 @@
-import { supa } from "/js/supabase.js";
+import {
+  supa
+} from "/js/supabase.js";
 
 /*
  * This script fetches the current weather data from the OpenWeatherMap API.
@@ -15,7 +17,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     let currentTemp = Math.round(data.main.temp - 273.15);
 
     if (document.querySelector('#temp')) {
-    document.querySelector('#temp').innerHTML = currentTemp;
+      document.querySelector('#temp').innerHTML = currentTemp;
     }
 
     // Get the current weather condition and icon
@@ -44,57 +46,69 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     }
 
     if (document.querySelector('#weather-icon')) {
-    document.querySelector('#weather-icon').src = iconUrl;
+      document.querySelector('#weather-icon').src = iconUrl;
     }
 
 
-// Assuming you have already fetched the weather data and stored it in a variable called weatherData
 
-let temperaturesToCheck = [10, 15, 20, 25]; // Add more temperatures as needed
-let isRaining = weatherCondition === 'Rain'; // Assuming you have obtained the current weather conditions
+    let temperaturesToCheck = [10, 15, 20, 25]; 
+    let isRaining = weatherCondition === 'Rain';
 
-console.log(isRaining)
+    console.log(isRaining)
 
-let closestTemperature = temperaturesToCheck[0]; // Initialize with the first temperature
-for (let temperature of temperaturesToCheck) {
-  if (Math.abs(currentTemp - temperature) < Math.abs(currentTemp - closestTemperature)) {
-    closestTemperature = temperature;
-  }
-}
+    let closestTemperature = temperaturesToCheck[0]; // Initialize with the first temperature
+    console.log(closestTemperature)
+    for (let temperature of temperaturesToCheck) {
+      if (Math.abs(currentTemp - temperature) < Math.abs(currentTemp - closestTemperature)) {
+        closestTemperature = temperature;
+      }
+    }
 
-supa
-  .from('clothes')
-  .select('*')
-  .eq('temperature', closestTemperature)
-  .eq('rain', isRaining)
-  .then(({ data, error }) => {
-    if (error) {
-      console.error('Error selecting row:', error);
-    } else {
-      if (data.length > 0) {
+    supa
+      .from('clothes')
+      .select('*')
+      .eq('temperature', closestTemperature)
+      .eq('rain', isRaining)
+      .then(({
+        data,
+        error
+      }) => {
+        if (error) {
+          console.error('Error selecting row:', error);
+        } else {
+          if (data.length > 0) {
+            let selectedRow = data[0];
+            console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
+          } else {
+            console.log(`No matching rows found for temperature ${closestTemperature}.`);
+          }
+        }
+
         let selectedRow = data[0];
-        console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
-      } else {
-        console.log(`No matching rows found for temperature ${closestTemperature}.`);
-      }
-    }
 
-    let selectedRow = data[0];
+        for (let key in selectedRow) {
+          let value = selectedRow[key];
+          if (typeof value === 'string' && value !== true && value !== false && value !== null) {
+            let clothingImage = document.createElement('img');
+            let createContainer = document.createElement('div')
+            createContainer.className = "clothes"
+            clothingImage.src = `https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public${value}`;
+            clothingImage.alt = `${key} Image`;
+            createContainer.appendChild(clothingImage);
+            document.getElementById('container-clothes').appendChild(createContainer);
+          }
+        }
 
-    for (let key in selectedRow) {
-      let value = selectedRow[key];
-      if (typeof value === 'string' && value !== true && value !== false && value !== null) {
-        let clothingImage = document.createElement('img');
-        let createContainer = document.createElement('div')
-        createContainer.className = "clothes"
-        clothingImage.src = `https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public${value}`;
-        clothingImage.alt = `${key} Image`;
-        createContainer.appendChild(clothingImage);
-        document.getElementById('container-clothes').appendChild(createContainer);
-    
-      }
-    }
-  });
+        // Hide skeleton-loading after maps are loaded
+        let skeletonLoading = document.querySelectorAll('.skeleton-loading');
+
+        skeletonLoading.forEach(loadingBox => {
+          loadingBox.style.display = 'none';
+        });
+       
+
+
+      });
 
 
 

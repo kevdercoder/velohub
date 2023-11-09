@@ -686,12 +686,14 @@ input:focus::placeholder {
 #user-name {
   font-size: 16px;
   font-weight: var(--fw-regular);
+  display: none;
 }
 
 #user-img {
   width: 62px;
   height: 62px;
   border-radius: 50%;
+  display: none;
 }
 
 .btn-user-routes {
@@ -736,6 +738,11 @@ input:focus::placeholder {
   margin-top: 15px;
 }
 
+.skeleton-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .skeleton-hidden {
   display: none;
 }
@@ -752,6 +759,12 @@ input:focus::placeholder {
   border-radius: 30px;
 }
 
+.skeleton-user-name {
+  width: 125px;
+  height: 20px;
+  border-radius: 30px;
+  margin-top: var(--padding-500);
+}
 
 .skeleton-data { 
   width: 50px;
@@ -835,7 +848,7 @@ justify-content: space-between;
   border-radius: 50%;
 }
 
-/* Skeleton Loading [Profile] */
+
 .skeleton-datetime {
   width: 125px;
   margin-right: 3px;
@@ -843,11 +856,19 @@ justify-content: space-between;
   border-radius: 30px;
 }
 
+/* Skeleton Loading [Weather] */
+.skeleton-box {
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+}
+
 
 /* -- Skeleton Loading [Background Styling] -- */
 
 .skeleton-map,
 .skeleton-name,
+.skeleton-user-name,
 .skeleton-data,
 .skeleton-filters,
 .skeleton-single-map-back,
@@ -859,7 +880,9 @@ justify-content: space-between;
 .skeleton-single-map-download,
 .skeleton-single-map-community,
 .skeleton-profile-picture,
-.skeleton-datetime {
+.skeleton-datetime,
+.skeleton-box
+{
   background: linear-gradient(to right,
   rgba(255, 255, 255, 0),
   rgba(255, 255, 255, 0.1) 50%,
@@ -898,6 +921,15 @@ background-position: 100% 0,
   padding-left: var(--padding-400);
 }
 
+#btn-community-participate {
+  background-color: var(--clr-grey-600);
+  width: 100%;
+  height: 35px;
+  color: var(--clr-primary-600);
+  font-size: 14px;
+  border-radius: 10px;
+  margin-bottom: 9px;
+}
 
 /* Plan Community */
 

@@ -96,8 +96,12 @@ async function community() {
          element.style.display = 'none';
        });
 
-}
 
+  // Add padding to the bottom of the page
+  let div = document.createElement('div');
+  div.className = 'container-padding-750'
+  document.body.appendChild(div);
+}
 
 
 function formatDateTime(dateTimeString) {
@@ -147,6 +151,20 @@ async function displayCommunityMap() {
           <h2 id="single-map-name">${tour.maps.map_name}</h2>
           <ul>
             <li class="maps-distance">
+              <img src="/img/icon-calendar.svg" alt="image-alt">
+              <p>${formattedDateTime.formattedDate}km</p>
+            </li>
+            <li class="maps-distance">
+              <img src="/img/icon-clock.svg" alt="image-alt">
+              <p>${tour.maps.altitude_up}m</p>
+            </li>
+            <li class="maps-distance">
+              <img src="/img/icon-down.svg" alt="image-alt">
+              <p>${tour.maps.altitude_down}m</p>
+            </li>
+          </ul>
+          <ul>
+            <li class="maps-distance">
               <img src="/img/icon-distance.svg" alt="image-alt">
               <p>${tour.maps.distance}km</p>
             </li>
@@ -170,9 +188,6 @@ async function displayCommunityMap() {
           <button id="btn-gpx">Download .gpx</button>
           </a>
           <button id="btn-community-participate">Einschreiben</button>
-        </section>
-        <section>
-          <p class="single-map-description">${tour.maps.description}</p>
         </section>
       `;
 
@@ -202,6 +217,8 @@ async function displayCommunityMap() {
      
      if (userAlreadyEnrolled) {
          alert('Du bist bereits eingeschrieben!');
+     } else if (supa.auth.user() === null) {
+      window.location.href = '/user-login.html';
      } else {
          await supa
              .from("tour_participant")
@@ -215,9 +232,7 @@ async function displayCommunityMap() {
       document.getElementById('btn-community-participate').addEventListener('click', () => {
         console.log('clicked');
         participate();
-      });
-
-  
+      });  
 
     }
   });

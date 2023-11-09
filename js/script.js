@@ -57,7 +57,7 @@ let btnList = document.querySelectorAll('.btn-list');
 btnFilterDistance.forEach((btn) => {
   btn.addEventListener('click', () => {
 
-    // Remove 'btn-filter-distance-active' class from other buttons
+    // Remove class from other buttons
     btnFilterDistance.forEach((otherBtn) => {
       if (otherBtn !== btn) {
         otherBtn.classList.remove('btn-filter-distance-active');
@@ -78,7 +78,7 @@ btnFilterDistance.forEach((btn) => {
   });
 });
 
-// Similar event listener for altitude filter buttons
+// Event listener for altitude filter buttons
 btnFilterAltitude.forEach((btn) => {
   btn.addEventListener('click', () => {
 
@@ -100,7 +100,7 @@ btnFilterAltitude.forEach((btn) => {
   });
 });
 
-// Activate a button as default if 'single-route' element is present
+// Activate button as default element
 if (document.contains(document.getElementById('single-route'))) {
   document.getElementById('list-overview').classList.add('btn-filter-distance-active')
 }
@@ -145,7 +145,7 @@ if (document.querySelector('.btn-submit')) {
 
     } else {
       // Redirect to the overview-maps.html page
-      window.location.href = 'overview-maps.html';
+      window.location.href = '/overview-maps.html';
     }
   });
 }
