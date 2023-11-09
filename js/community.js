@@ -4,7 +4,7 @@ import {
 
 async function community() {
   try {
-    const {
+    let {
       data: tour_x,
       error
     } = await supa.from("tour_x").select('*');
@@ -15,35 +15,35 @@ async function community() {
 
     let tourId = tour_x[0].id;
     console.log(tourId);
-    const now = new Date();
-    const mainElement = document.querySelector('main');
+    let now = new Date();
+    let mainElement = document.querySelector('main');
 
     tour_x.sort((a, b) => {
-      const dateA = new Date(a.start_time);
-      const dateB = new Date(b.start_time);
+      let dateA = new Date(a.start_time);
+      let dateB = new Date(b.start_time);
       return dateA - dateB;
     });
 
-    const fragment = document.createDocumentFragment();
+    let fragment = document.createDocumentFragment();
 
-    for (const tour of tour_x) {
-      const startingTime = new Date(tour.start_time);
+    for (let tour of tour_x) {
+      let startingTime = new Date(tour.start_time);
 
       if (startingTime < now) {
         continue;
       }
 
-      const {
+      let {
         data: user
       } = await supa.from("user").select('*').eq('user_id', tour.user_id);
 
-      const userName = user[0].name;
-      const userFirstName = user[0].first_name;
-      const userImg = user[0].user_img;
+      let userName = user[0].name;
+      let userFirstName = user[0].first_name;
+      let userImg = user[0].user_img;
 
-      const formattedDateTime = formatDateTime(tour.start_time);
+      let formattedDateTime = formatDateTime(tour.start_time);
 
-      const sectionMaps = document.createElement('section');
+      let sectionMaps = document.createElement('section');
       sectionMaps.classList.add('container-community');
       sectionMaps.id = tour.id;
       sectionMaps.innerHTML = `
@@ -65,7 +65,7 @@ async function community() {
         </div>
       `;
 
-      const hr = document.createElement('hr');
+      let hr = document.createElement('hr');
       hr.className = 'maps-seperator';
 
       fragment.appendChild(sectionMaps);
@@ -77,7 +77,7 @@ async function community() {
     console.error("Error fetching or processing data:", error);
   }
 
-  const sectionMapsList = document.querySelectorAll('.container-community');
+  let sectionMapsList = document.querySelectorAll('.container-community');
 
   console.log(sectionMapsList);
 
@@ -88,37 +88,40 @@ async function community() {
       window.location.href = `community-maps.html?${sectionMaps.id}`;
       console.log(`Clicked on ${sectionMaps.id}`);
     });
-
   });
+
+       // Hide skeleton-loading after maps are loaded
+       let skeletonLoading = document.querySelectorAll('.skeleton-loading');
+       skeletonLoading.forEach(element => {
+         element.style.display = 'none';
+       });
 
 }
 
 
 
 function formatDateTime(dateTimeString) {
-  const date = new Date(dateTimeString);
-  const options = {
+  let date = new Date(dateTimeString);
+  let options = {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   };
-  const formattedDate = date.toLocaleDateString('de-DE', options);
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const formattedTime = `${hours}:${minutes}`;
+  let formattedDate = date.toLocaleDateString('de-DE', options);
+  let hours = date.getHours().toString().padStart(2, '0');
+  let minutes = date.getMinutes().toString().padStart(2, '0');
+  let formattedTime = `${hours}:${minutes}`;
   return {
     formattedDate,
     formattedTime
   };
 }
 
-export {
-  community
-};
+export { community };
 
 
 async function displayCommunityMap() {
-  const {
+  let {
     data: tour_x,
     error
   } = await supa
@@ -181,29 +184,41 @@ async function displayCommunityMap() {
 
       async function participate() {
  
-
-        console.log(supa.auth.user().id,)
-    
-        const {
-          data,
-          error
-        } = await supa
-          .from("tour_participant")
-          .insert({
-            user_id: supa.auth.user().id,
-          });
-    
-          if (error) {
-            console.error('Error inserting record:', error);
-          } else {
-            console.log('Record inserted successfully:', data);
-          }  
+         // Check if user is already a participant
+         let existingParticipant = await supa
+         .from("tour_participant")
+         .select("*");
+     
+     console.log(existingParticipant.data);
+     
+     let userAlreadyEnrolled = false;
+     
+     for (let participant of existingParticipant.data) {
+         if (participant.user_id === supa.auth.user().id && participant.tour_id === tour.id)  {
+             userAlreadyEnrolled = true;
+             break;
+         }
+     }
+     
+     if (userAlreadyEnrolled) {
+         alert('Du bist bereits eingeschrieben!');
+     } else {
+         await supa
+             .from("tour_participant")
+             .insert({
+                 tour_id: tour.id,
+                 user_id: supa.auth.user().id,
+             });
+     }
       };
 
       document.getElementById('btn-community-participate').addEventListener('click', () => {
         console.log('clicked');
         participate();
       });
+
+  
+
     }
   });
 }

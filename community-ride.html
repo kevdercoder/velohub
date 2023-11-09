@@ -16,25 +16,23 @@
     <header>
         <div id="back-overview">
             <a id="back-home" href="/single-map.html">
-            <img id="icon-chevron" src="/img/icon-chevron.svg" alt="">
-            <p class="btn-back"></p>
-        </a>
+                <img id="icon-chevron" src="/img/icon-chevron.svg" alt="">
+                <p class="btn-back"></p>
+            </a>
         </div>
     </header>
     <main>
         <section>
-        <div class="map-information"></div>
-        <div class="date-selectors">
-            <select id="date-dropdown"></select>       
-          <select id="time-dropdown"></select>
-        </div>
+            <div class="map-information"></div>
+            <div class="date-selectors">
+                <select id="date-dropdown"></select>
+                <select id="time-dropdown"></select>
+            </div>
 
-        <div>
-          <a href="/community.html">
-            <button id="btn-add-community">Community-Tour hinzufügen</button>
-              </a>
-            </section>
-        </div>
+            <div>
+                <button id="btn-add-community">Community-Tour hinzufügen</button>
+            </div>
+        </section>
     </main>
     <nav class="mobile-nav">
         <a href="/index.html">
@@ -60,8 +58,9 @@
             <p class="mobile-nav-description">Profil</p>
         </div>
     </nav>
+    <script type="module" src="/js/supabase.js"></script>
+    <script type="module" src="/js/community-ride.js"></script>
+    <script type="module" src="/js/script.js"></script>
 </body>
-<script type="module" src="/js/supabase.js"></script>
-<script type="module" src="/js/community-ride.js"></script>
-<script type="module" src="/js/script.js"></script>
+
 </html>

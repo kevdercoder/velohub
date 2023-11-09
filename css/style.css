@@ -8,13 +8,8 @@
   --clr-grey-600: #252525;
   --clr-grey-800: #181818;
 
-  --clr-primary-300:
-    /* wird noch definiert */
-  ;
+
   --clr-primary-600: #91CB68;
-  --clr-primary-900:
-    /* wird noch definiert */
-  ;
 
   --clr-accent-blue: #53A2F9;
   --clr-accent-purple: #9E80DC;
@@ -250,7 +245,6 @@ h4 {
   color: var(--clr-grey-300);
   border: 1px solid var(--clr-grey-300);
   margin-right: var(--padding-200);
-  scrollbar-color: transparent;
 }
 
 .container-btn-filter::-webkit-scrollbar {
@@ -743,81 +737,30 @@ input:focus::placeholder {
 }
 
 .skeleton-hidden {
-  display: hidden;
+  display: none;
 }
 
-.skeleton-map {
+.skeleton-map { 
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
-}
-
-.skeleton-name {
+.skeleton-name { 
   width: 150px;
   height: 20px;
   border-radius: 30px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-}
-
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
 }
 
 
-.skeleton-data {
+.skeleton-data { 
   width: 50px;
   margin-right: 3px;
   height: 15px;
   border-radius: 30px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
-}
-
-.skeleton-filters {
+.skeleton-filters { 
   font-size: 9px;
   color: var(--clr-white);
   border-radius: 10px;
@@ -827,76 +770,25 @@ input:focus::placeholder {
   justify-content: center;
   align-items: center;
   margin-top: var(--padding-200);
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-}
-
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
 }
 
 /* -- Skeleton Loading [Single Page] -- */
-.skeleton-single-map-back {
+.skeleton-single-map-back { 
   margin-top: -38px;
   position: absolute;
   border-radius: 15px;
   height: 20px;
   width: 70px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-
-  @keyframes shine {
-    to {
-      background-position: 100% 0,
-        /* move highlight to right */
-        0 0;
-    }
-}
 }
 
-.skeleton-single-map-big {
+.skeleton-single-map-big { 
   margin-top: var(--padding-500);
   border-radius: 15px;
   height: 220px;
   width: 100%;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-
-  @keyframes shine {
-    to {
-      background-position: 100% 0,
-        /* move highlight to right */
-        0 0;
-    }
-}
 }
 
-.skeleton-single-map-container {
+.skeleton-single-map-container { 
 margin-top: var(--padding-300);
 display: flex;
 justify-content: space-between;
@@ -906,29 +798,68 @@ justify-content: space-between;
   width: 150px;
   height: 20px;
   border-radius: 30px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
-}
-
-.skeleton-single-map-finished {
+.skeleton-single-map-finished { 
   width: 70px;
   height: 20px;
   border-radius: 30px;
+}
+
+
+.skeleton-single-map-data { 
+  width: 50px;
+  height: 15px;
+  border-radius: 30px;
+  margin-right: 3px;
+}
+
+.skeleton-single-map-download { 
+  margin-top: var(--padding-500);
+  border-radius: 10px;
+  height: 35px;
+  width: 100%;
+}
+
+.skeleton-single-map-community { 
+  margin-top: var(--padding-200);
+  border-radius: 10px;
+  height: 35px;
+  width: 100%;
+}
+
+/* Skeleton Loading [Profile] */
+.skeleton-profile-picture {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+}
+
+/* Skeleton Loading [Profile] */
+.skeleton-datetime {
+  width: 125px;
+  margin-right: 3px;
+  height: 15px;
+  border-radius: 30px;
+}
+
+
+/* -- Skeleton Loading [Background Styling] -- */
+
+.skeleton-map,
+.skeleton-name,
+.skeleton-data,
+.skeleton-filters,
+.skeleton-single-map-back,
+.skeleton-single-map-big,
+.skeleton-single-map-container,
+.skeleton-single-map-name,
+.skeleton-single-map-finished,
+.skeleton-single-map-data,
+.skeleton-single-map-download,
+.skeleton-single-map-community,
+.skeleton-profile-picture,
+.skeleton-datetime {
   background: linear-gradient(to right,
   rgba(255, 255, 255, 0),
   rgba(255, 255, 255, 0.1) 50%,
@@ -949,78 +880,6 @@ background-position: 100% 0,
 }
 
 
-.skeleton-single-map-data {
-  width: 50px;
-  height: 15px;
-  border-radius: 30px;
-  margin-right: 3px;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-}
-
-@keyframes shine {
-  to {
-    background-position: 100% 0,
-      /* move highlight to right */
-      0 0;
-  }
-}
-
-.skeleton-single-map-download {
-  margin-top: var(--padding-500);
-  border-radius: 10px;
-  height: 35px;
-  width: 100%;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-
-  @keyframes shine {
-    to {
-      background-position: 100% 0,
-        /* move highlight to right */
-        0 0;
-    }
-}
-}
-
-.skeleton-single-map-community {
-  margin-top: var(--padding-200);
-  border-radius: 10px;
-  height: 35px;
-  width: 100%;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 80%),
-    var(--clr-grey-600);
-  background-repeat: repeat-y;
-  background-size: 50px 500px;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-
-  @keyframes shine {
-    to {
-      background-position: 100% 0,
-        /* move highlight to right */
-        0 0;
-    }
-}
-}
-
 /* Community */
 .user-picture {
   width: 62px;
@@ -1031,7 +890,6 @@ background-position: 100% 0,
 .container-community {
   display: flex;
   flex-direction: row;
-  align-items: top;
   margin-top: var(--padding-300);
   margin-bottom: var(--padding-300);
 }

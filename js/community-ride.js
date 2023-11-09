@@ -1,6 +1,7 @@
-
 // Import 'supa' object from '/js/supabase.js' module
-import { supa } from "/js/supabase.js";
+import {
+  supa
+} from "/js/supabase.js";
 
 // Define variables
 let mapID = localStorage.getItem('mapId');
@@ -11,7 +12,10 @@ let selectedTime
 async function displayMap() {
   try {
     // Query 'maps' data from Supabase
-    const { data: maps, error } = await supa.from("maps").select();
+    const {
+      data: maps,
+      error
+    } = await supa.from("maps").select();
     if (error) {
       throw error;
     }
@@ -57,7 +61,7 @@ async function displayMap() {
 function generateDateDropdown() {
   let dateDropdown = document.getElementById('date-dropdown');
 
-  dateDropdown.addEventListener('change', function() {
+  dateDropdown.addEventListener('change', function () {
     selectedDate = new Date(this.value);
     generateTimeDropdown();
   });
@@ -70,10 +74,18 @@ function generateDateDropdown() {
   let dayAfterTomorrow = new Date(today);
   dayAfterTomorrow.setDate(today.getDate() + 2);
 
-  let dateOptions = [
-    { label: formatDate(today), value: formatDate(today) },
-    { label: formatDate(tomorrow), value: formatDate(tomorrow) },
-    { label: formatDate(dayAfterTomorrow), value: formatDate(dayAfterTomorrow) }
+  let dateOptions = [{
+      label: formatDate(today),
+      value: formatDate(today)
+    },
+    {
+      label: formatDate(tomorrow),
+      value: formatDate(tomorrow)
+    },
+    {
+      label: formatDate(dayAfterTomorrow),
+      value: formatDate(dayAfterTomorrow)
+    }
   ];
 
   dateOptions.forEach(option => {
@@ -104,7 +116,7 @@ function generateTimeDropdown() {
   let endHour = 22;
   let startMinute = 0;
 
-  console.log(now.getDate()+ 1)
+  console.log(now.getDate() + 1)
   console.log(selectedDate)
   console.log(selectedDate.getDate())
 
@@ -133,7 +145,7 @@ function generateTimeDropdown() {
     startMinute = 0; // Reset startMinute for the next hour
   }
 
-  timeDropdown.addEventListener('change', function() {
+  timeDropdown.addEventListener('change', function () {
     selectedTime = this.value;
   });
 
@@ -150,7 +162,24 @@ document.getElementById('btn-add-community').addEventListener('click', planRide)
 function planRide() {
   // Check if date and time are selected
   if (selectedDate && selectedTime) {
-    let formattedDateTime = `${formatDate(selectedDate)} ${selectedTime}`;
+
+    // Split the time string into hours and minutes
+    let [hours, minutes] = selectedTime.split(":").map(Number);
+
+    // Subtract 1 hour
+    hours -= 1;
+
+    // If hours goes below 0, wrap around to 23 (since it's a 24-hour format)
+    if (hours < 0) {
+      hours = 23;
+    }
+
+    // Format the result back into HH:mm format
+    let convertedHour = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+
+    console.log(convertedHour);
+
+    let formattedDateTime = `${formatDate(selectedDate)} ${convertedHour}`;
 
     // Assuming you have elements to capture map details
     let mapId = localStorage.getItem('mapId');
@@ -165,18 +194,22 @@ function planRide() {
 // Function to save ride details to the database
 async function saveRideDetails(dateTime, mapId) {
   try {
-    const { data, error } = await supa
+    const {
+      data,
+      error
+    } = await supa
       .from('tour_x')
-      .insert([
-        {
-          start_time: dateTime,
-          user_id: supa.auth.user().id,
-          maps_id: mapId
-        }
-      ]);
+      .insert([{
+        start_time: dateTime,
+        user_id: supa.auth.user().id,
+        maps_id: mapId
+      }]);
 
     if (error) {
       throw error;
+    } else {
+      // Redirect to the 'my-rides.html' page
+      window.location.href = '/community.html';
     }
 
     console.log('Ride details saved successfully:', data);
@@ -187,7 +220,12 @@ async function saveRideDetails(dateTime, mapId) {
 
 // Function to format date
 function formatDate(date) {
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  let options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
   return date.toLocaleDateString(undefined, options);
 }
 

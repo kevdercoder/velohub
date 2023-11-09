@@ -1,8 +1,8 @@
 import { supa } from "/js/supabase.js";
 
 // Get the current page URL and links
-const currentUrl = window.location.href;
-const links = document.querySelectorAll('.mobile-nav a');
+let currentUrl = window.location.href;
+let links = document.querySelectorAll('.mobile-nav a');
 
 // Loop through the links and add the active class to the current link
 links.forEach(link => {
@@ -10,7 +10,7 @@ links.forEach(link => {
     link.id = 'mobile-nav-active-link';
 
     // Find the SVG element within the link
-    const svgIcon = link.querySelector('.mobile-nav-icon');
+    let svgIcon = link.querySelector('.mobile-nav-icon');
 
     if (svgIcon) {
       svgIcon.id = 'mobile-nav-active-icon';
@@ -33,7 +33,7 @@ function updateUserStatus(user) {
 }
 
 // Check and display the initial user status
-const initialUser = supa.auth.user();
+let initialUser = supa.auth.user();
 updateUserStatus(initialUser);
 
 // Listener for authentication state changes
@@ -48,11 +48,10 @@ supa.auth.onAuthStateChange((event, session) => {
 });
 
 
-
 // Save filter choice in local storage 
-const btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
-const btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
-const btnList = document.querySelectorAll('.btn-list');
+let btnFilterDistance = document.querySelectorAll('.btn-filter-distance');
+let btnFilterAltitude = document.querySelectorAll('.btn-filter-altitude');
+let btnList = document.querySelectorAll('.btn-list');
 
 // Event listener for distance filter buttons
 btnFilterDistance.forEach((btn) => {
@@ -159,21 +158,21 @@ if (document.querySelector('.btn-submit')) {
 // Event listener for maps feature
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/overview-maps.html') {
-    const { showMaps } = await import('./maps.js');
+    let { showMaps } = await import('./maps.js');
     showMaps();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
-    const { shuffleMaps } = await import('./maps.js');
+    let { shuffleMaps } = await import('./maps.js');
     shuffleMaps();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
-    const { displayMap } = await import('./maps.js');
+    let { displayMap } = await import('./maps.js');
     displayMap();
   }
 });
@@ -181,7 +180,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listener for community page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/community.html') {
-    const { community } = await import('./community.js');
+    let { community } = await import('./community.js');
     community();
   }
 });
@@ -189,28 +188,28 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listener for profile page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/profile.html') {
-    const { displayProfile } = await import('./user.js');
+    let { displayProfile } = await import('./user.js');
     displayProfile();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/maps-ridden.html') {
-    const { displayRiddenMaps } = await import('./user.js');
+    let { displayRiddenMaps } = await import('./user.js');
     displayRiddenMaps();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/past-rides.html') {
-    const { displayPastTour } = await import('./user.js');
+    let { displayPastTour } = await import('./user.js');
     displayPastTour();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/planned-rides.html') {
-    const { displayPlannedTour } = await import('./user.js');
+    let { displayPlannedTour } = await import('./user.js');
     displayPlannedTour();
   }
 });

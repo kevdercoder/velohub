@@ -280,8 +280,6 @@ async function displayMap() {
   // Hide skeleton-loading after maps are loaded
   let skeletonLoading = document.querySelector('.skeleton-loading');
   skeletonLoading.style.display = 'none';
-
-  console.log(localStorage.getItem('mapId'));
 }
 
 export { displayMap };

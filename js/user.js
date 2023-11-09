@@ -41,6 +41,10 @@ updateUserStatus(initialUser);
         document.getElementById('user-img').src = user.user_img;
        }
     })
+
+     // Hide skeleton-loading after maps are loaded
+     let skeletonLoading = document.querySelector('.skeleton-loading');
+       skeletonLoading.style.display = 'none';
 }
 
   export { displayProfile };
