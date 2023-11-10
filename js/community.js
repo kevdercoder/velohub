@@ -228,6 +228,7 @@ console.log(participant);
 
 displayCommunityMap();
 
+
 function formatDateTime(dateTimeString) {
   let date = new Date(dateTimeString);
   let options = {

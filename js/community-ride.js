@@ -58,6 +58,7 @@ async function displayMap() {
 }
 
 // Function to generate date dropdown
+// Function to generate date dropdown
 function generateDateDropdown() {
   let dateDropdown = document.getElementById('date-dropdown');
 
@@ -74,18 +75,10 @@ function generateDateDropdown() {
   let dayAfterTomorrow = new Date(today);
   dayAfterTomorrow.setDate(today.getDate() + 2);
 
-  let dateOptions = [{
-      label: formatDate(today),
-      value: formatDate(today)
-    },
-    {
-      label: formatDate(tomorrow),
-      value: formatDate(tomorrow)
-    },
-    {
-      label: formatDate(dayAfterTomorrow),
-      value: formatDate(dayAfterTomorrow)
-    }
+  let dateOptions = [
+    { label: formatDate(today), value: today.toISOString().split('T')[0] },
+    { label: formatDate(tomorrow), value: tomorrow.toISOString().split('T')[0] },
+    { label: formatDate(dayAfterTomorrow), value: dayAfterTomorrow.toISOString().split('T')[0] }
   ];
 
   dateOptions.forEach(option => {
@@ -96,8 +89,8 @@ function generateDateDropdown() {
   });
 
   // Set today's date as the default selected date
-  selectedDate = new Date();
-  dateDropdown.value = formatDate(selectedDate);
+  selectedDate = today;
+  dateDropdown.value = today.toISOString().split('T')[0];
 
   // Trigger the change event to update the selected time
   dateDropdown.dispatchEvent(new Event('change'));
@@ -120,7 +113,12 @@ function generateTimeDropdown() {
   console.log(selectedDate)
   console.log(selectedDate.getDate())
 
-  if (selectedDate && selectedDate.getDate() === now.getDate()) {
+  if (
+    selectedDate &&
+    selectedDate.getDate() === now.getDate() &&
+    selectedDate.getMonth() === now.getMonth() &&
+    selectedDate.getFullYear() === now.getFullYear()
+  ) {
     startHour = (currentHour < 22) ? currentHour : 22;
     if (currentMinute > 0 && currentMinute <= 45) {
       startMinute = Math.ceil(currentMinute / 15) * 15;
@@ -128,7 +126,11 @@ function generateTimeDropdown() {
       startMinute = 0;
       startHour++;
     }
-  } else if (selectedDate.getDate() === now.getDate() + 1) {
+  } else if (
+    selectedDate.getDate() === now.getDate() + 1 &&
+    selectedDate.getMonth() === now.getMonth() &&
+    selectedDate.getFullYear() === now.getFullYear()
+  ) {
     // If tomorrow's date is selected, start from 06:00
     startHour = 6;
     endHour = 22;
@@ -162,7 +164,6 @@ document.getElementById('btn-add-community').addEventListener('click', planRide)
 function planRide() {
   // Check if date and time are selected
   if (selectedDate && selectedTime) {
-
     // Split the time string into hours and minutes
     let [hours, minutes] = selectedTime.split(":").map(Number);
 
@@ -177,9 +178,12 @@ function planRide() {
     // Format the result back into HH:mm format
     let convertedHour = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
-    console.log(convertedHour);
+    // Create a new Date object with the selected date and time
+    let rideDateTime = new Date(selectedDate);
+    rideDateTime.setHours(hours, minutes);
 
-    let formattedDateTime = `${formatDate(selectedDate)} ${convertedHour}`;
+    // Format the date-time in ISO 8601 format
+    let formattedDateTime = rideDateTime.toISOString();
 
     // Assuming you have elements to capture map details
     let mapId = localStorage.getItem('mapId');

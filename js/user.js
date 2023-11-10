@@ -101,7 +101,7 @@ updateUserStatus(initialUser);
                 <p>${riddenMaps.maps.altitude_down}m</p>
               </li>
             </ul>
-            <div class="maps-filters">${riddenMaps.maps.altitude}</div>
+            <div class="maps-filters ${riddenMaps.maps.altitude}">${riddenMaps.maps.altitude}</div>
           </div>
         `;
   
@@ -109,9 +109,11 @@ updateUserStatus(initialUser);
         const hr = document.createElement('hr');
         hr.className = 'maps-seperator';
 
-
       document.querySelector('main').appendChild(sectionMaps);
       document.querySelector('main').appendChild(hr)
+
+      document.querySelector('.btn-back').innerHTML = 'Zurück';
+    document.querySelector('#icon-chevron').style.display = 'block';
 }
 displayOverview();
     })
@@ -142,13 +144,16 @@ displayOverview();
             `)
     .eq('user_id', supa.auth.user().id);
 
-    console.log(pastTour);
+  
+
+    console.log(pastTour.start_time);
 
     pastTour.forEach(pastTour => {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
       sectionMaps.id = pastTour.id;
      
+      let formattedDateTime = formatDateTime(pastTour.start_time);
   
       //Display the maps in the list view
       async function displayOverview() {
@@ -161,20 +166,14 @@ displayOverview();
             <h2>${pastTour.maps.map_name}</h2>
             <ul>
               <li class="maps-distance">
-                <img src="/img/icon-distance.svg" alt="image-alt">
-                <p>${pastTour.start_time}km</p>
+                <img src="/img/icon-calendar.svg" alt="image-alt">
+                <p>${formattedDateTime.formattedDate}</p>
               </li>
               <li class="maps-distance">
-                <img src="/img/icon-up.svg" alt="image-alt">
-                <p>${pastTour.maps.altitude_up}m</p>
-              </li>
-              <li class="maps-distance">
-                <img src="/img/icon-down.svg" alt="image-alt">
-                <p>${pastTour.maps.altitude_down}m</p>
+                <img src="/img/icon-clock.svg" alt="image-alt">
+                <p>${formattedDateTime.formattedTime}</p>
               </li>
             </ul>
-            <div class="maps-filters">${pastTour.maps.altitude}</div>
-          </div>
         `;
   
         document.body.appendChild(sectionMaps);
@@ -184,6 +183,9 @@ displayOverview();
 
       document.querySelector('main').appendChild(sectionMaps);
       document.querySelector('main').appendChild(hr)
+
+      document.querySelector('.btn-back').innerHTML = 'Zurück';
+      document.querySelector('#icon-chevron').style.display = 'block';
 }
 displayOverview();
     })
@@ -195,10 +197,10 @@ displayOverview();
 
   async function displayPlannedTour() {
     const {
-      data: pastTour,
+      data: plannedTour,
       error
     } = await supa
-    .from("past_tour")
+    .from("tour_x")
     .select(`
                 *,
                 maps_id, 
@@ -206,38 +208,34 @@ displayOverview();
             `)
     .eq('user_id', supa.auth.user().id);
 
-    console.log(pastTour);
 
-    pastTour.forEach(pastTour => {
+    plannedTour.forEach(plannedTour => {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
-      sectionMaps.id = pastTour.id;
+      sectionMaps.id = plannedTour.id;
+
+      let formattedDateTime = formatDateTime(plannedTour.start_time);
      
   
       //Display the maps in the list view
       async function displayOverview() {
         sectionMaps.innerHTML = `
           <div class="maps-img-container">
-            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${pastTour.maps.map_img}" alt="image-alt">
-            <img id="${pastTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${plannedTour.maps.map_img}" alt="image-alt">
+            <img id="${plannedTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
           </div>
           <div class="maps-margin">
-            <h2>${pastTour.maps.map_name}</h2>
+            <h2>${plannedTour.maps.map_name}</h2>
             <ul>
               <li class="maps-distance">
-                <img src="/img/icon-distance.svg" alt="image-alt">
-                <p>${pastTour.start_time}km</p>
+                <img src="/img/icon-calendar.svg" alt="image-alt">
+                <p>${formattedDateTime.formattedDate}</p>
               </li>
               <li class="maps-distance">
-                <img src="/img/icon-up.svg" alt="image-alt">
-                <p>${pastTour.maps.altitude_up}m</p>
-              </li>
-              <li class="maps-distance">
-                <img src="/img/icon-down.svg" alt="image-alt">
-                <p>${pastTour.maps.altitude_down}m</p>
+                <img src="/img/icon-clock.svg" alt="image-alt">
+                <p>${formattedDateTime.formattedTime}</p>
               </li>
             </ul>
-            <div class="maps-filters">${pastTour.maps.altitude}</div>
           </div>
         `;
   
@@ -248,10 +246,39 @@ displayOverview();
 
       document.querySelector('main').appendChild(sectionMaps);
       document.querySelector('main').appendChild(hr)
+
+      document.querySelector('.btn-back').innerHTML = 'Zurück';
+      document.querySelector('#icon-chevron').style.display = 'block';
 }
 displayOverview();
+
+ // Add event listener to redirect to community tour
+ sectionMaps.addEventListener('click', () => {
+  localStorage.setItem('communityId', plannedTour.id);
+  window.location.href = `community-maps.html?${plannedTour.id}`;
+  console.log(`Clicked on ${plannedTour.id}`);
+});
     })
 
+       
   }
 
   export { displayPlannedTour };
+
+
+  function formatDateTime(dateTimeString) {
+    let date = new Date(dateTimeString);
+    let options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    let formattedDate = date.toLocaleDateString('de-DE', options);
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    let formattedTime = `${hours}:${minutes}`;
+    return {
+      formattedDate,
+      formattedTime
+    };
+  }

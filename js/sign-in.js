@@ -11,6 +11,11 @@ import { supa } from "/js/supabase.js";
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
   
+    if (!email || !password) {
+      console.error("Email or password missing");
+      return;
+    }
+    
     const { user, error } = await supa.auth.signIn({ email, password });
   
   

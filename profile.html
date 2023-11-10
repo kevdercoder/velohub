@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.29.0/dist/umd/supabase.min.js"></script>
 </head>
 
-<body>
+<body class="overflow-hidden">
     <header>
         <h1 class="page-header">Profile</h1>
     </header>
@@ -36,13 +36,13 @@
         <section>
             <a href="/planned-rides.html">
             <button class="btn-user-routes">
-                <span class="btn-text">Geplante Touren</span>
+                <span class="btn-text">Geplante Community-Touren</span>
                 <img src="img/icon-chevron-right.svg" alt="" class="btn-chevron">
               </button>
             </a>
               <a href="/past-rides.html">
               <button id="past-rides" class="btn-user-routes">
-                <span class="btn-text">Vergangene Touren</span>
+                <span class="btn-text">Vergangene Community-Touren</span>
                 <img src="img/icon-chevron-right.svg" alt="" class="btn-chevron">
               </button>
             </a>
@@ -58,7 +58,7 @@
 
     <nav class="mobile-nav">
         <a href="/index.html">
-            <div class="mobile-nav-container">
+            <div id="mobile-nav-first-element"class="mobile-nav-container">
                 <img class="mobile-nav-icon" src="/img/icon-home.svg" alt="">
                 <p class="mobile-nav-description">Home</p>
             </div>
@@ -75,12 +75,10 @@
                 <p class="mobile-nav-description">Community</p>
             </div>
         </a>
-        <a href="/profile.html">
         <div id="mobile-nav-profile" class="mobile-nav-container">
             <img class="mobile-nav-icon" src="/img/icon-profile.svg" alt="">
             <p class="mobile-nav-description">Profil</p>
         </div>
-         </a>
     </nav>
 </body>
 <script type="module" src="/js/supabase.js"></script>
