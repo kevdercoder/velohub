@@ -99,8 +99,10 @@ async function showMaps() {
 
 
   // Hide skeleton-loading after maps are loaded
-  let skeletonLoading = document.querySelector('.skeleton-loading');
-  skeletonLoading.style.display = 'none';
+  let skeletonLoading = document.querySelectorAll('.skeleton-loading');
+  skeletonLoading.forEach(element => {
+    element.style.display = 'none';
+  });
 
   // Add padding to the bottom of the page
   let div = document.createElement('div');

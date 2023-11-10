@@ -363,8 +363,9 @@ ul {
 }
 
 #profile-picture-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   margin-top: var(--padding-500);
   gap: 10px;
@@ -372,6 +373,7 @@ ul {
 
 #profile-picture-options label img {
   border-radius: 50%;
+  max-width: 85px;
 }
 
 label.selected-img img {
@@ -733,7 +735,7 @@ input:focus::placeholder {
   align-items: center;
   position: fixed;
   bottom: 70px;
-  width: 87.5%;
+  width: 100%;
   height: 35px;
   font-size: 14px;
   border-radius: 10px;
@@ -966,6 +968,15 @@ input:focus::placeholder {
   appearance: none;
 }
 
+#date-dropdown {
+  width: 100%;
+  margin-right: 5%;
+}
+
+#time-dropdown {
+  width: 30%;
+}
+
 
 /* -- Responive Design -- */
 
@@ -1015,13 +1026,20 @@ input:focus::placeholder {
   }
 
   .btn-list {
+    margin-top: var(--padding-750);
     font-size: 16px;
     height: 45px;
   }
 
-  .btn-submit {
+  .btn-submit, 
+  #submit-login,
+  #submit-join  {
     font-size: 16px;
     height: 45px;
+  }
+
+  #submit-join {
+    margin-bottom: var(--padding-600);
   }
 
   .mobile-nav {
@@ -1075,6 +1093,7 @@ input:focus::placeholder {
   .btn-submit {
     max-width: 100%;
     width: 100%;
+    margin-bottom: 2em;
   }
 }
 
@@ -1086,6 +1105,10 @@ input:focus::placeholder {
 
   .mobile-nav-description {
     font-size: 16px;
+  }
+
+  #mobile-nav-profile {
+  margin-left: 41.1em;
   }
 
   .container-center {
@@ -1149,6 +1172,12 @@ input:focus::placeholder {
     height: 90px;
   }
 
+  #shuffle-again {
+    width: 95%;
+    height: 45px;
+    margin-top: -4.5em;
+  }
+
   .maps-filters {
     background-color: var(--clr-accent-blue);
     font-size: 11px;
@@ -1162,11 +1191,24 @@ input:focus::placeholder {
     margin-top: var(--padding-200);
   }
 
+  #btn-track-finished {
+    font-size: 12px;
+    width: 80px;
+    height: 25px;
+  }
+
   #btn-gpx,
   #btn-community-participate,
-  #btn-plan-community {
+  #btn-plan-community,
+  #btn-add-community,
+  #time-dropdown,
+  #date-dropdown {
     font-size: 16px;
     height: 45px;
+  }
+
+  #date-dropdown {
+    margin-right: 3%;
   }
 
   .single-map-description {
@@ -1223,5 +1265,20 @@ input:focus::placeholder {
 
   #btn-sign-in {
     bottom: 80px;
+  }
+
+  #join-firstname,
+  #join-name,
+  #join-lastname,
+  #join-email,
+  #join-password,
+  #login-email,
+  #login-password {
+    height: 45px;
+    font-size: 14px;
+  }
+
+  #profile-picture-options label img {
+    max-width: 130px;
   }
 }

@@ -219,8 +219,17 @@ if (navProfile) {
   navProfile.addEventListener('click', async () => {
     if (supa.auth.user() === null) {
       window.location.href = 'user-login.html';
+
     } else {
       window.location.href = 'profile.html';
     }
   });
+}
+
+let changeWording = document.querySelectorAll('.mobile-nav-description');
+
+if (document.querySelector('.mobile-nav-description')) { 
+if (supa.auth.user() === null) { 
+  changeWording[3].innerHTML = 'Login'
+}
 }

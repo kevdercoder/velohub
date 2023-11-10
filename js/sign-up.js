@@ -1,6 +1,7 @@
 import { supa } from "/js/supabase.js";
 
 let lastSelectedProfilePicture = null;
+let submitJoinButton = document.getElementById('submit-join');
 
 // Function to sign up using email and password
 async function signUp() {
@@ -37,27 +38,30 @@ async function signUp() {
   }
 
 
-  document.querySelectorAll('#profile-picture-options label').forEach(function(label) {
-    label.addEventListener('click', function() {
-      const radioInput = this.querySelector('input[type="radio"]');
-      radioInput.checked = true;
-  
-      // Update the last selected profile picture
-      lastSelectedProfilePicture = radioInput.value;
-      console.log(lastSelectedProfilePicture)
-  
-      // Add the selected class for visual indicator
-      document.querySelectorAll('#profile-picture-options label').forEach(function(label) {
-        label.classList.remove('selected-img');
-      });
-      this.classList.add('selected-img');
+document.querySelectorAll('#profile-picture-options label').forEach(function (label) {
+  label.addEventListener('click', function () {
+    const radioInput = this.querySelector('input[type="radio"]');
+    radioInput.checked = true;
+
+    // Update the last selected profile picture
+    lastSelectedProfilePicture = radioInput.value;
+    console.log(lastSelectedProfilePicture);
+
+    // Add the selected class for visual indicator
+    document.querySelectorAll('#profile-picture-options label').forEach(function (label) {
+      label.classList.remove('selected-img');
     });
+    this.classList.add('selected-img');
   });
+});
+
+submitJoinButton.addEventListener('click', function () {
+  // Check if a profile picture is selected
+  if (lastSelectedProfilePicture === null) {
+    alert('Please select a profile picture before signing up!');
+  } 
+});
   
-
-
-    // Attach event listeners to the sign up buttons
-    let submitJoinButton = document.getElementById('submit-join');
-      submitJoinButton.addEventListener('click', signUp);
+    submitJoinButton.addEventListener('click', signUp);
 
     
