@@ -93,7 +93,7 @@ async function community() {
   // Add padding to the bottom of the page
   let div = document.createElement('div');
   div.className = 'container-padding-750'
-  document.body.appendChild(div);
+  document.querySelector('main').appendChild(div);
 }
 
 export { community };
@@ -230,7 +230,7 @@ initMap = function() {
     });
 };
 
-document.body.appendChild(singleMapContainer);
+document.querySelector('main').appendChild(singleMapContainer);
 
 
 

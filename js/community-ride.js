@@ -285,6 +285,10 @@ function formatDate(date) {
 document.querySelector('.btn-back').innerHTML = 'Zurück';
 document.querySelector('#icon-chevron').style.display = 'block';
 
+document.querySelector(".btn-back").addEventListener("click", () => {
+  history.back();
+});
+
 // Initial function calls
 displayMap();
 generateDateDropdown();

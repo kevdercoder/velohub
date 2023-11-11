@@ -8,7 +8,7 @@ let altitude = localStorage.getItem('btnFilterAltitude');
 
 /* Programm to display the maps in the list view */
 async function showMaps() {
-  const {
+  let {
     data: maps,
     error
   } = await supa.from("maps").select();
@@ -59,8 +59,8 @@ async function showMaps() {
         </div>
       `;
 
-      document.body.appendChild(sectionMaps);
-      const hr = document.createElement('hr');
+      document.querySelector('main').appendChild(sectionMaps);
+      let hr = document.createElement('hr');
       hr.className = 'maps-seperator';
 
       document.querySelector('main').appendChild(sectionMaps);
@@ -69,14 +69,14 @@ async function showMaps() {
       if (supa.auth.user() === null) {
         null
       } else {
-        const {
+        let {
           user,
           error
         } = await supa.auth.user();
         if (error) {
           console.log("Error getting user information:", error.message);
         } else {
-          const {
+          let {
             data: existingData,
             error: existingError
           } = await supa
@@ -107,11 +107,11 @@ async function showMaps() {
   // Add padding to the bottom of the page
   let div = document.createElement('div');
   div.className = 'container-padding-750'
-  document.body.appendChild(div);
+  document.querySelector('main').appendChild(div);
 
 
   // Save the id of the clicked map in local storage and redirect to single-map.html
-  const sectionMapsList = document.querySelectorAll('.container-maps');
+  let sectionMapsList = document.querySelectorAll('.container-maps');
 
   sectionMapsList.forEach((sectionMaps) => {
     sectionMaps.addEventListener('click', () => {
@@ -130,7 +130,7 @@ export { showMaps };
 
 
 async function displayMap() {
-  const { data: maps, error } = await supa.from("maps").select();
+  let { data: maps, error } = await supa.from("maps").select();
 
   if (maps) {
     maps.forEach(mapsData => {
@@ -182,13 +182,14 @@ async function displayMap() {
         initMap = function() {
           console.log("initMap function called");
           
-          const map = new google.maps.Map(document.getElementById("map"), {
+          let map = new google.maps.Map(document.getElementById("map"), {
               mapId: "67a32317a1bc4a60",
               zoom: 10,
               center: { lat: 46.946383444981336, lng: 7.442313596894101 },
               mapTypeId: "roadmap",
               zoomControl: false,
               streetViewControl: false,
+              mapTypeControl: false,
           });
 
                 fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${mapsData.gpx_data}`)
@@ -200,7 +201,7 @@ async function displayMap() {
                     var points = [];
                     var bounds = new google.maps.LatLngBounds();
                 
-                    const nodes = [...doc.getElementsByTagName('trkpt')];
+                    let nodes = [...doc.getElementsByTagName('trkpt')];
                     nodes.forEach(node =>
                     {
                         var lat = node.getAttribute("lat");
@@ -224,24 +225,25 @@ async function displayMap() {
                 })
               }
 
+        document.querySelector('main').appendChild(singleMapContainer);
 
-
-        document.body.appendChild(singleMapContainer);
-
-        const referrer = document.referrer;
+        let referrer = document.referrer;
         if (referrer.includes('overview-maps.html')) {
           document.querySelector('.btn-back').innerHTML = 'Übersicht';
           document.querySelector('#icon-chevron').style.display = 'block';
         } else {
-          document.querySelector('.btn-back').innerHTML = 'Home';
+          document.querySelector('.btn-back').innerHTML = 'Zurück';
           document.querySelector('#back-home').href = 'index.html';
           document.querySelector('#icon-chevron').style.display = 'block';
 
-          const shuffleAgainButton = document.getElementById('shuffle-again');
+          let shuffleAgainButton = document.getElementById('shuffle-again');
           shuffleAgainButton.style.display = 'block';
 
           shuffleAgainButton.addEventListener('click', () => {
             window.location.reload();
+          localStorage.getItem('mapId', sectionMaps.id)
+          window.location.href = `single-map.html?${sectionMaps.id}`;
+          console.log(`Clicked on ${sectionMaps.id}`);
           })
         }
 
@@ -252,11 +254,11 @@ async function displayMap() {
           if (supa.auth.user() === null) {
             btnTrackFinished.style.display = 'none';
           } else {
-            const { user, error } = await supa.auth.user();
+            let { user, error } = await supa.auth.user();
             if (error) {
               console.log("Error getting user information:", error.message);
             } else {
-              const { data: existingData, error: existingError } = await supa
+              let { data: existingData, error: existingError } = await supa
                 .from("done")
                 .select("*")
                 .eq("maps_id", mapsData.id)
@@ -287,9 +289,9 @@ async function displayMap() {
         }
 
         async function addRiddenMap() {
-          const { user, error } = await supa.auth.user();
+          let { user, error } = await supa.auth.user();
           if (error) {} else {
-            const { data, error } = await supa
+            let { data, error } = await supa
               .from("done")
               .insert({
                 maps_id: mapsData.id,
@@ -328,15 +330,15 @@ export { displayMap };
 /* Programm to display the maps in the single-view */
 
 async function shuffleMaps() {
-  const { data: maps, error } = await supa.from("maps").select();
+  let { data: maps, error } = await supa.from("maps").select();
 
-  const referrer = document.referrer;
+  let referrer = document.referrer;
   if (referrer.includes('overview-maps.html')) {
 
   } else {
     // Fisher-Yates shuffle algorithm
     for (let i = maps.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      let j = Math.floor(Math.random() * (i + 1));
       [maps[i], maps[j]] = [maps[j], maps[i]];
   }
 

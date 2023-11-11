@@ -471,7 +471,6 @@ input:focus::placeholder {
 
 
 /* -- Mobile Navigation -- */
-
 .mobile-nav {
   position: fixed;
   bottom: 0;
@@ -515,7 +514,6 @@ input:focus::placeholder {
 
 
 /* -- Overview Maps -- */
-
 .container-maps {
   display: flex;
   flex-direction: row;
@@ -611,6 +609,10 @@ input:focus::placeholder {
   margin-right: 5px;
 }
 
+#map {
+  width: 100%;
+}
+
 .single-map-big {
   border-radius: 15px;
   height: 220px;
@@ -703,8 +705,8 @@ input:focus::placeholder {
   width: 90%;
   height: 35px;
   position: relative;
-  margin-top: -3.5em;
-  margin-bottom: 1em;
+  margin-top: -4.75em;
+  margin-bottom: 2.25em;
 }
 
 
@@ -905,7 +907,6 @@ input:focus::placeholder {
 .skeleton-filters,
 .skeleton-single-map-back,
 .skeleton-single-map-big,
-.skeleton-single-map-container,
 .skeleton-single-map-name,
 .skeleton-single-map-finished,
 .skeleton-single-map-data,
@@ -997,6 +998,34 @@ input:focus::placeholder {
 
 
 /* -- Responive Design -- */
+
+@media (min-width: 375px) {
+  #map {
+    height: 300px;
+  }
+}
+
+  @media (min-width: 500px) {
+  #map {
+    height: 400px;
+  }
+
+  .skeleton-single-map-big {
+    height: 400px;
+  }
+}
+
+@media (min-width: 700px) {
+  #map {
+    width: 100%;
+    height: 500px;
+  }
+
+  .skeleton-single-map-big {
+    width: 100%;
+    height: 500px;
+  }
+}
 
 @media (min-width: 980px) {
 
@@ -1174,7 +1203,7 @@ input:focus::placeholder {
 }
 
 
-/* -- Resposive Community -- */
+/* -- Resposive Maps -- */
 @media (min-width: 980px) {
   .maps-distance>img {
     height: 10px;
@@ -1210,10 +1239,27 @@ input:focus::placeholder {
     margin-top: var(--padding-200);
   }
 
+  .Hügelig {
+    background-color: var(--clr-accent-orange);
+  }
+
+  .Bergig {
+    background-color: var(--clr-accent-red);
+  }
+
   #btn-track-finished {
     font-size: 12px;
     width: 80px;
     height: 25px;
+  }
+
+  #finished-map {
+    font-size: 12px;
+  }
+
+  #add-track-finished {
+    width: 10px;
+    margin-right: 5px;
   }
 
   #btn-gpx,
@@ -1326,13 +1372,41 @@ input:focus::placeholder {
     height: 23px;
     margin-top: 10px;
   }
+
+  .skeleton-single-map-back {
+    height: 21px;
+    width: 80px;
+  }
+  
+  .skeleton-single-map-big {
+    height: 500px;
+    width: 100%;
+  }
+  
+  .skeleton-single-map-name {
+    width: 200px;
+    height: 25px;
+  }
+  
+  .skeleton-single-map-finished {
+    margin-top: 5px;
+    width: 80px;
+    height: 25px;
+  }
+  
+  .skeleton-single-map-data {
+    width: 50px;
+    height: 15px;
+  }
+  
+  .skeleton-single-map-download {
+    height: 45px;
+    width: 100%;
+  }
+  
+  .skeleton-single-map-community {
+    height: 45px;
+    width: 100%;
+  }  
 }
 
-
-
-
-/* test */
- #map {
-  height: 500px;
-  width: 100%;
-}
