@@ -190,6 +190,7 @@ initMap = function() {
     mapTypeId: "roadmap",
     zoomControl: false,
     streetViewControl: false,
+    mapTypeControl: false,
   });
 
   fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${tour.maps.gpx_data}`)
