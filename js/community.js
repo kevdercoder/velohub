@@ -44,7 +44,7 @@ async function community() {
           <img class="user-picture" src="${userImg}" alt="image-alt">
         </div>
         <div class="container-details">
-          <h2>${userFirstName} ${userName}'s Tour</h2>
+          <h2>${userFirstName} ${userName}s Tour</h2>
           <ul>
             <li class="maps-distance">
               <img src="/img/icon-calendar.svg" alt="image-alt">

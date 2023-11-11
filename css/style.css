@@ -1193,7 +1193,8 @@ input:focus::placeholder {
   #shuffle-again {
     width: 95%;
     height: 45px;
-    margin-top: -4.5em;
+    margin-top: -5.5em;
+    margin-bottom: 2.3em;
   }
 
   .maps-filters {
@@ -1312,25 +1313,26 @@ input:focus::placeholder {
   .skeleton-name {
     width: 200px;
     height: 25px;
-    border-radius: 30px;
   }
   
   .skeleton-data {
     width: 50px;
-    margin-right: 3px;
-    height: 15px;
-    border-radius: 30px;
+    margin-top: 5px;
+    margin-right: 10px;
   }
   
   .skeleton-filters {
-    font-size: 9px;
-    color: var(--clr-white);
-    border-radius: 10px;
-    width: 47px;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: var(--padding-200);
+    width: 55px;
+    height: 23px;
+    margin-top: 10px;
   }
+}
+
+
+
+
+/* test */
+ #map {
+  height: 500px;
+  width: 100%;
 }
