@@ -27,4 +27,16 @@ import { supa } from "/js/supabase.js";
       window.location.href = 'profile.html';
     }
   }
+
+
+  let submitButton = document.getElementById("submit-login");
+
+  document.addEventListener("keydown", keyDownTextField, false);
+
+  function keyDownTextField(e) {
+  let keyCode = e.keyCode;
+    if(keyCode==13) {
+      submitButton.click();
+    }
+  }
   

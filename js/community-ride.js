@@ -241,3 +241,15 @@ document.querySelector('#icon-chevron').style.display = 'block';
 displayMap();
 generateDateDropdown();
 generateTimeDropdown();
+
+
+let submitButton = document.getElementById("btn-add-community");
+
+document.addEventListener("keydown", keyDownTextField, false);
+
+function keyDownTextField(e) {
+let keyCode = e.keyCode;
+  if(keyCode==13) {
+    submitButton.click();
+  }
+}

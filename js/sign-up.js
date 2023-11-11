@@ -25,7 +25,7 @@ async function signUp() {
           first_name: firstName,
           name: name,
           email: email,
-          user_img: '0' + lastSelectedProfilePicture + '_profile_picture.JPG'
+          user_img: '/img/' + '0' + lastSelectedProfilePicture + '_profile-picture.JPG'
         });
   
       if (error) {
@@ -65,3 +65,13 @@ submitJoinButton.addEventListener('click', function () {
     submitJoinButton.addEventListener('click', signUp);
 
     
+    let submitButton = document.getElementById("submit-join");
+  
+    document.addEventListener("keydown", keyDownTextField, false);
+
+    function keyDownTextField(e) {
+    let keyCode = e.keyCode;
+      if(keyCode==13) {
+        submitButton.click();
+      }
+    }

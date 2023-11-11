@@ -190,6 +190,24 @@ h4 {
   padding: var(--padding-500) 0;
 }
 
+.container-community,
+.container-maps,
+.btn-user-routes,
+#mobile-nav-profile, 
+#btn-sign-in, 
+#btn-sign-up,
+#submit-join,
+#submit-login,
+#profile-picture-options > label,
+#btn-track-finished,
+#btn-gpx,
+#btn-add-community,
+#btn-plan-community,
+#btn-community-participate,
+#btn-logout {
+  cursor: pointer;
+}
+
 /* -- Container Styles -- */
 
 .container-center {
@@ -735,7 +753,7 @@ input:focus::placeholder {
   align-items: center;
   position: fixed;
   bottom: 70px;
-  width: 100%;
+  width: calc(100% - 40px);
   height: 35px;
   font-size: 14px;
   border-radius: 10px;
@@ -1247,10 +1265,10 @@ input:focus::placeholder {
 
   #btn-logout {
     font-size: 16px;
-    height: 45px;
+    height: 46px;
     bottom: 40px;
+    width: 100%;
     max-width: 980px;
-    overflow-x: hidden;
   }
 }
 
@@ -1280,5 +1298,39 @@ input:focus::placeholder {
 
   #profile-picture-options label img {
     max-width: 130px;
+  }
+}
+
+/* -- Skeleton Loading [Responsive] -- */
+
+@media (min-width: 980px) {
+  .skeleton-map {
+    width: 150px;
+    height: 150px;
+  }
+
+  .skeleton-name {
+    width: 200px;
+    height: 25px;
+    border-radius: 30px;
+  }
+  
+  .skeleton-data {
+    width: 50px;
+    margin-right: 3px;
+    height: 15px;
+    border-radius: 30px;
+  }
+  
+  .skeleton-filters {
+    font-size: 9px;
+    color: var(--clr-white);
+    border-radius: 10px;
+    width: 47px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--padding-200);
   }
 }
