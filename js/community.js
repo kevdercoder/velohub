@@ -100,6 +100,7 @@ export { community };
 
 
 
+
 async function displayCommunityMap() {
   let {
     data: tour_x,
@@ -128,7 +129,7 @@ console.log(participant);
     if (localStorage.getItem('communityId') == tour.id && window.location.href.includes('community-maps.html')) {
 
       singleMapContainer.innerHTML = `
-          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${tour.maps.map_img}" alt="image-alt">
+      <div id="map" class="single-map-big"></div>
           <button id="shuffle-again">Nochmals mischen</button>
         <div class="container-flex">
           <div>
@@ -178,7 +179,60 @@ console.log(participant);
         </section>
       `;
 
-      document.body.appendChild(singleMapContainer);
+let map
+
+initMap = function() {
+
+    map = new google.maps.Map(document.getElementById("map"), {
+    mapId: "67a32317a1bc4a60",
+    zoom: 10,
+    center: { lat: 46.946383444981336, lng: 7.442313596894101 },
+    mapTypeId: "roadmap",
+    zoomControl: false,
+    streetViewControl: false,
+  });
+
+  fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${tour.maps.gpx_data}`)
+    .then(response => response.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    .then(doc => {
+      console.log("Successfully fetched and parsed XML data");
+
+      var points = [];
+      var bounds = new google.maps.LatLngBounds();
+
+      const nodes = [...doc.getElementsByTagName('trkpt')];
+      nodes.forEach(node => {
+        var lat = node.getAttribute("lat");
+        var lon = node.getAttribute("lon");
+
+        var p = new google.maps.LatLng(lat, lon);
+        points.push(p);
+        bounds.extend(p);
+      });
+
+      var poly = new google.maps.Polyline({
+        path: points,
+        strokeColor: "#f99a52",
+        strokeOpacity: 0.8,
+        strokeWeight: 4
+      });
+
+      poly.setMap(map);
+      console.log("Polyline set on the map");
+
+      // fit bounds to track
+      map.fitBounds(bounds);
+      console.log("Map bounds set");
+    })
+    .catch(error => {
+      console.error("Error fetching or parsing XML data:", error);
+    });
+};
+
+document.body.appendChild(singleMapContainer);
+
+
 
       //if (tour.user_id === supa.auth.user().id) {
       //  document.getElementById('btn-community-participate').style.display = 'none';
@@ -223,10 +277,13 @@ console.log(participant);
 
     }
   });
+    // Initialize Google Maps
+    initMap();
 }
 
 
-displayCommunityMap();
+export { displayCommunityMap };
+
 
 
 function formatDateTime(dateTimeString) {
@@ -244,4 +301,5 @@ function formatDateTime(dateTimeString) {
     formattedDate,
     formattedTime
   };
+
 }

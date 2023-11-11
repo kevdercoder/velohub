@@ -180,6 +180,8 @@ async function displayMap() {
         `;
 
         initMap = function() {
+          console.log("initMap function called");
+          
           const map = new google.maps.Map(document.getElementById("map"), {
               mapId: "67a32317a1bc4a60",
               zoom: 10,

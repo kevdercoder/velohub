@@ -185,6 +185,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Event listener for community page
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname === '/community-maps.html') {
+    let { displayCommunityMap } = await import('./community.js');
+    displayCommunityMap();
+  }
+});
+
+
 // Event listener for profile page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/profile.html') {

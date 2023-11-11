@@ -20,44 +20,90 @@ async function displayMap() {
       throw error;
     }
 
-    maps.forEach(map => {
+    maps.forEach(maps => {
       let mapInformation = document.querySelector('.map-information');
-      mapInformation.id = map.id;
+      mapInformation.id = maps.id;
 
-      if (mapID == map.id) {
+      if (mapID == maps.id) {
         // Populate map information in HTML based on map ID
         mapInformation.innerHTML = `
-          <img class="single-map-big" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${map.map_img}" alt="image-alt">
+        <div id="map" class="single-map-big"></div>
           <button id="shuffle-again">Nochmals mischen</button>
           <div class="container-flex">
             <div>
-              <h2 id="single-map-name">${map.map_name}</h2>
+              <h2 id="single-map-name">${maps.map_name}</h2>
               <ul>
                 <li class="maps-distance">
                   <img src="/img/icon-distance.svg" alt="image-alt">
-                  <p>${map.distance}km</p>
+                  <p>${maps.distance}km</p>
                 </li>
                 <li class="maps-distance">
                   <img src="/img/icon-up.svg" alt="image-alt">
-                  <p>${map.altitude_up}m</p>
+                  <p>${maps.altitude_up}m</p>
                 </li>
                 <li class="maps-distance">
                   <img src="/img/icon-down.svg" alt="image-alt">
-                  <p>${map.altitude_down}m</p>
+                  <p>${maps.altitude_down}m</p>
                 </li>
               </ul>
-              <div class="maps-filters ${map.altitude}">${map.altitude}</div>
+              <div class="maps-filters ${maps.altitude}">${maps.altitude}</div>
             </div>
           </div>
         `;
+
+        initMap = function() {
+          const map = new google.maps.Map(document.getElementById("map"), {
+              mapId: "67a32317a1bc4a60",
+              zoom: 10,
+              center: { lat: 46.946383444981336, lng: 7.442313596894101 },
+              mapTypeId: "roadmap",
+              zoomControl: false,
+              streetViewControl: false,
+          });
+
+                fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}`)
+                .then(response => response.text())
+                .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+                //.then(data => console.log(data))
+                .then(doc =>
+                {
+                    var points = [];
+                    var bounds = new google.maps.LatLngBounds();
+                
+                    const nodes = [...doc.getElementsByTagName('trkpt')];
+                    nodes.forEach(node =>
+                    {
+                        var lat = node.getAttribute("lat");
+                        var lon = node.getAttribute("lon");
+                        //console.log(lat);
+                        
+                        var p = new google.maps.LatLng(lat, lon);
+                        points.push(p);
+                        bounds.extend(p);
+                    })
+                    
+                    var poly = new google.maps.Polyline({
+                             path: points,
+                             strokeColor: "#f99a52",
+                             strokeOpacity: 0.8,
+                             strokeWeight: 4
+                        });
+                        poly.setMap(map);
+                        // fit bounds to track
+                        map.fitBounds(bounds);
+                })
+              }
+               // Initialize Google Maps
+              initMap();
       }
     });
   } catch (error) {
     console.error('Error fetching map data:', error.message);
   }
+
 }
 
-// Function to generate date dropdown
+
 // Function to generate date dropdown
 function generateDateDropdown() {
   let dateDropdown = document.getElementById('date-dropdown');
@@ -94,6 +140,7 @@ function generateDateDropdown() {
 
   // Trigger the change event to update the selected time
   dateDropdown.dispatchEvent(new Event('change'));
+
 }
 
 // Function to generate time dropdown
@@ -193,6 +240,7 @@ function planRide() {
   } else {
     console.log('Please select a date and time.');
   }
+  
 }
 
 // Function to save ride details to the database
@@ -252,4 +300,6 @@ let keyCode = e.keyCode;
   if(keyCode==13) {
     submitButton.click();
   }
+
+  
 }
