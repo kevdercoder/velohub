@@ -988,6 +988,15 @@ input:focus::placeholder {
 
 
 /* Community */
+.community-none {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh; /* Set the height of the container to 100% of the viewport height */
+  margin-top: -20%;
+}
+
 .user-picture {
   width: 62px;
   height: 62px;
@@ -1224,6 +1233,10 @@ input:focus::placeholder {
     max-width: 100%;
     width: 100%;
     margin-bottom: 2em;
+  }
+
+  .community-none {
+    margin-top: -10%;
   }
 }
 

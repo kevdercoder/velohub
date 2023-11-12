@@ -34,6 +34,8 @@ async function community() {
       let userFirstName = user[0].first_name;
       let userImg = user[0].user_img;
 
+      console.log(userName);
+
       let formattedDateTime = formatDateTime(tour.start_time);
 
       let sectionMaps = document.createElement('section');
@@ -81,6 +83,10 @@ async function community() {
   let sectionMapsList = document.querySelectorAll('.container-community');
 
   console.log(sectionMapsList);
+
+  if (sectionMapsList.length === 0) {
+    document.querySelector('.community-none').style.display = 'flex';
+  }
 
   sectionMapsList.forEach((sectionMaps) => {
     sectionMaps.addEventListener('click', () => {
