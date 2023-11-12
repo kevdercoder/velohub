@@ -6,13 +6,16 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 – Visualisierung der App Idee<br />
 – Umsetzung des User Flows
 
+**Midjourney**<br />
+– Erstellung von Illustrationen
+
 **Datawrapper & Geojson.io**<br />
-– Erstellen der Grafiken der möglichen Routen<br />
-– Visualisierung der Geodaten auf eine einfache Art
+– Visualisierung der Geodaten auf eine einfache Art<br />
+– Erstellung der Grafiken, der Routen
 
 **Supabase**<br />
-– Erstellen der Datentabellen mit dazugehörigen Relations<br />
-– Container mit Bildinhalten<br />
+– Erstellung der Datentabellen mit dazugehörigen Relations<br />
+– Erstellung von Container mit Bildinhalten<br />
 – Erstellung von Cron Schedules für die automatische Verwaltung der Tabelleninhalte
 
 **APIs**<br />
@@ -20,7 +23,7 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 – OpenWeatherMap API für die Abfrage und das Anzeigen verschiedener Komponenten
 
 **Google Suche**<br />
-– mehrheitlich W3Schools, MDN Web Docs und Stack Overflow für die Suche nach konkreten Lösungen
+– Mehrheitlich W3Schools, MDN Web Docs und Stack Overflow für die Suche nach konkreten Lösungen
 
 **KI**<br />
 – Chat GTP als Assistenz während dem Programmieren, insbesondere bei Fehlercodes<br />
