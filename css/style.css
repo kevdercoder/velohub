@@ -175,6 +175,13 @@ h4 {
   width: 70vw;
 }
 
+h5 {
+  margin-top: -2px;
+  font-size: 10px;
+  font-weight: var(--fw-regular);
+  color: var(--clr-grey-200);
+}
+
 .page-header {
   margin: var(--padding-200) 0 var(--padding-100) 0;
 }
@@ -205,7 +212,8 @@ h4 {
 #btn-add-community,
 #btn-plan-community,
 #btn-community-participate,
-#btn-logout {
+#btn-logout,
+#shuffle-again {
   cursor: pointer;
 }
 
@@ -806,10 +814,19 @@ input:focus::placeholder {
 }
 
 .skeleton-user-name {
-  width: 125px;
-  height: 20px;
+  width: 100px;
+  height: 18px;
   border-radius: 30px;
-  margin-top: var(--padding-500);
+  margin-top: 15px;
+  margin-left: -5px;
+}
+
+.skeleton-user-additional {
+  width: 80px;
+  height: 12px;
+  border-radius: 30px;
+  margin-left: -5px;
+  margin-top: 4px;
 }
 
 .skeleton-data {
@@ -919,6 +936,7 @@ input:focus::placeholder {
 .skeleton-map,
 .skeleton-name,
 .skeleton-user-name,
+.skeleton-user-additional,
 .skeleton-data,
 .skeleton-filters,
 .skeleton-single-map-back,
@@ -1074,6 +1092,10 @@ input:focus::placeholder {
     font-size: 18px;
     line-height: 24px;
     padding-top: var(--padding-100);
+  }
+
+  h5 {
+    font-size: 12px;
   }
 
   .page-header {
@@ -1439,6 +1461,18 @@ input:focus::placeholder {
   .skeleton-profile-picture {
     width: 90px;
     height: 90px;
+  }
+
+  .skeleton-user-name {
+    width: 135px;
+    height: 22px;
+    border-radius: 30px;
+    margin-top: 30px;
+    margin-left: -5px;
+  }
+
+  .skeleton-user-additional {
+    width: 105px;
   }
 }
 
