@@ -241,25 +241,36 @@ function planRide() {
 
     // Save the ride details to the Supabase table 'tour_x'
     saveRideDetails(formattedDateTime, mapId);
+
+    console.log('Date:', rideDateTime);
+
   } else {
     console.log('Please select a date and time.');
   }
   
 }
 
+
 // Function to save ride details to the database
 async function saveRideDetails(dateTime, mapId) {
   try {
+
+    const originalDateTime = new Date(dateTime);
+
+    // Add 1 hour to the dateTime
+    const adjustedDateTime = new Date(originalDateTime.getTime() + 60 * 60 * 1000);
+
     const {
       data,
       error
     } = await supa
       .from('tour_x')
       .insert([{
-        start_time: dateTime,
+        start_time: adjustedDateTime,
         user_id: supa.auth.user().id,
         maps_id: mapId
       }]);
+
 
     if (error) {
       throw error;
