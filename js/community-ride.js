@@ -51,54 +51,55 @@ async function displayMap() {
           </div>
         `;
 
-        initMap = function() {
+        initMap = function () {
           const map = new google.maps.Map(document.getElementById("map"), {
-              mapId: "67a32317a1bc4a60",
-              zoom: 10,
-              center: { lat: 46.946383444981336, lng: 7.442313596894101 },
-              mapTypeId: "roadmap",
-              zoomControl: false,
-              streetViewControl: false,
-              mapTypeControl: false,
+            mapId: "67a32317a1bc4a60",
+            zoom: 10,
+            center: {
+              lat: 46.946383444981336,
+              lng: 7.442313596894101
+            },
+            mapTypeId: "roadmap",
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
           });
 
-                fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}`)
-                .then(response => response.text())
-                .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-                //.then(data => console.log(data))
-                .then(doc =>
-                {
-                    var points = [];
-                    var bounds = new google.maps.LatLngBounds();
-                
-                    const nodes = [...doc.getElementsByTagName('trkpt')];
-                    nodes.forEach(node =>
-                    {
-                        var lat = node.getAttribute("lat");
-                        var lon = node.getAttribute("lon");
-                        //console.log(lat);
-                        
-                        var p = new google.maps.LatLng(lat, lon);
-                        points.push(p);
-                        bounds.extend(p);
-                    })
-                    
-                    var poly = new google.maps.Polyline({
-                             path: points,
-                             strokeColor: "#f99a52",
-                             strokeOpacity: 0.8,
-                             strokeWeight: 4
-                        });
-                        poly.setMap(map);
-                        // fit bounds to track
-                        map.fitBounds(bounds);
-                })
-              }
-               // Initialize Google Maps
-              initMap();
+          fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${maps.gpx_data}`)
+            .then(response => response.text())
+            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+            //.then(data => console.log(data))
+            .then(doc => {
+              var points = [];
+              var bounds = new google.maps.LatLngBounds();
 
-              let skeletonLoading = document.querySelector('.skeleton-loading');
-              skeletonLoading.style.display = 'none';
+              const nodes = [...doc.getElementsByTagName('trkpt')];
+              nodes.forEach(node => {
+                var lat = node.getAttribute("lat");
+                var lon = node.getAttribute("lon");
+                //console.log(lat);
+
+                var p = new google.maps.LatLng(lat, lon);
+                points.push(p);
+                bounds.extend(p);
+              })
+
+              var poly = new google.maps.Polyline({
+                path: points,
+                strokeColor: "#f99a52",
+                strokeOpacity: 0.8,
+                strokeWeight: 4
+              });
+              poly.setMap(map);
+              // fit bounds to track
+              map.fitBounds(bounds);
+            })
+        }
+        // Initialize Google Maps
+        initMap();
+
+        let skeletonLoading = document.querySelector('.skeleton-loading');
+        skeletonLoading.style.display = 'none';
       }
     });
   } catch (error) {
@@ -125,10 +126,18 @@ function generateDateDropdown() {
   let dayAfterTomorrow = new Date(today);
   dayAfterTomorrow.setDate(today.getDate() + 2);
 
-  let dateOptions = [
-    { label: formatDate(today), value: today.toISOString().split('T')[0] },
-    { label: formatDate(tomorrow), value: tomorrow.toISOString().split('T')[0] },
-    { label: formatDate(dayAfterTomorrow), value: dayAfterTomorrow.toISOString().split('T')[0] }
+  let dateOptions = [{
+      label: formatDate(today),
+      value: today.toISOString().split('T')[0]
+    },
+    {
+      label: formatDate(tomorrow),
+      value: tomorrow.toISOString().split('T')[0]
+    },
+    {
+      label: formatDate(dayAfterTomorrow),
+      value: dayAfterTomorrow.toISOString().split('T')[0]
+    }
   ];
 
   dateOptions.forEach(option => {
@@ -247,7 +256,7 @@ function planRide() {
   } else {
     console.log('Please select a date and time.');
   }
-  
+
 }
 
 
@@ -315,9 +324,8 @@ let submitButton = document.getElementById("btn-add-community");
 document.addEventListener("keydown", keyDownTextField, false);
 
 function keyDownTextField(e) {
-let keyCode = e.keyCode;
-  if(keyCode==13) {
+  let keyCode = e.keyCode;
+  if (keyCode == 13) {
     submitButton.click();
   }
-  
 }

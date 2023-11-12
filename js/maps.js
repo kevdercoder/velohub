@@ -88,11 +88,11 @@ async function showMaps() {
 
           let list = document.getElementsByClassName("maps-checkmark");
 
-            for (let item of list) {
-              if (existingData.length > 0 && existingData[0].maps_id == item.id) {
-                item.style.display = 'block';
-              }
+          for (let item of list) {
+            if (existingData.length > 0 && existingData[0].maps_id == item.id) {
+              item.style.display = 'block';
             }
+          }
         }
       }
     }
@@ -120,18 +120,23 @@ async function showMaps() {
       localStorage.setItem('mapId', sectionMaps.id)
       window.location.href = `single-map.html?${sectionMaps.id}`;
       console.log(`Clicked on ${sectionMaps.id}`);
-      
+
     });
 
   });
 }
 
-export { showMaps };
+export {
+  showMaps
+};
 
 
 
 async function displayMap() {
-  let { data: maps, error } = await supa.from("maps").select();
+  let {
+    data: maps,
+    error
+  } = await supa.from("maps").select();
 
   if (maps) {
     maps.forEach(mapsData => {
@@ -178,63 +183,64 @@ async function displayMap() {
           </section>
         `;
 
-        initMap = function() {
+        initMap = function () {
           console.log("initMap function called");
-          
+
           let map = new google.maps.Map(document.getElementById("map"), {
-              mapId: "67a32317a1bc4a60",
-              zoom: 10,
-              center: { lat: 46.946383444981336, lng: 7.442313596894101 },
-              mapTypeId: "roadmap",
-              zoomControl: false,
-              streetViewControl: false,
-              mapTypeControl: false,
+            mapId: "67a32317a1bc4a60",
+            zoom: 10,
+            center: {
+              lat: 46.946383444981336,
+              lng: 7.442313596894101
+            },
+            mapTypeId: "roadmap",
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
           });
 
-                fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${mapsData.gpx_data}`)
-                .then(response => response.text())
-                .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-                //.then(data => console.log(data))
-                .then(doc =>
-                {
-                    var points = [];
-                    var bounds = new google.maps.LatLngBounds();
-                
-                    let nodes = [...doc.getElementsByTagName('trkpt')];
-                    nodes.forEach(node =>
-                    {
-                        var lat = node.getAttribute("lat");
-                        var lon = node.getAttribute("lon");
-                        //console.log(lat);
-                        
-                        var p = new google.maps.LatLng(lat, lon);
-                        points.push(p);
-                        bounds.extend(p);
-                    })
-                    
-                    var poly = new google.maps.Polyline({
-                             path: points,
-                             strokeColor: "#f99a52",
-                             strokeOpacity: 0.8,
-                             strokeWeight: 4
-                        });
-                        poly.setMap(map);
-                        // fit bounds to track
-                        map.fitBounds(bounds);
-                })
-              }
+          fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${mapsData.gpx_data}`)
+            .then(response => response.text())
+            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+            //.then(data => console.log(data))
+            .then(doc => {
+              var points = [];
+              var bounds = new google.maps.LatLngBounds();
+
+              let nodes = [...doc.getElementsByTagName('trkpt')];
+              nodes.forEach(node => {
+                var lat = node.getAttribute("lat");
+                var lon = node.getAttribute("lon");
+                //console.log(lat);
+
+                var p = new google.maps.LatLng(lat, lon);
+                points.push(p);
+                bounds.extend(p);
+              })
+
+              var poly = new google.maps.Polyline({
+                path: points,
+                strokeColor: "#f99a52",
+                strokeOpacity: 0.8,
+                strokeWeight: 4
+              });
+              poly.setMap(map);
+              // fit bounds to track
+              map.fitBounds(bounds);
+            })
+        }
 
         document.querySelector('main').appendChild(singleMapContainer);
 
         let btnPlaning = document.getElementById('btn-plan-community')
 
         btnPlaning.addEventListener('click', () => {
-        if (supa.auth.user() === null) {
-        window.location.href = '/user-login.html';
-        } else {
-        window.location.href = '/community-ride.html';
-        }
-      });
+          if (supa.auth.user() === null) {
+            window.location.href = '/user-login.html';
+          } else {
+            window.location.href = '/community-ride.html';
+          }
+        });
 
 
         let referrer = document.referrer;
@@ -249,17 +255,17 @@ async function displayMap() {
           let shuffleAgainButton = document.getElementById('shuffle-again');
           shuffleAgainButton.style.display = 'block';
 
-          if(document.getElementById('shuffle-again')) {
-            let shuffleButton = document.getElementById('shuffle-again'); 
+          if (document.getElementById('shuffle-again')) {
+            let shuffleButton = document.getElementById('shuffle-again');
             shuffleButton.addEventListener('click', () => {
-            
+
               console.log('Clicked on shuffle button');
-            
+
               localStorage.setItem('shouldShuffle', 'true');
-            
+
               shuffleMaps();
             })
-            }
+          }
         }
 
         let btnTrackFinished = document.getElementById('btn-track-finished');
@@ -269,11 +275,17 @@ async function displayMap() {
           if (supa.auth.user() === null) {
             btnTrackFinished.style.display = 'none';
           } else {
-            let { user, error } = await supa.auth.user();
+            let {
+              user,
+              error
+            } = await supa.auth.user();
             if (error) {
               console.log("Error getting user information:", error.message);
             } else {
-              let { data: existingData, error: existingError } = await supa
+              let {
+                data: existingData,
+                error: existingError
+              } = await supa
                 .from("done")
                 .select("*")
                 .eq("maps_id", mapsData.id)
@@ -304,9 +316,15 @@ async function displayMap() {
         }
 
         async function addRiddenMap() {
-          let { user, error } = await supa.auth.user();
+          let {
+            user,
+            error
+          } = await supa.auth.user();
           if (error) {} else {
-            let { data, error } = await supa
+            let {
+              data,
+              error
+            } = await supa
               .from("done")
               .insert({
                 maps_id: mapsData.id,
@@ -337,10 +355,9 @@ async function displayMap() {
   initMap();
 }
 
-export { displayMap };
-
-
-
+export {
+  displayMap
+};
 
 
 /* Programm to display the maps in the single-view */
@@ -351,7 +368,10 @@ async function shuffleMaps() {
 
   // Check if maps should be shuffled
   if (shouldShuffle) {
-    let { data: maps, error } = await supa.from("maps").select();
+    let {
+      data: maps,
+      error
+    } = await supa.from("maps").select();
 
     console.log('Shuffling maps');
 
@@ -365,7 +385,7 @@ async function shuffleMaps() {
     }
 
     let selectedMapId = findSelectedMapId(maps);
-    
+
     // Store the selected map ID
     localStorage.setItem('mapId', selectedMapId);
 
@@ -376,42 +396,44 @@ async function shuffleMaps() {
   }
 
 
-function findSelectedMapId(maps) {
-  let selectedMapId = null;
+  function findSelectedMapId(maps) {
+    let selectedMapId = null;
 
-  maps.forEach(maps => {
-    //Filter for the maps which should be displayed
-    if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == null && altitude == maps.altitude) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == null && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    }
-  })
-  return selectedMapId;
-}
+    maps.forEach(maps => {
+      //Filter for the maps which should be displayed
+      if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == null && altitude == maps.altitude) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == null && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      }
+    })
+    return selectedMapId;
+  }
 }
 
-export { shuffleMaps };
+export {
+  shuffleMaps
+};
 
 
 async function shuffleMapsIndex() {
@@ -421,7 +443,10 @@ async function shuffleMapsIndex() {
 
   // Check if maps should be shuffled
   if (shouldShuffle) {
-    let { data: maps, error } = await supa.from("maps").select();
+    let {
+      data: maps,
+      error
+    } = await supa.from("maps").select();
 
     console.log('Shuffling maps');
 
@@ -435,7 +460,7 @@ async function shuffleMapsIndex() {
     }
 
     let selectedMapId = findSelectedMapId(maps);
-    
+
     // Store the selected map ID
     localStorage.setItem('mapId', selectedMapId);
 
@@ -446,42 +471,41 @@ async function shuffleMapsIndex() {
   }
 
 
-function findSelectedMapId(maps) {
-  let selectedMapId = null;
+  function findSelectedMapId(maps) {
+    let selectedMapId = null;
 
-  maps.forEach(maps => {
-    //Filter for the maps which should be displayed
-    if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == null && altitude == maps.altitude) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    } else if (distance == null && altitude == null) {
-      selectedMapId = maps.id;
-      localStorage.setItem('mapId', selectedMapId);
-      return
-    }
-  })
-  return selectedMapId;
+    maps.forEach(maps => {
+      //Filter for the maps which should be displayed
+      if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == null && altitude == maps.altitude) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      } else if (distance == null && altitude == null) {
+        selectedMapId = maps.id;
+        localStorage.setItem('mapId', selectedMapId);
+        return
+      }
+    })
+    return selectedMapId;
+  }
 }
-}
 
-export { shuffleMapsIndex };
-   
-
-        
+export {
+  shuffleMapsIndex
+};

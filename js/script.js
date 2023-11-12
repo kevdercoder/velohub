@@ -1,4 +1,6 @@
-import { supa } from "/js/supabase.js";
+import {
+  supa
+} from "/js/supabase.js";
 
 // Get the current page URL and links
 let currentUrl = window.location.href;
@@ -141,16 +143,18 @@ if (document.querySelector('.btn-submit')) {
 
     if (singleRoute.classList.contains('btn-filter-distance-active')) {
       // Redirect to the single-map.html page
-      
-        // Set the shouldShuffle flag to true
-  localStorage.setItem('shouldShuffle', 'true');
 
-  // Import the shuffleMaps function dynamically
-  const { shuffleMapsIndex } = await import('./maps.js');
-  // Call the imported function and wait for the shuffled maps
-  await shuffleMapsIndex();
+      // Set the shouldShuffle flag to true
+      localStorage.setItem('shouldShuffle', 'true');
 
-  console.log("code got exectued");
+      // Import the shuffleMaps function dynamically
+      const {
+        shuffleMapsIndex
+      } = await import('./maps.js');
+      // Call the imported function and wait for the shuffled maps
+      await shuffleMapsIndex();
+
+      console.log("code got exectued");
 
     } else {
       // Redirect to the overview-maps.html page
@@ -168,7 +172,9 @@ if (document.querySelector('.btn-submit')) {
 // Event listener for maps feature
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/overview-maps.html') {
-    let { showMaps } = await import('./maps.js');
+    let {
+      showMaps
+    } = await import('./maps.js');
     showMaps();
   }
 });
@@ -176,7 +182,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
-    let { displayMap } = await import('./maps.js');
+    let {
+      displayMap
+    } = await import('./maps.js');
     displayMap();
   }
 });
@@ -185,7 +193,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listener for community page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/community.html') {
-    let { community } = await import('./community.js');
+    let {
+      community
+    } = await import('./community.js');
     community();
   }
 });
@@ -193,7 +203,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listener for community page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/community-maps.html') {
-    let { displayCommunityMap } = await import('./community.js');
+    let {
+      displayCommunityMap
+    } = await import('./community.js');
     displayCommunityMap();
   }
 });
@@ -202,28 +214,36 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Event listener for profile page
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/profile.html') {
-    let { displayProfile } = await import('./user.js');
+    let {
+      displayProfile
+    } = await import('./user.js');
     displayProfile();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/maps-ridden.html') {
-    let { displayRiddenMaps } = await import('./user.js');
+    let {
+      displayRiddenMaps
+    } = await import('./user.js');
     displayRiddenMaps();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/past-rides.html') {
-    let { displayPastTour } = await import('./user.js');
+    let {
+      displayPastTour
+    } = await import('./user.js');
     displayPastTour();
   }
 });
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/planned-rides.html') {
-    let { displayPlannedTour } = await import('./user.js');
+    let {
+      displayPlannedTour
+    } = await import('./user.js');
     displayPlannedTour();
   }
 });
@@ -242,8 +262,8 @@ if (navProfile) {
 
 let changeWording = document.querySelectorAll('.mobile-nav-description');
 
-if (document.querySelector('.mobile-nav-description')) { 
-if (supa.auth.user() === null) { 
-  changeWording[3].innerHTML = 'Login'
-}
+if (document.querySelector('.mobile-nav-description')) {
+  if (supa.auth.user() === null) {
+    changeWording[3].innerHTML = 'Login'
+  }
 }

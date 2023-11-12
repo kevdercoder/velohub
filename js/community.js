@@ -14,12 +14,12 @@ async function community() {
       throw error;
     }
 
-      // Sort tours by start time
-  tour_x.sort((a, b) => {
-    let dateA = new Date(a.start_time);
-    let dateB = new Date(b.start_time);
-    return dateA - dateB;
-  });
+    // Sort tours by start time
+    tour_x.sort((a, b) => {
+      let dateA = new Date(a.start_time);
+      let dateB = new Date(b.start_time);
+      return dateA - dateB;
+    });
 
     let mainElement = document.querySelector('main');
     let fragment = document.createDocumentFragment();
@@ -44,11 +44,11 @@ async function community() {
 
       console.log('no tours')
 
-      if(tour.length === 0) {
+      if (tour.length === 0) {
         console.log('no tours');
       } else {
 
-      sectionMaps.innerHTML = `
+        sectionMaps.innerHTML = `
         <div>
           <img class="user-picture" src="${userImg}" alt="image-alt">
         </div>
@@ -67,12 +67,12 @@ async function community() {
         </div>
       `;
 
-      let hr = document.createElement('hr');
-      hr.className = 'maps-seperator';
+        let hr = document.createElement('hr');
+        hr.className = 'maps-seperator';
 
-      fragment.appendChild(sectionMaps);
-      fragment.appendChild(hr);
-    }
+        fragment.appendChild(sectionMaps);
+        fragment.appendChild(hr);
+      }
     }
 
     mainElement.appendChild(fragment);
@@ -97,11 +97,11 @@ async function community() {
     });
   });
 
-       // Hide skeleton-loading after maps are loaded
-       let skeletonLoading = document.querySelectorAll('.skeleton-loading');
-       skeletonLoading.forEach(element => {
-         element.style.display = 'none';
-       });
+  // Hide skeleton-loading after maps are loaded
+  let skeletonLoading = document.querySelectorAll('.skeleton-loading');
+  skeletonLoading.forEach(element => {
+    element.style.display = 'none';
+  });
 
 
   // Add padding to the bottom of the page
@@ -110,7 +110,9 @@ async function community() {
   document.querySelector('main').appendChild(div);
 }
 
-export { community };
+export {
+  community
+};
 
 
 
@@ -120,16 +122,19 @@ async function displayCommunityMap() {
     data: tour_x,
     error
   } = await supa
-    .from("tour_x",)
+    .from("tour_x", )
     .select(`
   *,
   maps_id, 
   maps (*)
 `)
 
-const { data: participant, errors } = await supa.from("tour_participant").select('*');
+  const {
+    data: participant,
+    errors
+  } = await supa.from("tour_participant").select('*');
 
-console.log(participant);
+  console.log(participant);
 
   tour_x.forEach(tour => {
     let singleMapContainer = document.createElement('section');
@@ -193,65 +198,68 @@ console.log(participant);
         </section>
       `;
 
-let map
+      let map
 
-initMap = function() {
+      initMap = function () {
 
-    map = new google.maps.Map(document.getElementById("map"), {
-    mapId: "67a32317a1bc4a60",
-    zoom: 10,
-    center: { lat: 46.946383444981336, lng: 7.442313596894101 },
-    mapTypeId: "roadmap",
-    zoomControl: false,
-    streetViewControl: false,
-    mapTypeControl: false,
-  });
+        map = new google.maps.Map(document.getElementById("map"), {
+          mapId: "67a32317a1bc4a60",
+          zoom: 10,
+          center: {
+            lat: 46.946383444981336,
+            lng: 7.442313596894101
+          },
+          mapTypeId: "roadmap",
+          zoomControl: false,
+          streetViewControl: false,
+          mapTypeControl: false,
+        });
 
-  fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${tour.maps.gpx_data}`)
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    .then(doc => {
-      console.log("Successfully fetched and parsed XML data");
+        fetch(`https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${tour.maps.gpx_data}`)
+          .then(response => response.text())
+          .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+          .then(doc => {
+            console.log("Successfully fetched and parsed XML data");
 
-      var points = [];
-      var bounds = new google.maps.LatLngBounds();
+            var points = [];
+            var bounds = new google.maps.LatLngBounds();
 
-      const nodes = [...doc.getElementsByTagName('trkpt')];
-      nodes.forEach(node => {
-        var lat = node.getAttribute("lat");
-        var lon = node.getAttribute("lon");
+            const nodes = [...doc.getElementsByTagName('trkpt')];
+            nodes.forEach(node => {
+              var lat = node.getAttribute("lat");
+              var lon = node.getAttribute("lon");
 
-        var p = new google.maps.LatLng(lat, lon);
-        points.push(p);
-        bounds.extend(p);
-      });
+              var p = new google.maps.LatLng(lat, lon);
+              points.push(p);
+              bounds.extend(p);
+            });
 
-      var poly = new google.maps.Polyline({
-        path: points,
-        strokeColor: "#f99a52",
-        strokeOpacity: 0.8,
-        strokeWeight: 4
-      });
+            var poly = new google.maps.Polyline({
+              path: points,
+              strokeColor: "#f99a52",
+              strokeOpacity: 0.8,
+              strokeWeight: 4
+            });
 
-      poly.setMap(map);
-      console.log("Polyline set on the map");
+            poly.setMap(map);
+            console.log("Polyline set on the map");
 
-      // fit bounds to track
-      map.fitBounds(bounds);
-      console.log("Map bounds set");
-    })
-    .catch(error => {
-      console.error("Error fetching or parsing XML data:", error);
-    });
-};
-
-document.querySelector('main').appendChild(singleMapContainer);
-
-
-        if (supa.auth.user() === null) {
-          document.getElementById('btn-community-participate').addEventListener('click', () => {
-            window.location.href = "/user-login.html";
+            // fit bounds to track
+            map.fitBounds(bounds);
+            console.log("Map bounds set");
+          })
+          .catch(error => {
+            console.error("Error fetching or parsing XML data:", error);
           });
+      };
+
+      document.querySelector('main').appendChild(singleMapContainer);
+
+
+      if (supa.auth.user() === null) {
+        document.getElementById('btn-community-participate').addEventListener('click', () => {
+          window.location.href = "/user-login.html";
+        });
 
       } else if (tour.user_id === supa.auth.user().id) {
         document.getElementById('btn-community-participate').style.display = 'none';
@@ -259,48 +267,48 @@ document.querySelector('main').appendChild(singleMapContainer);
 
 
       async function participate() {
- 
-         // Check if user is already a participant
-         let existingParticipant = await supa
-         .from("tour_participant")
-         .select("*");
-     
-     console.log(existingParticipant.data);
-     
-     let userAlreadyEnrolled = false;
-     
-     for (let participant of existingParticipant.data) {
-         if (participant.user_id === supa.auth.user().id && participant.tour_id === tour.id)  {
-             userAlreadyEnrolled = true;
-             break;
-         }
-     }
-     
-     if (userAlreadyEnrolled) {
-         alert('Du bist bereits eingeschrieben!');
-     } else {
-         await supa
-             .from("tour_participant")
-             .insert({
-                 tour_id: tour.id,
-                 user_id: supa.auth.user().id,
-             });
 
-             document.getElementById('participant-count').innerHTML = participantCount + 1;
-     }
+        // Check if user is already a participant
+        let existingParticipant = await supa
+          .from("tour_participant")
+          .select("*");
+
+        console.log(existingParticipant.data);
+
+        let userAlreadyEnrolled = false;
+
+        for (let participant of existingParticipant.data) {
+          if (participant.user_id === supa.auth.user().id && participant.tour_id === tour.id) {
+            userAlreadyEnrolled = true;
+            break;
+          }
+        }
+
+        if (userAlreadyEnrolled) {
+          alert('Du bist bereits eingeschrieben!');
+        } else {
+          await supa
+            .from("tour_participant")
+            .insert({
+              tour_id: tour.id,
+              user_id: supa.auth.user().id,
+            });
+
+          document.getElementById('participant-count').innerHTML = participantCount + 1;
+        }
       };
 
       document.getElementById('btn-community-participate').addEventListener('click', () => {
         console.log('clicked');
         participate();
-      });  
+      });
 
     }
   });
-    // Initialize Google Maps
-    initMap();
+  // Initialize Google Maps
+  initMap();
 
-    document.querySelector('.btn-back').innerHTML = 'Zurück';
+  document.querySelector('.btn-back').innerHTML = 'Zurück';
   document.querySelector('#icon-chevron').style.display = 'block';
 
   let skeletonLoading = document.querySelector('.skeleton-loading');
@@ -308,7 +316,9 @@ document.querySelector('main').appendChild(singleMapContainer);
 }
 
 
-export { displayCommunityMap };
+export {
+  displayCommunityMap
+};
 
 
 
@@ -327,5 +337,4 @@ function formatDateTime(dateTimeString) {
     formattedDate,
     formattedTime
   };
-
 }

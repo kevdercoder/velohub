@@ -11,7 +11,9 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.29.0/dist/umd/supabase.min.js"></script>
     <script src="js/maps-api.js" defer></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKwQdMyqSzBnuW4-9ZUgy2LQc2leL6HxE&callback=initMap&libraries=drawing&v=weekly"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKwQdMyqSzBnuW4-9ZUgy2LQc2leL6HxE&callback=initMap&libraries=drawing&v=weekly">
+    </script>
 </head>
 
 <body>
@@ -26,18 +28,18 @@
     <main>
         <section id="skeleton-comm-ride" class="skeleton-loading">
             <div class="skeleton-single-map-big"></div>
-                <div class="skeleton-single-map-container">
-                    <div class="skeleton-single-map-name"></div>
+            <div class="skeleton-single-map-container">
+                <div class="skeleton-single-map-name"></div>
+            </div>
+            <div>
+                <div class="skeleton-flex-data">
+                    <div class="skeleton-single-map-data"></div>
+                    <div class="skeleton-single-map-data"></div>
+                    <div class="skeleton-single-map-data"></div>
                 </div>
-                <div>
-                    <div class="skeleton-flex-data">
-                        <div class="skeleton-single-map-data"></div>
-                        <div class="skeleton-single-map-data"></div>
-                        <div class="skeleton-single-map-data"></div>
-                    </div>
-                    <div class="skeleton-filters"></div>
-                </div>
-            </section>
+                <div class="skeleton-filters"></div>
+            </div>
+        </section>
         <section>
             <div class="map-information"></div>
             <div class="date-selectors">

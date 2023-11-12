@@ -51,7 +51,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 
 
 
-    let temperaturesToCheck = [10, 15, 20, 25]; 
+    let temperaturesToCheck = [10, 15, 20, 25];
     let isRaining = weatherCondition === 'Rain';
 
     console.log(isRaining)
@@ -108,13 +108,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
         skeletonLoading.forEach(loadingBox => {
           loadingBox.style.display = 'none';
         });
-       
-
-
       });
-
-
-
   })
 
   .catch(error => {
