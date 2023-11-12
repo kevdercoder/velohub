@@ -5,6 +5,7 @@ import {
 //Global variables
 let distance = localStorage.getItem('btnFilterDistance');
 let altitude = localStorage.getItem('btnFilterAltitude');
+localStorage.setItem('shouldShuffle', 'false');
 
 /* Programm to display the maps in the list view */
 async function showMaps() {
@@ -239,12 +240,17 @@ async function displayMap() {
           let shuffleAgainButton = document.getElementById('shuffle-again');
           shuffleAgainButton.style.display = 'block';
 
-          shuffleAgainButton.addEventListener('click', () => {
-            window.location.reload();
-          localStorage.getItem('mapId', sectionMaps.id)
-          window.location.href = `single-map.html?${sectionMaps.id}`;
-          console.log(`Clicked on ${sectionMaps.id}`);
-          })
+          if(document.getElementById('shuffle-again')) {
+            let shuffleButton = document.getElementById('shuffle-again'); 
+            shuffleButton.addEventListener('click', () => {
+            
+              console.log('Clicked on shuffle button');
+            
+              localStorage.setItem('shouldShuffle', 'true');
+            
+              shuffleMaps();
+            })
+            }
         }
 
         let btnTrackFinished = document.getElementById('btn-track-finished');
@@ -327,21 +333,37 @@ export { displayMap };
 
 
 
+
 /* Programm to display the maps in the single-view */
-
 async function shuffleMaps() {
-  let { data: maps, error } = await supa.from("maps").select();
+  let shouldShuffle = localStorage.getItem('shouldShuffle') === 'true';
 
-  let referrer = document.referrer;
-  if (referrer.includes('overview-maps.html')) {
+  // Check if maps should be shuffled
+  if (shouldShuffle) {
+    let { data: maps, error } = await supa.from("maps").select();
 
-  } else {
-    // Fisher-Yates shuffle algorithm
-    for (let i = maps.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [maps[i], maps[j]] = [maps[j], maps[i]];
+    let referrer = document.referrer;
+    if (!referrer.includes('overview-maps.html')) {
+      // Fisher-Yates shuffle algorithm
+      for (let i = maps.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [maps[i], maps[j]] = [maps[j], maps[i]];
+      }
+    }
+
+    let selectedMapId = findSelectedMapId(maps);
+    
+    // Store the selected map ID
+    localStorage.setItem('mapId', selectedMapId);
+
+    // Set shouldShuffle to false after shuffling
+    localStorage.setItem('shouldShuffle', 'false');
+
+    window.location.reload();
   }
 
+
+function findSelectedMapId(maps) {
   let selectedMapId = null;
 
   maps.forEach(maps => {
@@ -372,8 +394,18 @@ async function shuffleMaps() {
       return
     }
   })
+  return selectedMapId;
 }
 }
 
+
+
 export { shuffleMaps };
+
+
+
+
+
+   
+
         

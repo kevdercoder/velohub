@@ -193,6 +193,7 @@ h4 {
 .container-community,
 .container-maps,
 .btn-user-routes,
+.btn-back,
 #mobile-nav-profile, 
 #btn-sign-in, 
 #btn-sign-up,
@@ -820,6 +821,10 @@ input:focus::placeholder {
 }
 
 /* -- Skeleton Loading [Single Page] -- */
+#skeleton-comm-ride {
+  margin-top: -20px;
+}
+
 .skeleton-single-map-back {
   margin-top: -38px;
   position: absolute;
@@ -970,6 +975,7 @@ input:focus::placeholder {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: -0.75em;
+  margin-top: -0.5em;
 }
 
 #date-dropdown,
@@ -1407,6 +1413,11 @@ input:focus::placeholder {
   .skeleton-single-map-community {
     height: 45px;
     width: 100%;
-  }  
+  }
+
+  .skeleton-profile-picture {
+    width: 90px;
+    height: 90px;
+  }
 }
 

@@ -14,11 +14,36 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKwQdMyqSzBnuW4-9ZUgy2LQc2leL6HxE&callback=initMap&libraries=drawing&v=weekly"></script>
 </head>
 <body>
-    <header>
-        <h1 class="page-header">Community Map</h1>
-    </header>
+    <div id="back-overview">
+        <a id="back-home" href="/community.html">
+            <img id="icon-chevron" src="/img/icon-chevron.svg" alt="">
+            <p class="btn-back"></p>
+        </a>
+    </div>
     <main>
-    
+        <section class="skeleton-loading">
+            <div class="skeleton-single-map-back"></div>
+            <div class="skeleton-single-map-big"></div>
+                <div class="skeleton-single-map-container">
+                    <div class="skeleton-single-map-name"></div>
+                    <div class="skeleton-single-map-finished"></div>
+                </div>
+                <div>
+                    <ul>
+                        <div class="skeleton-single-map-data"></div>
+                        <div class="skeleton-single-map-data"></div>
+                        <div class="skeleton-single-map-data"></div>
+                    </ul>
+                    <ul>
+                        <div class="skeleton-single-map-data"></div>
+                        <div class="skeleton-single-map-data"></div>
+                        <div class="skeleton-single-map-data"></div>
+                    </ul>
+                    <div class="skeleton-filters"></div>
+                </div>
+                    <div class="skeleton-single-map-download"></div>
+                    <div class="skeleton-single-map-community"></div>
+            </section>
     </main>
     <nav class="mobile-nav">
         <a href="/index.html">

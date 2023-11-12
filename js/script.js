@@ -141,7 +141,8 @@ if (document.querySelector('.btn-submit')) {
 
     if (singleRoute.classList.contains('btn-filter-distance-active')) {
       // Redirect to the single-map.html page
-      window.location.href = '/single-map.html';
+
+      window.location.href = `/single-map.html`; 
 
     } else {
       // Redirect to the overview-maps.html page
@@ -176,6 +177,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     displayMap();
   }
 });
+
+
 
 // Event listener for community page
 window.addEventListener('DOMContentLoaded', async () => {

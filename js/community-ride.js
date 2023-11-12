@@ -96,6 +96,9 @@ async function displayMap() {
               }
                // Initialize Google Maps
               initMap();
+
+              let skeletonLoading = document.querySelector('.skeleton-loading');
+              skeletonLoading.style.display = 'none';
       }
     });
   } catch (error) {
@@ -305,6 +308,5 @@ let keyCode = e.keyCode;
   if(keyCode==13) {
     submitButton.click();
   }
-
   
 }

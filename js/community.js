@@ -39,6 +39,13 @@ async function community() {
       let sectionMaps = document.createElement('section');
       sectionMaps.classList.add('container-community');
       sectionMaps.id = tour.id;
+
+      console.log('no tours')
+
+      if(tour.length === 0) {
+        console.log('no tours');
+      } else {
+
       sectionMaps.innerHTML = `
         <div>
           <img class="user-picture" src="${userImg}" alt="image-alt">
@@ -63,6 +70,7 @@ async function community() {
 
       fragment.appendChild(sectionMaps);
       fragment.appendChild(hr);
+    }
     }
 
     mainElement.appendChild(fragment);
@@ -280,6 +288,12 @@ document.querySelector('main').appendChild(singleMapContainer);
   });
     // Initialize Google Maps
     initMap();
+
+    document.querySelector('.btn-back').innerHTML = 'Zurück';
+  document.querySelector('#icon-chevron').style.display = 'block';
+
+  let skeletonLoading = document.querySelector('.skeleton-loading');
+  skeletonLoading.style.display = 'none';
 }
 
 
