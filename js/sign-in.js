@@ -30,7 +30,7 @@ async function login() {
   if (error) {
     console.error("Error during login: ", error.message);
   } else {
-    console.log("Logged in as ", email);
+    //console.log("Logged in as ", email);
 
     window.location.href = 'profile.html';
   }

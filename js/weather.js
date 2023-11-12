@@ -31,7 +31,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     let hours = localDate.getHours();
     let isDaytime = hours >= 6 && hours < 18;
 
-    console.log(weatherCondition);
+    //console.log(weatherCondition);
 
     // Set the weather icon based on the weather condition and daytime
     let iconUrl;
@@ -54,10 +54,8 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     let temperaturesToCheck = [10, 15, 20, 25];
     let isRaining = weatherCondition === 'Rain';
 
-    console.log(isRaining)
-
     let closestTemperature = temperaturesToCheck[0]; // Initialize with the first temperature
-    console.log(closestTemperature)
+    //console.log(closestTemperature)
     for (let temperature of temperaturesToCheck) {
       if (Math.abs(currentTemp - temperature) < Math.abs(currentTemp - closestTemperature)) {
         closestTemperature = temperature;
@@ -78,7 +76,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
         } else {
           if (data.length > 0) {
             let selectedRow = data[0];
-            console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
+            //console.log(`Selected row for closest temperature ${closestTemperature} and rain ${isRaining}:`, selectedRow);
           } else {
             console.log(`No matching rows found for temperature ${closestTemperature}.`);
           }

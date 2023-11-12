@@ -76,7 +76,7 @@ btnFilterDistance.forEach((btn) => {
       localStorage.setItem('btnFilterDistance', btn.id);
     }
 
-    console.log(localStorage.getItem('btnFilterDistance'))
+    //console.log(localStorage.getItem('btnFilterDistance'))
   });
 });
 
@@ -98,7 +98,7 @@ btnFilterAltitude.forEach((btn) => {
       localStorage.setItem('btnFilterAltitude', btn.id);
     }
 
-    console.log(localStorage.getItem('btnFilterAltitude'))
+    //console.log(localStorage.getItem('btnFilterAltitude'))
   });
 });
 
@@ -153,8 +153,6 @@ if (document.querySelector('.btn-submit')) {
       } = await import('./maps.js');
       // Call the imported function and wait for the shuffled maps
       await shuffleMapsIndex();
-
-      console.log("code got exectued");
 
     } else {
       // Redirect to the overview-maps.html page

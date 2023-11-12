@@ -34,7 +34,7 @@ async function community() {
       let userFirstName = user[0].first_name;
       let userImg = user[0].user_img;
 
-      console.log(userName);
+      //console.log(userName);
 
       let formattedDateTime = formatDateTime(tour.start_time);
 
@@ -42,10 +42,9 @@ async function community() {
       sectionMaps.classList.add('container-community');
       sectionMaps.id = tour.id;
 
-      console.log('no tours')
 
       if (tour.length === 0) {
-        console.log('no tours');
+        //console.log('no tours');
       } else {
 
         sectionMaps.innerHTML = `
@@ -82,7 +81,7 @@ async function community() {
 
   let sectionMapsList = document.querySelectorAll('.container-community');
 
-  console.log(sectionMapsList);
+  //console.log(sectionMapsList);
 
   if (sectionMapsList.length === 0) {
     document.querySelector('.community-none').style.display = 'flex';
@@ -93,7 +92,7 @@ async function community() {
 
       localStorage.setItem('communityId', sectionMaps.id)
       window.location.href = `community-maps.html?${sectionMaps.id}`;
-      console.log(`Clicked on ${sectionMaps.id}`);
+      //console.log(`Clicked on ${sectionMaps.id}`);
     });
   });
 
@@ -134,7 +133,7 @@ async function displayCommunityMap() {
     errors
   } = await supa.from("tour_participant").select('*');
 
-  console.log(participant);
+  //console.log(participant);
 
   tour_x.forEach(tour => {
     let singleMapContainer = document.createElement('section');
@@ -219,7 +218,7 @@ async function displayCommunityMap() {
           .then(response => response.text())
           .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
           .then(doc => {
-            console.log("Successfully fetched and parsed XML data");
+            //console.log("Successfully fetched and parsed XML data");
 
             var points = [];
             var bounds = new google.maps.LatLngBounds();
@@ -242,11 +241,9 @@ async function displayCommunityMap() {
             });
 
             poly.setMap(map);
-            console.log("Polyline set on the map");
 
             // fit bounds to track
             map.fitBounds(bounds);
-            console.log("Map bounds set");
           })
           .catch(error => {
             console.error("Error fetching or parsing XML data:", error);
@@ -273,7 +270,7 @@ async function displayCommunityMap() {
           .from("tour_participant")
           .select("*");
 
-        console.log(existingParticipant.data);
+        //console.log(existingParticipant.data);
 
         let userAlreadyEnrolled = false;
 
@@ -299,7 +296,7 @@ async function displayCommunityMap() {
       };
 
       document.getElementById('btn-community-participate').addEventListener('click', () => {
-        console.log('clicked');
+        //console.log('clicked');
         participate();
       });
 

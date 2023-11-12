@@ -169,9 +169,9 @@ function generateTimeDropdown() {
   let endHour = 22;
   let startMinute = 0;
 
-  console.log(now.getDate() + 1)
-  console.log(selectedDate)
-  console.log(selectedDate.getDate())
+  //console.log(now.getDate() + 1)
+  //console.log(selectedDate)
+  //console.log(selectedDate.getDate())
 
   if (
     selectedDate &&
@@ -251,7 +251,7 @@ function planRide() {
     // Save the ride details to the Supabase table 'tour_x'
     saveRideDetails(formattedDateTime, mapId);
 
-    console.log('Date:', rideDateTime);
+    //console.log('Date:', rideDateTime);
 
   } else {
     console.log('Please select a date and time.');
@@ -288,7 +288,7 @@ async function saveRideDetails(dateTime, mapId) {
       window.location.href = '/community.html';
     }
 
-    console.log('Ride details saved successfully:', data);
+    //console.log('Ride details saved successfully:', data);
   } catch (error) {
     console.error('Error saving ride details:', error.message);
   }

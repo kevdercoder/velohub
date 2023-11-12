@@ -42,7 +42,7 @@ async function signUp() {
     if (error) {
       console.log("Error inserting data:", error.message);
     } else {
-      console.log("Data inserted successfully:", data);
+      //console.log("Data inserted successfully:", data);
       window.location.href = 'confirm-email.html';
     }
   }
@@ -56,7 +56,7 @@ document.querySelectorAll('#profile-picture-options label').forEach(function (la
 
     // Update the last selected profile picture
     lastSelectedProfilePicture = radioInput.value;
-    console.log(lastSelectedProfilePicture);
+    //console.log(lastSelectedProfilePicture);
 
     // Add the selected class for visual indicator
     document.querySelectorAll('#profile-picture-options label').forEach(function (label) {

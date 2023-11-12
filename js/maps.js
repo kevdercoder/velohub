@@ -119,7 +119,7 @@ async function showMaps() {
 
       localStorage.setItem('mapId', sectionMaps.id)
       window.location.href = `single-map.html?${sectionMaps.id}`;
-      console.log(`Clicked on ${sectionMaps.id}`);
+      //console.log(`Clicked on ${sectionMaps.id}`);
 
     });
 
@@ -184,7 +184,7 @@ async function displayMap() {
         `;
 
         initMap = function () {
-          console.log("initMap function called");
+          //console.log("initMap function called");
 
           let map = new google.maps.Map(document.getElementById("map"), {
             mapId: "67a32317a1bc4a60",
@@ -259,7 +259,7 @@ async function displayMap() {
             let shuffleButton = document.getElementById('shuffle-again');
             shuffleButton.addEventListener('click', () => {
 
-              console.log('Clicked on shuffle button');
+              //console.log('Clicked on shuffle button');
 
               localStorage.setItem('shouldShuffle', 'true');
 
@@ -303,7 +303,7 @@ async function displayMap() {
               } else {
                 breakPoint.style.display = 'none';
                 btnTrackFinished.style.display = 'flex';
-                console.log("User has not finished the track yet.");
+                //console.log("User has not finished the track yet.");
               }
             }
           }
@@ -339,7 +339,7 @@ async function displayMap() {
             if (error) {
               console.log("Error inserting data:", error.message);
             } else {
-              console.log("Data inserted successfully:", data);
+              //console.log("Data inserted successfully:", data);
             }
           }
         }
@@ -364,16 +364,12 @@ export {
 async function shuffleMaps() {
   let shouldShuffle = localStorage.getItem('shouldShuffle') === 'true';
 
-  console.log('You are on the right track!');
-
   // Check if maps should be shuffled
   if (shouldShuffle) {
     let {
       data: maps,
       error
     } = await supa.from("maps").select();
-
-    console.log('Shuffling maps');
 
     let referrer = document.referrer;
     if (!referrer.includes('overview-maps.html')) {
@@ -447,8 +443,6 @@ async function shuffleMapsIndex() {
       data: maps,
       error
     } = await supa.from("maps").select();
-
-    console.log('Shuffling maps');
 
     let referrer = document.referrer;
     if (!referrer.includes('overview-maps.html')) {

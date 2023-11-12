@@ -26,9 +26,9 @@ if (logoutButton) {
 function updateUserStatus(user) {
 
   if (user) {
-    console.log(`Authenticated as: ${user.email}`);
+    //console.log(`Authenticated as: ${user.email}`);
   } else {
-    console.log("Not authenticated.");
+    //console.log("Not authenticated.");
   }
 }
 
@@ -163,7 +163,7 @@ async function displayPastTour() {
     return;
   }
 
-  console.log(pastTour.start_time);
+  //console.log(pastTour.start_time);
 
   pastTour.forEach(pastTour => {
     let sectionMaps = document.createElement('section');
