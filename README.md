@@ -20,7 +20,7 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 – OpenWeatherMap API für die Abfrage und das Anzeigen verschiedener Komponenten
 
 **Google Suche**<br />
-– mehrheitlich W3Schools, MDN Web Docs und Stack Overflow für die Suche nach konkretten Lösungen
+– mehrheitlich W3Schools, MDN Web Docs und Stack Overflow für die Suche nach konkreten Lösungen
 
 **KI**<br />
 – Chat GTP als Assistenz während dem Programmieren, insbesondere bei Fehlercodes<br />
