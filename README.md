@@ -27,5 +27,5 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 
 **KI**<br />
 – Chat GTP als Assistenz während dem Programmieren, insbesondere bei Fehlercodes<br />
-– Generierung von kleineren Code Snippets oder Boilerplates<br />
+– Generierung von kleineren Code Snippets<br />
 – Co-Pilot beim direkten Coden in VS Code
