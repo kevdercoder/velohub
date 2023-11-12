@@ -836,14 +836,6 @@ input:focus::placeholder {
   margin-left: -5px;
 }
 
-.skeleton-user-additional {
-  width: 80px;
-  height: 12px;
-  border-radius: 30px;
-  margin-left: -5px;
-  margin-top: 4px;
-}
-
 .skeleton-data {
   width: 50px;
   margin-right: 3px;
