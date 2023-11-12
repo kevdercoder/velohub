@@ -599,6 +599,10 @@ input:focus::placeholder {
   flex-direction: row;
 }
 
+.adjust-margin-top {
+  margin-top: 0!important;
+}
+
 #back-overview a {
   display: flex;
   align-items: center;

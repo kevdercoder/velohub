@@ -141,8 +141,16 @@ if (document.querySelector('.btn-submit')) {
 
     if (singleRoute.classList.contains('btn-filter-distance-active')) {
       // Redirect to the single-map.html page
+      
+        // Set the shouldShuffle flag to true
+  localStorage.setItem('shouldShuffle', 'true');
 
-      window.location.href = `/single-map.html`; 
+  // Import the shuffleMaps function dynamically
+  const { shuffleMapsIndex } = await import('./maps.js');
+  // Call the imported function and wait for the shuffled maps
+  await shuffleMapsIndex();
+
+  console.log("code got exectued");
 
     } else {
       // Redirect to the overview-maps.html page
@@ -150,6 +158,7 @@ if (document.querySelector('.btn-submit')) {
     }
   });
 }
+
 
 /* 
  * This section handles different event listeners to dynamically load 
@@ -164,12 +173,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname === '/single-map.html') {
-    let { shuffleMaps } = await import('./maps.js');
-    shuffleMaps();
-  }
-});
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (window.location.pathname === '/single-map.html') {
@@ -177,7 +180,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     displayMap();
   }
 });
-
 
 
 // Event listener for community page

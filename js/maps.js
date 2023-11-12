@@ -347,9 +347,13 @@ export { displayMap };
 async function shuffleMaps() {
   let shouldShuffle = localStorage.getItem('shouldShuffle') === 'true';
 
+  console.log('You are on the right track!');
+
   // Check if maps should be shuffled
   if (shouldShuffle) {
     let { data: maps, error } = await supa.from("maps").select();
+
+    console.log('Shuffling maps');
 
     let referrer = document.referrer;
     if (!referrer.includes('overview-maps.html')) {
@@ -407,14 +411,77 @@ function findSelectedMapId(maps) {
 }
 }
 
-
-
 export { shuffleMaps };
 
 
+async function shuffleMapsIndex() {
+  let shouldShuffle = localStorage.getItem('shouldShuffle') === 'true';
+
+  shouldShuffle = true;
+
+  // Check if maps should be shuffled
+  if (shouldShuffle) {
+    let { data: maps, error } = await supa.from("maps").select();
+
+    console.log('Shuffling maps');
+
+    let referrer = document.referrer;
+    if (!referrer.includes('overview-maps.html')) {
+      // Fisher-Yates shuffle algorithm
+      for (let i = maps.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [maps[i], maps[j]] = [maps[j], maps[i]];
+      }
+    }
+
+    let selectedMapId = findSelectedMapId(maps);
+    
+    // Store the selected map ID
+    localStorage.setItem('mapId', selectedMapId);
+
+    // Set shouldShuffle to false after shuffling
+    localStorage.setItem('shouldShuffle', 'false');
+
+    window.location.href = '/single-map.html';
+  }
 
 
+function findSelectedMapId(maps) {
+  let selectedMapId = null;
 
+  maps.forEach(maps => {
+    //Filter for the maps which should be displayed
+    if (distance == 20 && maps.distance <= 20 && altitude == maps.altitude || distance == 20 && maps.distance <= 20 && altitude == null) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    } else if (distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == maps.altitude || distance == 50 && maps.distance <= 50 && maps.distance > 20 && altitude == null) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    } else if (distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == maps.altitude || distance == 100 && maps.distance <= 100 && maps.distance > 50 && altitude == null) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    } else if (distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == maps.altitude || distance == 200 && maps.distance <= 200 && maps.distance > 100 && altitude == null) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    } else if (distance == null && altitude == maps.altitude) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    } else if (distance == null && altitude == null) {
+      selectedMapId = maps.id;
+      localStorage.setItem('mapId', selectedMapId);
+      return
+    }
+  })
+  return selectedMapId;
+}
+}
+
+export { shuffleMapsIndex };
    
 
         

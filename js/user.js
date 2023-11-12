@@ -54,34 +54,30 @@ updateUserStatus(initialUser);
 
 
   async function displayRiddenMaps() {
-    const {
-      data: riddenMaps,
-      error
-    } = await supa
-    .from("done")
-    .select(`
-                maps_id, 
-                maps (*)
-            `)
-    .eq('user_id', supa.auth.user().id);
-    
+    const { data: riddenMaps, error } = await supa
+      .from("done")
+      .select(`
+        maps_id, 
+        maps (*)
+      `)
+      .eq('user_id', supa.auth.user().id);
+  
     if (error) {
       console.error("Error fetching data:", error);
-    } 
-
+    }
+  
     if (riddenMaps.length === 0) {
-      showBackButton(); // Call a function to display the back button
-      document.querySelector('.profile-option-none').style.display = 'flex'
+      showBackButton();
+      document.querySelector('.profile-option-none').style.display = 'flex';
       return;
     }
-
+  
     riddenMaps.forEach(riddenMaps => {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
       sectionMaps.id = riddenMaps.id;
-     
   
-      //Display the maps in the list view
+      // Display the maps in the list view
       async function displayOverview() {
         sectionMaps.innerHTML = `
           <div class="maps-img-container">
@@ -111,24 +107,23 @@ updateUserStatus(initialUser);
         document.body.appendChild(sectionMaps);
         const hr = document.createElement('hr');
         hr.className = 'maps-seperator';
-
-      document.querySelector('main').appendChild(sectionMaps);
-      document.querySelector('main').appendChild(hr)
-
-      document.querySelector('.btn-back').innerHTML = 'Zurück';
-    document.querySelector('#icon-chevron').style.display = 'block';
-}
-displayOverview();
-    })
+  
+        document.querySelector('main').appendChild(sectionMaps);
+        document.querySelector('main').appendChild(hr);
+  
+        // Add event listener to redirect to single-map.html
+        sectionMaps.addEventListener('click', () => {
+          localStorage.setItem('mapId', riddenMaps.maps.id);
+          window.location.href = '/single-map.html';
+        });
+  
+        showBackButton();
+      }
+  
+      displayOverview();
+    });
   }
   
-  if (window.location.href === 'http://127.0.0.1:5500/profile-maps.html') {
-    document.querySelector('.btn-back').innerHTML = 'Zurück';
-    document.querySelector('#icon-chevron').style.display = 'block';
-  } else {
-
-  }
-
 
   export { displayRiddenMaps };
   
