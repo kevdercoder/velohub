@@ -67,9 +67,12 @@ updateUserStatus(initialUser);
     
     if (error) {
       console.error("Error fetching data:", error);
-    } else {
-      console.log(riddenMaps);
-      console.log(riddenMaps[0].maps.map_img)
+    } 
+
+    if (riddenMaps.length === 0) {
+      showBackButton(); // Call a function to display the back button
+      document.querySelector('.profile-option-none').style.display = 'flex'
+      return;
     }
 
     riddenMaps.forEach(riddenMaps => {
@@ -144,7 +147,11 @@ displayOverview();
             `)
     .eq('user_id', supa.auth.user().id);
 
-  
+    if (pastTour.length === 0) {
+      showBackButton(); // Call a function to display the back button
+      document.querySelector('.profile-option-none').style.display = 'flex'
+      return;
+    }
 
     console.log(pastTour.start_time);
 
@@ -200,67 +207,75 @@ displayOverview();
       data: plannedTour,
       error
     } = await supa
-    .from("tour_x")
-    .select(`
-                *,
-                maps_id, 
-                maps (*)
-            `)
-    .eq('user_id', supa.auth.user().id);
-
-
+      .from("tour_x")
+      .select(`
+                  *,
+                  maps_id, 
+                  maps (*)
+              `)
+      .eq('user_id', supa.auth.user().id);
+  
+    // Check if there are no planned tours
+    if (plannedTour.length === 0) {
+      showBackButton(); // Call a function to display the back button
+      document.querySelector('.profile-option-none').style.display = 'flex'
+      return;
+    }
+  
+  
     plannedTour.forEach(plannedTour => {
       let sectionMaps = document.createElement('section');
       sectionMaps.className = 'container-maps';
       sectionMaps.id = plannedTour.id;
-
-      let formattedDateTime = formatDateTime(plannedTour.start_time);
-     
   
-      //Display the maps in the list view
+      let formattedDateTime = formatDateTime(plannedTour.start_time);
+  
+      // Display the maps in the list view
       async function displayOverview() {
         sectionMaps.innerHTML = `
-          <div class="maps-img-container">
-            <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${plannedTour.maps.map_img}" alt="image-alt">
-            <img id="${plannedTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
-          </div>
-          <div class="maps-margin">
-            <h2>${plannedTour.maps.map_name}</h2>
-            <ul>
-              <li class="maps-distance">
-                <img src="/img/icon-calendar.svg" alt="image-alt">
-                <p>${formattedDateTime.formattedDate}</p>
-              </li>
-              <li class="maps-distance">
-                <img src="/img/icon-clock.svg" alt="image-alt">
-                <p>${formattedDateTime.formattedTime}</p>
-              </li>
-            </ul>
-          </div>
-        `;
+            <div class="maps-img-container">
+              <img class="maps-map-small" src="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${plannedTour.maps.map_img}" alt="image-alt">
+              <img id="${plannedTour.maps.id}" class="maps-checkmark" style="display: none" src="/img/icon-checkmark-dark.svg" alt="checkmark">
+            </div>
+            <div class="maps-margin">
+              <h2>${plannedTour.maps.map_name}</h2>
+              <ul>
+                <li class="maps-distance">
+                  <img src="/img/icon-calendar.svg" alt="image-alt">
+                  <p>${formattedDateTime.formattedDate}</p>
+                </li>
+                <li class="maps-distance">
+                  <img src="/img/icon-clock.svg" alt="image-alt">
+                  <p>${formattedDateTime.formattedTime}</p>
+                </li>
+              </ul>
+            </div>
+          `;
   
         document.body.appendChild(sectionMaps);
         const hr = document.createElement('hr');
         hr.className = 'maps-seperator';
-
-
-      document.querySelector('main').appendChild(sectionMaps);
-      document.querySelector('main').appendChild(hr)
-
-      document.querySelector('.btn-back').innerHTML = 'Zurück';
-      document.querySelector('#icon-chevron').style.display = 'block';
-}
-displayOverview();
-
- // Add event listener to redirect to community tour
- sectionMaps.addEventListener('click', () => {
-  localStorage.setItem('communityId', plannedTour.id);
-  window.location.href = `community-maps.html?${plannedTour.id}`;
-  console.log(`Clicked on ${plannedTour.id}`);
-});
-    })
-
-       
+  
+        document.querySelector('main').appendChild(sectionMaps);
+        document.querySelector('main').appendChild(hr);
+  
+        showBackButton(); // Call a function to display the back button
+      }
+  
+      displayOverview();
+  
+      // Add event listener to redirect to community tour
+      sectionMaps.addEventListener('click', () => {
+        localStorage.setItem('communityId', plannedTour.id);
+        window.location.href = `community-maps.html?${plannedTour.id}`;
+      });
+    });
+  }
+  
+  function showBackButton() {
+    // Your logic to show the back button
+    document.querySelector('.btn-back').innerHTML = 'Zurück';
+    document.querySelector('#icon-chevron').style.display = 'block';
   }
 
   export { displayPlannedTour };

@@ -171,9 +171,7 @@ async function displayMap() {
             <a href="https://jxqqxtyepipnutkjzefu.supabase.co/storage/v1/object/public/Maps${mapsData.gpx_data}" download>
               <button id="btn-gpx">Download .gpx</button>
             </a>
-            <a href="/community-ride.html">
               <button id="btn-plan-community">Community-Tour planen</button>
-            </a>
           </section>
           <section>
             <p class="single-map-description">${mapsData.description}</p>
@@ -227,6 +225,17 @@ async function displayMap() {
               }
 
         document.querySelector('main').appendChild(singleMapContainer);
+
+        let btnPlaning = document.getElementById('btn-plan-community')
+
+        btnPlaning.addEventListener('click', () => {
+        if (supa.auth.user() === null) {
+        window.location.href = '/user-login.html';
+        } else {
+        window.location.href = '/community-ride.html';
+        }
+      });
+
 
         let referrer = document.referrer;
         if (referrer.includes('overview-maps.html')) {

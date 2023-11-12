@@ -153,7 +153,7 @@ console.log(participant);
             </li>
             <li class="maps-distance">
               <img src="/img/icon-participants.svg" alt="image-alt">
-              <p>${participantCount}</p>
+              <p id="participant-count">${participantCount}</p>
             </li>
           </ul>
           <ul>
@@ -242,10 +242,15 @@ initMap = function() {
 document.querySelector('main').appendChild(singleMapContainer);
 
 
+        if (supa.auth.user() === null) {
+          document.getElementById('btn-community-participate').addEventListener('click', () => {
+            window.location.href = "/user-login.html";
+          });
 
-      //if (tour.user_id === supa.auth.user().id) {
-      //  document.getElementById('btn-community-participate').style.display = 'none';
-      //}
+      } else if (tour.user_id === supa.auth.user().id) {
+        document.getElementById('btn-community-participate').style.display = 'none';
+      }
+
 
       async function participate() {
  
@@ -267,8 +272,6 @@ document.querySelector('main').appendChild(singleMapContainer);
      
      if (userAlreadyEnrolled) {
          alert('Du bist bereits eingeschrieben!');
-     } else if (supa.auth.user() === null) {
-      window.location.href = '/user-login.html';
      } else {
          await supa
              .from("tour_participant")
@@ -276,6 +279,8 @@ document.querySelector('main').appendChild(singleMapContainer);
                  tour_id: tour.id,
                  user_id: supa.auth.user().id,
              });
+
+             document.getElementById('participant-count').innerHTML = participantCount + 1;
      }
       };
 
