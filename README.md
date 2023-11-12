@@ -12,6 +12,7 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 
 **Supabase**<br />
 – Erstellen der Datentabellen mit dazugehörigen Relations<br />
+– Container mit Bildinhalten<br />
 – Erstellung von Cron Schedules für die automatische Verwaltung der Tabelleninhalte
 
 **APIs**<br />
