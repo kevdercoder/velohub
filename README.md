@@ -15,7 +15,7 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 – Erstellung von Cron Schedules für die automatische Verwaltung der Tabelleninhalte
 
 **APIs**<br />
-– Maps API inklusive Libraries von Google für die Darstellung und Visualisierung der Karte und Routen<br />
+– Maps API inklusive Libraries von Google für die Darstellung und Visualisierung der Karten und Routen<br />
 – OpenWeatherMap API für die Abfrage und das Anzeigen verschiedener Komponenten
 
 **Google Suche**<br />
