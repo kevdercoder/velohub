@@ -36,17 +36,17 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
     // Set the weather icon based on the weather condition and daytime
     let iconUrl;
     if (weatherCondition === 'Clear') {
-      iconUrl = isDaytime ? 'img/weather_sun.png' : 'img/moon.svg';
-    } else if (weatherCondition === 'Clouds') {
-      iconUrl = isDaytime ? 'img/clouds-day.png' : 'img/clouds-night.svg';
-    } else if (weatherCondition === 'Rain' || 'Drizzle') {
-      iconUrl = isDaytime ? 'img/weather_rain.png' : 'img/rain-night.svg';
+      iconUrl = isDaytime ? 'img/weather_sun.png' : 'img/weather_clear_night.png';
+    } else if (weatherCondition === 'Clouds' | 'Few Clouds') {
+      iconUrl = isDaytime ? 'img/weather_cloudy.png' : 'img/weather_cloudy_night.png';
+    } else if (weatherCondition === 'Drizzle' || 'Rain' || 'Mist' || 'Shower Rain') {
+      iconUrl = isDaytime ? 'img/weather_rain.png' : 'img/weather_rain_night.png';
     } else {
-      iconUrl = 'img/weather_default.png';
+      iconUrl = isDaytime ? 'img/weather_default.png' : 'img/weather_default_night.png';
     }
 
-    if (document.querySelector('#heading-img')) {
-      document.querySelector('#heading-img').src = iconUrl;
+    if (document.querySelector('#heading-img-weather')) {
+      document.querySelector('#heading-img-weather').src = iconUrl;
     }
 
 
@@ -101,7 +101,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}
 
         // Hide skeleton-loading after maps are loaded
         let skeletonLoading = document.querySelectorAll('.skeleton-loading');
-        let skeletonImg = document.querySelector('#heading-img');
+        let skeletonImg = document.querySelector('#heading-img-weather');
 
         skeletonImg.style.display = 'block';
 
