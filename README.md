@@ -26,6 +26,6 @@ Untenstehend sind die Tools und Programme aufgelistet, welche uns bei unserem Pr
 – Mehrheitlich W3Schools, MDN Web Docs und Stack Overflow für die Suche nach konkreten Lösungen
 
 **KI**<br />
-– Chat GTP als Assistenz während dem Programmieren, insbesondere bei Fehlercodes<br />
+– Chat GPT als Assistenz während dem Programmieren, insbesondere bei Fehlercodes<br />
 – Generierung von kleineren Code Snippets<br />
 – Co-Pilot beim direkten Coden in VS Code
